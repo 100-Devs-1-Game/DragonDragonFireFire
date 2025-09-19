@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbxryce6ob4pc"]
+[gd_scene load_steps=3 format=3 uid="uid://bbxryce6ob4pc"]
 
 [ext_resource type="PackedScene" uid="uid://0b8gkxjmmmak" path="res://stages/stage_1.tscn" id="1_n4lbc"]
+[ext_resource type="PackedScene" uid="uid://8d30jhpgc64o" path="res://ui/game_ui.tscn" id="2_m1k14"]
 
 [node name="GameScene" type="Node2D"]
 
 [node name="Stage1" parent="." instance=ExtResource("1_n4lbc")]
+
+[node name="GameUI" parent="." instance=ExtResource("2_m1k14")]

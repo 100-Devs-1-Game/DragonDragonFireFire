@@ -1,0 +1,104 @@
+[gd_scene load_steps=2 format=3 uid="uid://8d30jhpgc64o"]
+
+[ext_resource type="Script" uid="uid://cyecl4ol6lhyv" path="res://ui/score_label.gd" id="1_dcmab"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 20.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScoreDescriptionLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 2.0
+offset_right = -78.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.25490198, 0.38039216, 0.9843137, 1)
+theme_override_font_sizes/font_size = 8
+text = "SCORE"
+
+[node name="ScoreLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 11.0
+offset_right = -110.0
+offset_bottom = 19.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 8
+text = "999999"
+script = ExtResource("1_dcmab")
+
+[node name="TimeDescriptionLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85882354, 0.25490198, 0.38039216, 1)
+theme_override_font_sizes/font_size = 8
+text = "TIME"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 11.0
+offset_right = 24.0
+offset_bottom = 19.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 1
+
+[node name="LivesDescriptionLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 79.0
+offset_top = 2.0
+offset_right = 159.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.31764707, 0.63529414, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "LIVES"
+horizontal_alignment = 2
+
+[node name="LivesScoreLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 111.0
+offset_top = 11.0
+offset_right = 159.0
+offset_bottom = 19.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 8
+text = "ooo"
+horizontal_alignment = 2
