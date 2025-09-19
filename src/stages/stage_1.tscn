@@ -46,6 +46,9 @@ position = Vector2(304, 176)
 [node name="MovablePlatform48x8P" parent="DynamicGeometry" instance=ExtResource("2_yor2l")]
 position = Vector2(132, 124)
 
+[node name="MovablePlatform48x8P2" parent="DynamicGeometry" instance=ExtResource("2_yor2l")]
+position = Vector2(172, 156)
+
 [node name="BurnableGeometry" type="Node2D" parent="."]
 
 [node name="BurnableBlock8P" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
@@ -65,6 +68,18 @@ position = Vector2(124, 140)
 
 [node name="BurnableBlock8P6" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
 position = Vector2(124, 132)
+
+[node name="BurnableBlock8P7" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(164, 172)
+
+[node name="BurnableBlock8P8" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(180, 172)
+
+[node name="BurnableBlock8P9" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(180, 164)
+
+[node name="BurnableBlock8P10" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(164, 164)
 
 [node name="Player" parent="." instance=ExtResource("2_p6prp")]
 position = Vector2(17, 136)

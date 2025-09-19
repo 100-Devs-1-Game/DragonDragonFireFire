@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signals="*res://autoloads/signals.gd"
+GameState="*res://autoloads/game_state.gd"
 
 [debug]
 
@@ -31,6 +32,11 @@ window/size/viewport_height=1080
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="uid://c2bp156wiol35"
+theme/custom_font="uid://bh1h0jek32brm"
 
 [input]
 
