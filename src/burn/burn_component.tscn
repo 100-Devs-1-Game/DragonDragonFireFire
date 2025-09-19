@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0gcyjv75u0ib"]
+
+[ext_resource type="Script" uid="uid://bdvcego2rbhla" path="res://burn/burn_component.gd" id="1_1xv3j"]
+
+[node name="BurnComponent" type="Node2D"]
+script = ExtResource("1_1xv3j")

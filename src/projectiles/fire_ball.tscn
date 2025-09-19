@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwdm4wk1ik4wh"]
+
+[ext_resource type="SpriteFrames" uid="uid://c7gqacquxtber" path="res://projectiles/fire_ball_sprite_frames.tres" id="1_j0war"]
+[ext_resource type="Script" uid="uid://mm5lu8evrhnl" path="res://projectiles/fire_ball.gd" id="1_w3s1y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0war"]
+radius = 3.0
+
+[node name="FireBall" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_w3s1y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_j0war")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j0war")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

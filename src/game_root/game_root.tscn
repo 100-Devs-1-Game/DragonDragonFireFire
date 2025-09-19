@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://6thasun1l7ps"]
+
+[ext_resource type="Shader" uid="uid://l216h1rx3xxf" path="res://shaders/crt_shader.gdshader" id="1_ndwrs"]
+[ext_resource type="PackedScene" uid="uid://bbxryce6ob4pc" path="res://game_scene/game_scene.tscn" id="1_nusy7"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lssg5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nmxx"]
+resource_local_to_scene = true
+shader = ExtResource("1_ndwrs")
+shader_parameter/tex = SubResource("ViewportTexture_lssg5")
+shader_parameter/mask_type = 0
+shader_parameter/curve = 0.0730000034675
+shader_parameter/sharpness = 0.8030000143925
+shader_parameter/color_offset = 0.0
+shader_parameter/mask_brightness = 0.94800004503
+shader_parameter/scanline_brightness = 0.9740000225150001
+shader_parameter/min_scanline_thickness = 0.81800002698
+shader_parameter/aspect = 0.75
+shader_parameter/wobble_strength = 0.0
+
+[node name="GameRoot" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6nmxx")
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+snap_2d_transforms_to_pixel = true
+size = Vector2i(320, 180)
+
+[node name="GameScene" parent="SubViewport" instance=ExtResource("1_nusy7")]

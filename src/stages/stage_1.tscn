@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://0b8gkxjmmmak"]
+
+[ext_resource type="PackedScene" uid="uid://bu7ws8be2kgjt" path="res://geometry/static_platform_32x_8p.tscn" id="1_tksfr"]
+[ext_resource type="PackedScene" uid="uid://cfm6whuvj2n57" path="res://geometry/burnable_block_8p.tscn" id="2_40wcd"]
+[ext_resource type="PackedScene" uid="uid://dk42xswvh07t0" path="res://player/player.tscn" id="2_p6prp"]
+[ext_resource type="PackedScene" uid="uid://b2qqy2qp1tee4" path="res://geometry/movable_platform_24x_8p.tscn" id="2_yor2l"]
+
+[node name="Stage1" type="Node2D"]
+metadata/_edit_vertical_guides_ = [320.0]
+metadata/_edit_horizontal_guides_ = [180.0]
+
+[node name="StaticGeometry" type="Node2D" parent="."]
+
+[node name="StaticPlatform64x8P" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(16, 176)
+
+[node name="StaticPlatform64x8P2" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(48, 176)
+
+[node name="StaticPlatform64x8P3" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(80, 176)
+
+[node name="StaticPlatform64x8P4" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(112, 176)
+
+[node name="StaticPlatform64x8P5" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(144, 176)
+
+[node name="StaticPlatform64x8P6" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(176, 176)
+
+[node name="StaticPlatform64x8P7" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(208, 176)
+
+[node name="StaticPlatform64x8P8" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(240, 176)
+
+[node name="StaticPlatform64x8P9" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(272, 176)
+
+[node name="StaticPlatform64x8P10" parent="StaticGeometry" instance=ExtResource("1_tksfr")]
+position = Vector2(304, 176)
+
+[node name="DynamicGeometry" type="Node2D" parent="."]
+
+[node name="MovablePlatform48x8P" parent="DynamicGeometry" instance=ExtResource("2_yor2l")]
+position = Vector2(132, 124)
+
+[node name="BurnableGeometry" type="Node2D" parent="."]
+
+[node name="BurnableBlock8P" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 172)
+
+[node name="BurnableBlock8P2" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 164)
+
+[node name="BurnableBlock8P3" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 156)
+
+[node name="BurnableBlock8P4" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 148)
+
+[node name="BurnableBlock8P5" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 140)
+
+[node name="BurnableBlock8P6" parent="BurnableGeometry" instance=ExtResource("2_40wcd")]
+position = Vector2(124, 132)
+
+[node name="Player" parent="." instance=ExtResource("2_p6prp")]
+position = Vector2(17, 136)
