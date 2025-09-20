@@ -37,7 +37,10 @@ func _ready() -> void:
 
 
 func _process(_delta : float) -> void:
-	_handle_animation()
+	_handle_animation() # Handle animation even when paused as pausing the animation needs to be handled.
+
+	if GameState.paused:
+		return
 	
 	_burn_visuals.visible = _burn_component.is_burning()
 	if _burn_component.is_burning() and _burn_component.get_burn_time() >= _BURN_TIME_TO_KILL:
@@ -51,6 +54,9 @@ func _process(_delta : float) -> void:
 
 
 func _physics_process(delta : float) -> void:
+	if GameState.paused:
+		return
+
 	_ground_shape_cast.force_shapecast_update()
 	var object_beneath : bool = _ground_shape_cast.is_colliding()
 
@@ -128,6 +134,10 @@ func _check_if_flees_from_burning() -> void:
 
 
 func _handle_animation() -> void:
+	if GameState.paused:
+		_sprite.pause()
+		return
+	
 	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
 
 	_sprite.speed_scale = 1.0 if not _burn_component.is_burning() else _BURNING_MODIFIER

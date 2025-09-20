@@ -7,6 +7,12 @@ var _lifetime : float = 0.0
 
 
 func _process(delta: float) -> void:
+	# Pause animation in paused mode.
+	if GameState.paused:
+		pause()
+		return
+
+	play()
 	_lifetime += delta
 	if _lifetime >= _MAX_LIFETIME:
 		queue_free()

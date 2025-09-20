@@ -24,6 +24,9 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
+	if GameState.paused:
+		return
+	
 	_burn_sprite.visible = _burn_component.is_burning()
 
 	match _cur_state:
@@ -49,6 +52,9 @@ func _update_incinerate_visuals() -> void:
 
 
 func _physics_process(delta : float) -> void:
+	if GameState.paused:
+		return
+		
 	# Only fall in default state.
 	if _cur_state == State.DEFAULT:
 		_handle_fall_logic(delta)

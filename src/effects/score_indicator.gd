@@ -26,6 +26,9 @@ func set_spawn_position(pos : Vector2) -> void:
 
 
 func _process(delta : float) -> void:
+	if GameState.paused:
+		return
+	
 	position += _MOTION * delta
 	_lifetime += delta
 	text = str(_score_value)

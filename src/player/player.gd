@@ -21,6 +21,9 @@ var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
 
 func _physics_process(delta : float) -> void:
+	if GameState.paused:
+		return
+		
 	match _cur_state:
 		State.MOVE:
 			_physics_process_move(delta)

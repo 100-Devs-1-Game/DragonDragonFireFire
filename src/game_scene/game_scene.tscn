@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbxryce6ob4pc"]
+[gd_scene load_steps=6 format=3 uid="uid://bbxryce6ob4pc"]
 
+[ext_resource type="Script" uid="uid://cou2py78batyp" path="res://game_scene/game_scene.gd" id="1_k340r"]
 [ext_resource type="PackedScene" uid="uid://0b8gkxjmmmak" path="res://stages/stage_1.tscn" id="1_n4lbc"]
 [ext_resource type="PackedScene" uid="uid://8d30jhpgc64o" path="res://ui/game_ui.tscn" id="2_m1k14"]
 [ext_resource type="Script" uid="uid://bvh2cr587fm7k" path="res://game_scene/time_controller.gd" id="3_3kg8t"]
+[ext_resource type="PackedScene" uid="uid://pwy1g0xius4r" path="res://ui/pause_overlay.tscn" id="4_e0oqy"]
 
 [node name="GameScene" type="Node2D"]
+script = ExtResource("1_k340r")
 
 [node name="Stage1" parent="." instance=ExtResource("1_n4lbc")]
 
 [node name="GameUI" parent="." instance=ExtResource("2_m1k14")]
+
+[node name="PauseOverlay" parent="." instance=ExtResource("4_e0oqy")]
 
 [node name="TimeController" type="Node" parent="."]
 script = ExtResource("3_3kg8t")
