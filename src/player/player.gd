@@ -17,6 +17,8 @@ const _MAX_FALL_SPEED = 150.0
 var _cur_state : State = State.MOVE
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
+@onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
+
 
 func _physics_process(delta : float) -> void:
 	match _cur_state:
@@ -26,6 +28,9 @@ func _physics_process(delta : float) -> void:
 			pass
 	
 	Teleport.handle_teleport(self)
+
+	if _head_check_component.is_hit():
+		queue_free()
 
 
 func _physics_process_move(delta : float) -> void:

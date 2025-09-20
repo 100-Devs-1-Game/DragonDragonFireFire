@@ -82,6 +82,7 @@ down={
 2d_physics/layer_2="StaticGeometry"
 2d_physics/layer_3="MovableGeometry"
 2d_physics/layer_4="Projectiles"
+2d_physics/layer_5="Enemies"
 
 [physics]
 

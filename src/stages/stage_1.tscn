@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://0b8gkxjmmmak"]
+[gd_scene load_steps=6 format=4 uid="uid://0b8gkxjmmmak"]
 
 [ext_resource type="TileSet" uid="uid://cj0foed3p6jmm" path="res://geometry/tileset_static_geometry.tres" id="1_nndgx"]
 [ext_resource type="TileSet" uid="uid://b8adolhf1jwt3" path="res://geometry/tileset_dynamic_geometry.tres" id="2_nndgx"]
 [ext_resource type="PackedScene" uid="uid://dk42xswvh07t0" path="res://player/player.tscn" id="2_p6prp"]
+[ext_resource type="PackedScene" uid="uid://nfwtfgygpjt8" path="res://enemies/enemy_walker.tscn" id="3_yor2l"]
+[ext_resource type="PackedScene" uid="uid://dv30hcnyvv1t7" path="res://enemies/enemy_flyer.tscn" id="4_nndgx"]
 
 [node name="Stage1" type="Node2D"]
 metadata/_edit_vertical_guides_ = [320.0]
@@ -16,6 +18,17 @@ tile_set = ExtResource("1_nndgx")
 [node name="TilemapDynamic" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAUABUAAAAAAAAAAQAUABQAAAAAAAAAAQAVABQAAAAAAAAAAQAWABQAAAAAAAAAAQAWABUAAAAAAAAAAQAVABUAAAAAAAAAAQAPABAAAAAAAAAAAQAQABAAAAAAAAAAAQARABAAAAAAAAAAAQAPABEAAAAAAAAAAQAPABIAAAAAAAAAAQAPABMAAAAAAAAAAQAPABQAAAAAAAAAAQAPABUAAAAAAAAAAQAQABUAAAAAAAAAAQARABUAAAAAAAAAAQARABQAAAAAAAAAAQARABMAAAAAAAAAAQARABIAAAAAAAAAAQARABEAAAAAAAAAAQAQABEAAAAAAAAAAQAQABIAAAAAAAAAAQAQABMAAAAAAAAAAQAQABQAAAAAAAAAAQARAA4AAAAAAAAAAQARAA0AAAAAAAAAAQARAAwAAAAAAAAAAQAUABIAAAAAAAAAAQAUABEAAAAAAAAAAQAUABAAAAAAAAAAAQAUAA8AAAAAAAAAAQAUAA4AAAAAAAAAAQAUAA0AAAAAAAAAAQAUAAwAAAAAAAAAAQAJAAsAAAAAAAAAAQAJAAwAAAAAAAAAAQAJAA0AAAAAAAAAAQAJAA4AAAAAAAAAAQAJAA8AAAAAAAAAAQAJABAAAAAAAAAAAQAJABEAAAAAAAAAAQAVABMAAAAAAAAAAgAQAA8AAAAAAAAAAgATAAsAAAAAAAAAAgAJAAoAAAAAAAAAAgA=")
 tile_set = ExtResource("2_nndgx")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemyWalker" parent="Enemies" instance=ExtResource("3_yor2l")]
+position = Vector2(92, 140)
+
+[node name="EnemyWalker2" parent="Enemies" instance=ExtResource("3_yor2l")]
+position = Vector2(260, 172)
+
+[node name="EnemyFlyer" parent="Enemies" instance=ExtResource("4_nndgx")]
+position = Vector2(120, 44)
 
 [node name="Player" parent="." instance=ExtResource("2_p6prp")]
 position = Vector2(17, 136)

@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://nfwtfgygpjt8"]
+
+[ext_resource type="Script" uid="uid://baxd1twerggh" path="res://enemies/enemy_walker.gd" id="1_kjv7w"]
+[ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="1_u0qym"]
+[ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="2_cygq1"]
+[ext_resource type="SpriteFrames" uid="uid://dcxbvgske0q7x" path="res://enemies/enemy_walker_sprite_frames.tres" id="2_visw6"]
+[ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="4_bxbco"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjv7w"]
+size = Vector2(12, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxbco"]
+size = Vector2(10, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vya6k"]
+size = Vector2(12.2, 1)
+
+[node name="EnemyWalker" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 6
+script = ExtResource("1_kjv7w")
+score = 100
+
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -1)
+sprite_frames = ExtResource("2_visw6")
+animation = &"standing"
+autoplay = "walking"
+
+[node name="BurnVisuals" type="Node2D" parent="Visuals"]
+position = Vector2(0, 7)
+
+[node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+position = Vector2(-4, -7)
+sprite_frames = ExtResource("2_cygq1")
+autoplay = "default"
+
+[node name="BurnSprite2" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+position = Vector2(1, -12)
+sprite_frames = ExtResource("2_cygq1")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_kjv7w")
+
+[node name="BurnComponent" parent="." instance=ExtResource("1_u0qym")]
+position = Vector2(0, -8)
+_ignition_range = 10.0
+_force_immediate = true
+_catch_fire_range = 8.0
+
+[node name="HeadCheckComponent" parent="." instance=ExtResource("4_bxbco")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_bxbco")
+debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)
+
+[node name="GroundShapeCast" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_vya6k")
+target_position = Vector2(0, 0)
+collision_mask = 6

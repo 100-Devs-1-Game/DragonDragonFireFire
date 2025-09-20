@@ -22,7 +22,7 @@ func _process(delta : float) -> void:
 	
 	_burn_time += delta
 	_time_since_last_tick += delta
-	if _time_since_last_tick >= Constants._FIRE_TICK_TIME:
+	if _time_since_last_tick >= Constants.FIRE_TICK_TIME:
 		var burn_params : BurnParameters = _make_burn_parameters()
 		Signals.fire_emitted.emit(burn_params)
 		_time_since_last_tick = 0.0

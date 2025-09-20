@@ -8,7 +8,7 @@ radius = 3.0
 
 [node name="FireBall" type="Area2D"]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 22
 script = ExtResource("1_w3s1y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
