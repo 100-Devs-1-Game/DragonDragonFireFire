@@ -28,6 +28,7 @@ sprite_frames = ExtResource("3_lvq3l")
 autoplay = "default"
 
 [node name="BurnComponent" parent="." instance=ExtResource("3_tlsna")]
+position = Vector2(0, -4)
 _ignition_range = 6.0
 _catch_fire_range = 4.0
 _catch_burn_time = 1.0

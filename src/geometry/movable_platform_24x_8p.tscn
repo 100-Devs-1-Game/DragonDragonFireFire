@@ -9,6 +9,7 @@
 size = Vector2(23.5, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epyog"]
+resource_local_to_scene = true
 size = Vector2(23.8, 8)
 
 [node name="MovablePlatform24x8P" type="CharacterBody2D"]

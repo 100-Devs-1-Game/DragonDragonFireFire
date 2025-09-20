@@ -12,7 +12,7 @@ const _FIRE_BALL_OFFSET_Y : float = -8.0
 
 const _SPEED = 80.0
 const _JUMP_VELOCITY = -170.0
-const _MAX_FALL_SPEED = 150.0
+const _MAX_FALL_SPEED = 130.0
 
 var _cur_state : State = State.MOVE
 var _cur_dir : Types.Direction = Types.Direction.RIGHT

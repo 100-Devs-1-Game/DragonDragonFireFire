@@ -12,6 +12,8 @@ var _cur_state : State = State.FLYING
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 var _cur_vertical_dir : Types.Direction = Types.Direction.DOWN
 
+var _burned_previously : bool = false
+
 @onready var _burn_component : BurnComponent = $BurnComponent
 @onready var _burn_visuals : Node2D = $Visuals/BurnVisuals
 
@@ -38,6 +40,11 @@ func _process(_delta : float) -> void:
 
 
 func _physics_process(_delta : float) -> void:
+	# Just caught fire?
+	if not _burned_previously and _burn_component.is_burning():
+		_burned_previously = true
+		_cur_dir = _burn_component.get_burn_flee_direction()
+
 	var cur_motion_vector : Vector2 = Vector2.ZERO
 	cur_motion_vector.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
 	cur_motion_vector.y = 0.5 if _cur_vertical_dir == Types.Direction.DOWN else -0.5
