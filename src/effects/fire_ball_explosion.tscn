@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd1hcwgxkd8dg"]
+
+[ext_resource type="SpriteFrames" uid="uid://cd4sqc355t13k" path="res://effects/fire_ball_explosion_sprite_frames.tres" id="1_viat4"]
+[ext_resource type="Script" uid="uid://b0x701jewl6hy" path="res://effects/fire_ball_explosion.gd" id="2_viat4"]
+
+[node name="FireBallExplosion" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_viat4")
+autoplay = "default"
+script = ExtResource("2_viat4")

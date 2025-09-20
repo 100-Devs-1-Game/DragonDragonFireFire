@@ -13,3 +13,6 @@ var ignition_range : float = 0.0
 
 # Whether to force immediate ignition of objects, ignoring certain conditions.
 var force_immediate : bool = false
+
+# Whether this burn source scares away enemies.
+var scares_enemies : bool = false

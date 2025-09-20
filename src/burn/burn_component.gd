@@ -5,6 +5,8 @@ var _is_burning : bool = false
 var _burn_time : float = 0.0
 var _time_since_last_tick : float = 0.0
 var _burn_flee_direction : Types.Direction = Types.Direction.LEFT
+var _scares_enemies : bool = false
+var _inactive : bool = false
 
 @export var _ignition_range : float = 0.0
 @export var _force_immediate : bool = false
@@ -19,6 +21,9 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	if not _is_burning:
+		return
+	
+	if _inactive:
 		return
 	
 	_burn_time += delta
@@ -37,6 +42,10 @@ func get_burn_time() -> float:
 	return _burn_time
 
 
+func does_scare_enemies() -> bool:
+	return _scares_enemies
+
+
 func get_burn_flee_direction() -> Types.Direction:
 	return _burn_flee_direction
 
@@ -47,7 +56,12 @@ func _make_burn_parameters() -> BurnParameters:
 	params.source_burn_time = _burn_time
 	params.ignition_range = _ignition_range
 	params.force_immediate = _force_immediate
+	params.scares_enemies = false # Indirect fire does not scare enemies.
 	return params
+
+
+func set_inactive() -> void:
+	_inactive = true
 
 
 func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
@@ -62,6 +76,7 @@ func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
 		_is_burning = true
 
 	# Flee direction is in the opposite direction from the fire source.
+	_scares_enemies = burn_parameters.scares_enemies
 	if burn_parameters.source_pos.x > destination_pos.x:
 		_burn_flee_direction = Types.Direction.LEFT
 	else:

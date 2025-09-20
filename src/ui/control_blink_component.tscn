@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmub8ct7sq4o6"]
+
+[ext_resource type="Script" uid="uid://dakw5y8dvdbqe" path="res://ui/control_blink_component.gd" id="1_pl3kf"]
+
+[node name="ControlBlinkComponent" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pl3kf")

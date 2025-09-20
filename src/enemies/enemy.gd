@@ -15,11 +15,25 @@ const _BURNING_MODIFIER : float = 2.0
 const _BURN_TIME_TO_KILL : float = 3.0
 
 # Other constant properties.
+const _DEATH_SEQUENCE_TIME : float = 0.17 # To be synched with incinerate shader animation.
 const _DESPAWN_DISTANCE : float = 64.0
 
 @export var score : int = 0
 
+var _death_time_elapsed : float = 0.0
+
 @onready var _visuals : Node2D = $Visuals
+
+
+func _ready() -> void:
+	# Assert that _visuals has its shader material attached.
+	assert(_visuals.get("material") is ShaderMaterial)
+
+
+func _update_death_visuals() -> void:
+	var shader_material : ShaderMaterial = _visuals.get("material") as ShaderMaterial
+	assert(shader_material)
+	shader_material.set_shader_parameter("current_time", _death_time_elapsed)
 
 
 func die() -> void:

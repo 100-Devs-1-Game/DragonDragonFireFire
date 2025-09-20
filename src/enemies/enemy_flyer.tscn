@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv30hcnyvv1t7"]
+[gd_scene load_steps=9 format=3 uid="uid://dv30hcnyvv1t7"]
 
 [ext_resource type="SpriteFrames" uid="uid://ddk5t1k4nvlo8" path="res://enemies/enemy_flyer_sprite_frames.tres" id="1_273yy"]
 [ext_resource type="Script" uid="uid://t6vck30nrxvp" path="res://enemies/enemy_flyer.gd" id="1_ue0bs"]
+[ext_resource type="Material" uid="uid://dyx1yhurrujxn" path="res://shaders/shader_material_incinerate.tres" id="2_0rhl1"]
 [ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="2_5lxk0"]
 [ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="2_ju4oa"]
 [ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="3_a556r"]
@@ -19,22 +20,27 @@ script = ExtResource("1_ue0bs")
 score = 300
 
 [node name="Visuals" type="Node2D" parent="."]
+material = ExtResource("2_0rhl1")
 position = Vector2(0, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+use_parent_material = true
 sprite_frames = ExtResource("1_273yy")
 animation = &"flying"
 frame_progress = 0.79629123
 
 [node name="BurnVisuals" type="Node2D" parent="Visuals"]
+use_parent_material = true
 position = Vector2(0, 7)
 
 [node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
 position = Vector2(-2, -5)
 sprite_frames = ExtResource("3_a556r")
 autoplay = "default"
 
 [node name="BurnSprite2" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
 position = Vector2(3, -10)
 sprite_frames = ExtResource("3_a556r")
 autoplay = "default"
@@ -44,7 +50,8 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_273yy")
 
 [node name="BurnComponent" parent="." instance=ExtResource("2_ju4oa")]
-_ignition_range = 9.0
+position = Vector2(0, -7)
+_ignition_range = 10.0
 _force_immediate = true
 _catch_fire_range = 7.0
 

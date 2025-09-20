@@ -1,6 +1,8 @@
 class_name FireBall
 extends Area2D
 
+const _FIRE_BALL_EXPLOSION_SCENE : PackedScene = preload("res://effects/fire_ball_explosion.tscn")
+
 const _SPEED : float = 150.0
 const _IGNITION_RANGE : float = 12.0
 
@@ -33,10 +35,16 @@ func _make_burn_parameters() -> BurnParameters:
 	params.source_burn_time = 0.0
 	params.ignition_range = _IGNITION_RANGE
 	params.force_immediate = true
+	params.scares_enemies = true
 	return params
 
 
 func _on_body_entered(_body):
 	var burn_params : BurnParameters = _make_burn_parameters()
 	Signals.fire_emitted.emit(burn_params)
+
+	var explosion : FireBallExplosion = _FIRE_BALL_EXPLOSION_SCENE.instantiate() as FireBallExplosion
+	explosion.global_position = global_position
+	get_parent().add_child(explosion)
+
 	queue_free()
