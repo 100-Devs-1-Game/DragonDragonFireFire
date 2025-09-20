@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://nfwtfgygpjt8"]
+[gd_scene load_steps=10 format=3 uid="uid://nfwtfgygpjt8"]
 
 [ext_resource type="Script" uid="uid://baxd1twerggh" path="res://enemies/enemy_walker.gd" id="1_kjv7w"]
 [ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="1_u0qym"]
@@ -14,6 +14,9 @@ size = Vector2(10, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vya6k"]
 size = Vector2(12.2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7cfi"]
+size = Vector2(2, 2)
 
 [node name="EnemyWalker" type="CharacterBody2D"]
 collision_layer = 16
@@ -62,5 +65,17 @@ debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)
 
 [node name="GroundShapeCast" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_vya6k")
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="EdgeShapeCastLeft" type="ShapeCast2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_j7cfi")
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="EdgeShapeCastRight" type="ShapeCast2D" parent="."]
+position = Vector2(6, 0)
+shape = SubResource("RectangleShape2D_j7cfi")
 target_position = Vector2(0, 0)
 collision_mask = 6

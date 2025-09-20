@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://8d30jhpgc64o"]
+[gd_scene load_steps=3 format=3 uid="uid://8d30jhpgc64o"]
 
 [ext_resource type="Script" uid="uid://cyecl4ol6lhyv" path="res://ui/score_label.gd" id="1_dcmab"]
+[ext_resource type="Script" uid="uid://bqd1mtvc33yal" path="res://ui/time_label.gd" id="2_w46tp"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -69,6 +70,7 @@ offset_bottom = 19.0
 grow_horizontal = 2
 text = "99"
 horizontal_alignment = 1
+script = ExtResource("2_w46tp")
 
 [node name="LivesDescriptionLabel" type="Label" parent="Background"]
 layout_mode = 1

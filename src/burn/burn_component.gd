@@ -4,6 +4,7 @@ extends Node2D
 var _is_burning : bool = false
 var _burn_time : float = 0.0
 var _time_since_last_tick : float = 0.0
+var _burn_flee_direction : Types.Direction = Types.Direction.LEFT
 
 @export var _ignition_range : float = 0.0
 @export var _force_immediate : bool = false
@@ -36,6 +37,10 @@ func get_burn_time() -> float:
 	return _burn_time
 
 
+func get_burn_flee_direction() -> Types.Direction:
+	return _burn_flee_direction
+
+
 func _make_burn_parameters() -> BurnParameters:
 	var params : BurnParameters = BurnParameters.new()
 	params.source_pos = global_position
@@ -55,3 +60,9 @@ func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
 	
 	if burn_parameters.source_burn_time >= _catch_burn_time or burn_parameters.force_immediate:
 		_is_burning = true
+
+	# Flee direction is in the opposite direction from the fire source.
+	if burn_parameters.source_pos.x > destination_pos.x:
+		_burn_flee_direction = Types.Direction.LEFT
+	else:
+		_burn_flee_direction = Types.Direction.RIGHT

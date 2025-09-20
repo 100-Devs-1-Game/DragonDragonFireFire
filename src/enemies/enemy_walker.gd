@@ -17,6 +17,8 @@ var _cur_dir : Types.Direction = Types.Direction.RIGHT
 var _fall_begin_time : float = 0.0
 var _drop_time : float = 0.0
 
+var _burned_previously : bool = false
+
 @onready var _burn_component : BurnComponent = $BurnComponent
 @onready var _burn_visuals : Node2D = $Visuals/BurnVisuals
 
@@ -24,6 +26,9 @@ var _drop_time : float = 0.0
 @onready var _ground_shape_cast : ShapeCast2D = $GroundShapeCast
 
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
+
+@onready var _edge_shape_cast_left : ShapeCast2D = $EdgeShapeCastLeft
+@onready var _edge_shape_cast_right : ShapeCast2D = $EdgeShapeCastRight
 
 
 func _ready() -> void:
@@ -54,6 +59,11 @@ func _physics_process(delta : float) -> void:
 				_cur_state = State.FALL_BEGIN
 				_fall_begin_time = 0.0
 			else:
+				# Just caught fire?
+				if not _burned_previously and _burn_component.is_burning():
+					_burned_previously = true
+					_cur_dir = _burn_component.get_burn_flee_direction()
+
 				velocity.x = _SPEED if _cur_dir == Types.Direction.RIGHT else -_SPEED
 				if _burn_component.is_burning():
 					velocity.x *= _BURNING_MODIFIER
@@ -61,8 +71,19 @@ func _physics_process(delta : float) -> void:
 				velocity.y = 0
 				move_and_slide()
 
+				# Turn around at walls.
 				if is_on_wall():
 					_cur_dir = Types.Direction.LEFT if _cur_dir == Types.Direction.RIGHT else Types.Direction.RIGHT
+				
+				# Turn around at edges, but only if not on fire.
+				_edge_shape_cast_left.force_shapecast_update()
+				_edge_shape_cast_right.force_shapecast_update()
+				var burning : bool = _burn_component.is_burning()
+				if not _edge_shape_cast_left.is_colliding() and _cur_dir == Types.Direction.LEFT and not burning:
+					_cur_dir = Types.Direction.RIGHT
+				elif not _edge_shape_cast_right.is_colliding() and _cur_dir == Types.Direction.RIGHT and not burning:
+					_cur_dir = Types.Direction.LEFT
+
 		
 		State.FALL_BEGIN:
 			_fall_begin_time += delta
@@ -74,6 +95,10 @@ func _physics_process(delta : float) -> void:
 			_visuals.position.x = 0
 			velocity.x = 0
 			velocity += get_gravity() * _GRAVITY_MODIFIER * delta
+
+			if velocity.y > _MAX_FALL_SPEED:
+				velocity.y = _MAX_FALL_SPEED
+
 			move_and_slide()
 			if is_on_floor():
 				_cur_state = State.DROPPED
