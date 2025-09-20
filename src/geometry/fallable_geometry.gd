@@ -28,8 +28,8 @@ func _handle_fall_logic(delta : float) -> void:
 				fall_state = FallState.FALL_BEGIN
 		FallState.FALL_BEGIN:
 			fall_begin_time += delta
-			visuals.position.x = 1 if int(fall_begin_time * Constants._FALL_SHAKE_SPEED_FACTOR) % 2 == 0 else 0
-			if fall_begin_time >= Constants._FALL_TELEGRAPH_TIME:
+			visuals.position.x = 1 if int(fall_begin_time * Constants.FALL_SHAKE_SPEED_FACTOR) % 2 == 0 else 0
+			if fall_begin_time >= Constants.FALL_TELEGRAPH_TIME:
 				fall_state = FallState.DROPPING
 		FallState.DROPPING:
 			visuals.position.x = 0

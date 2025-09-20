@@ -13,22 +13,25 @@ size = Vector2(12, 14)
 size = Vector2(10, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vya6k"]
-size = Vector2(11.5, 1)
+size = Vector2(12.2, 1)
 
 [node name="EnemyWalker" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 6
 script = ExtResource("1_kjv7w")
+score = 100
 
 [node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, -8)
+position = Vector2(0, -1)
 sprite_frames = ExtResource("2_visw6")
 animation = &"standing"
 autoplay = "walking"
 
 [node name="BurnVisuals" type="Node2D" parent="Visuals"]
+position = Vector2(0, 7)
 
 [node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
 position = Vector2(-4, -7)

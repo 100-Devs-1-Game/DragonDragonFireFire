@@ -24,6 +24,9 @@ tile_set = ExtResource("2_nndgx")
 [node name="EnemyWalker" parent="Enemies" instance=ExtResource("3_yor2l")]
 position = Vector2(92, 140)
 
+[node name="EnemyWalker2" parent="Enemies" instance=ExtResource("3_yor2l")]
+position = Vector2(260, 172)
+
 [node name="EnemyFlyer" parent="Enemies" instance=ExtResource("4_nndgx")]
 position = Vector2(120, 44)
 

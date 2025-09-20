@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ple2hmem8xhp"]
+
+[ext_resource type="SpriteFrames" uid="uid://dhm624m3teesf" path="res://effects/poof_effect_sprite_frames.tres" id="1_0nbey"]
+[ext_resource type="Script" uid="uid://cerin42t4ypul" path="res://effects/poof_effect.gd" id="2_b3oeu"]
+
+[node name="PoofEffect" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_0nbey")
+autoplay = "default"
+script = ExtResource("2_b3oeu")

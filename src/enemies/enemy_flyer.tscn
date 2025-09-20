@@ -16,16 +16,18 @@ size = Vector2(10, 5)
 collision_layer = 16
 collision_mask = 6
 script = ExtResource("1_ue0bs")
+score = 300
 
 [node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -7)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, -7)
 sprite_frames = ExtResource("1_273yy")
 animation = &"flying"
 frame_progress = 0.79629123
 
 [node name="BurnVisuals" type="Node2D" parent="Visuals"]
+position = Vector2(0, 7)
 
 [node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
 position = Vector2(-2, -5)
