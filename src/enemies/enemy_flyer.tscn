@@ -8,7 +8,7 @@
 [ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="3_a556r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_273yy"]
-radius = 7.0
+radius = 6.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ju4oa"]
 size = Vector2(10, 5)
