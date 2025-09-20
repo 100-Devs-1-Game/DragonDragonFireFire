@@ -1,13 +1,15 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b8adolhf1jwt3"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://b8adolhf1jwt3"]
 
 [ext_resource type="PackedScene" uid="uid://cfm6whuvj2n57" path="res://geometry/burnable_block_8p.tscn" id="1_u8yef"]
 [ext_resource type="PackedScene" uid="uid://b2qqy2qp1tee4" path="res://geometry/movable_platform_24x_8p.tscn" id="2_6r0tj"]
 [ext_resource type="PackedScene" uid="uid://4ixpt336ii8" path="res://geometry/movable_platform_40x_8p.tscn" id="3_faud7"]
+[ext_resource type="PackedScene" uid="uid://byrs8mwxmfql4" path="res://geometry/movable_platform_48x_8p.tscn" id="4_g1wf2"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yor2l"]
 scenes/1/scene = ExtResource("1_u8yef")
 scenes/2/scene = ExtResource("2_6r0tj")
 scenes/3/scene = ExtResource("3_faud7")
+scenes/7/scene = ExtResource("4_g1wf2")
 
 [resource]
 tile_size = Vector2i(8, 8)
