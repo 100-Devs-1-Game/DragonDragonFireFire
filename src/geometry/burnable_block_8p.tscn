@@ -32,7 +32,7 @@ _ignition_range = 6.0
 _catch_fire_range = 4.0
 _catch_burn_time = 1.0
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+[node name="GroundShapeCast" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_lvq3l")
 target_position = Vector2(0, 0)
 collision_mask = 6

@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv30hcnyvv1t7"]
+
+[ext_resource type="SpriteFrames" uid="uid://ddk5t1k4nvlo8" path="res://enemies/enemy_flyer_sprite_frames.tres" id="1_273yy"]
+[ext_resource type="Script" uid="uid://t6vck30nrxvp" path="res://enemies/enemy_flyer.gd" id="1_ue0bs"]
+[ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="2_5lxk0"]
+[ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="2_ju4oa"]
+[ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="3_a556r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_273yy"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju4oa"]
+size = Vector2(10, 5)
+
+[node name="EnemyFlyer" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 6
+script = ExtResource("1_ue0bs")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -7)
+sprite_frames = ExtResource("1_273yy")
+animation = &"flying"
+frame_progress = 0.79629123
+
+[node name="BurnVisuals" type="Node2D" parent="Visuals"]
+
+[node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+position = Vector2(-2, -5)
+sprite_frames = ExtResource("3_a556r")
+autoplay = "default"
+
+[node name="BurnSprite2" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+position = Vector2(3, -10)
+sprite_frames = ExtResource("3_a556r")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_273yy")
+
+[node name="BurnComponent" parent="." instance=ExtResource("2_ju4oa")]
+_ignition_range = 9.0
+_force_immediate = true
+_catch_fire_range = 7.0
+
+[node name="HeadCheckComponent" parent="." instance=ExtResource("2_5lxk0")]
+position = Vector2(0, -7)
+must_be_on_ground = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_ju4oa")
+debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)

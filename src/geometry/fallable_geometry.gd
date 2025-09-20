@@ -13,13 +13,13 @@ const _GRAVITY_MODIFIER : float = 0.25
 var fall_state : FallState = FallState.ON_GROUND
 var fall_begin_time : float = 0.0
 
-@onready var shape_cast : ShapeCast2D = $ShapeCast2D
+@onready var ground_shape_cast : ShapeCast2D = $GroundShapeCast
 @onready var visuals : Node2D = $Visuals
 
 
 func _handle_fall_logic(delta : float) -> void:
-	shape_cast.force_shapecast_update()
-	var object_beneath : bool = shape_cast.is_colliding()
+	ground_shape_cast.force_shapecast_update()
+	var object_beneath : bool = ground_shape_cast.is_colliding()
 
 	match fall_state:
 		FallState.ON_GROUND:

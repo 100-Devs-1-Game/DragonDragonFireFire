@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dcxbvgske0q7x"]
+
+[ext_resource type="Texture2D" uid="uid://xdvgixw6clnu" path="res://assets/enemies/walker.png" id="1_cfvog"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfvog"]
+atlas = ExtResource("1_cfvog")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqx0n"]
+atlas = ExtResource("1_cfvog")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3x6g"]
+atlas = ExtResource("1_cfvog")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02k0a"]
+atlas = ExtResource("1_cfvog")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfvog")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqx0n")
+}],
+"loop": false,
+"name": &"standing",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3x6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02k0a")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 2.0
+}]

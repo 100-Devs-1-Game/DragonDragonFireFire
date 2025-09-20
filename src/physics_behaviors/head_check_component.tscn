@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3i6n8ncflaq3"]
+
+[ext_resource type="Script" uid="uid://baowet2m4rgs" path="res://physics_behaviors/head_check_component.gd" id="1_icfra"]
+
+[node name="HeadCheckComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_icfra")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

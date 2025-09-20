@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk42xswvh07t0"]
+[gd_scene load_steps=6 format=3 uid="uid://dk42xswvh07t0"]
 
 [ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cdalc5l8qtll0" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="3_g1dw6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oul6g"]
 size = Vector2(12, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
+size = Vector2(10, 4)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -17,3 +21,10 @@ sprite_frames = ExtResource("1_oul6g")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_oul6g")
+
+[node name="HeadCheckComponent" parent="." instance=ExtResource("3_g1dw6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_yw30f")
+debug_color = Color(0.96020204, 0, 0.52006775, 0.41960785)
