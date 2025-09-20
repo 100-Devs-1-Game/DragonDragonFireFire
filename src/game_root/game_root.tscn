@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://6thasun1l7ps"]
+[gd_scene load_steps=6 format=3 uid="uid://6thasun1l7ps"]
 
+[ext_resource type="Script" uid="uid://bu6eoatch50ty" path="res://game_root/game_root.gd" id="1_lssg5"]
 [ext_resource type="Shader" uid="uid://l216h1rx3xxf" path="res://shaders/crt_shader.gdshader" id="1_ndwrs"]
-[ext_resource type="PackedScene" uid="uid://bbxryce6ob4pc" path="res://game_scene/game_scene.tscn" id="1_nusy7"]
+[ext_resource type="PackedScene" uid="uid://3j6mbl5516uy" path="res://title_screen/title_screen.tscn" id="3_lssg5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lssg5"]
 viewport_path = NodePath("SubViewport")
@@ -15,12 +16,13 @@ shader_parameter/curve = 0.0730000034675
 shader_parameter/sharpness = 0.8030000143925
 shader_parameter/color_offset = 0.0
 shader_parameter/mask_brightness = 0.94800004503
-shader_parameter/scanline_brightness = 0.9740000225150001
+shader_parameter/scanline_brightness = 0.974000022515
 shader_parameter/min_scanline_thickness = 0.81800002698
 shader_parameter/aspect = 0.75
 shader_parameter/wobble_strength = 0.0
 
 [node name="GameRoot" type="Node2D"]
+script = ExtResource("1_lssg5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6nmxx")
@@ -31,4 +33,6 @@ offset_bottom = 1080.0
 snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
 
-[node name="GameScene" parent="SubViewport" instance=ExtResource("1_nusy7")]
+[node name="TitleScreen" parent="SubViewport" instance=ExtResource("3_lssg5")]
+offset_right = 0.0
+offset_bottom = 0.0

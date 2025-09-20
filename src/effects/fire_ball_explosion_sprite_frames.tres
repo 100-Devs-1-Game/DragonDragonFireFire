@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cd4sqc355t13k"]
+
+[ext_resource type="Texture2D" uid="uid://cygfu8auq32qh" path="res://assets/effects/fire_ball_explosion.png" id="1_yhtqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnj38"]
+atlas = ExtResource("1_yhtqj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhxoq"]
+atlas = ExtResource("1_yhtqj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6su5"]
+atlas = ExtResource("1_yhtqj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhtqj"]
+atlas = ExtResource("1_yhtqj")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnj38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhxoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6su5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhtqj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]

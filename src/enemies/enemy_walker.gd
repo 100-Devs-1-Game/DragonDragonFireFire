@@ -7,6 +7,7 @@ enum State
 	FALL_BEGIN,
 	FALLING,
 	DROPPED,
+	DYING,
 }
 
 const _SPEED : float = 20.0
@@ -40,11 +41,11 @@ func _process(_delta : float) -> void:
 	
 	_burn_visuals.visible = _burn_component.is_burning()
 	if _burn_component.is_burning() and _burn_component.get_burn_time() >= _BURN_TIME_TO_KILL:
-		die()
+		_cur_state = State.DYING
 	
 	if _head_check_component.is_hit():
-		die()
-	
+		_cur_state = State.DYING
+
 	check_out_of_bounds_despawn()
 	Teleport.handle_teleport(self)
 
@@ -59,10 +60,7 @@ func _physics_process(delta : float) -> void:
 				_cur_state = State.FALL_BEGIN
 				_fall_begin_time = 0.0
 			else:
-				# Just caught fire?
-				if not _burned_previously and _burn_component.is_burning():
-					_burned_previously = true
-					_cur_dir = _burn_component.get_burn_flee_direction()
+				_check_if_flees_from_burning()
 
 				velocity.x = _SPEED if _cur_dir == Types.Direction.RIGHT else -_SPEED
 				if _burn_component.is_burning():
@@ -113,6 +111,20 @@ func _physics_process(delta : float) -> void:
 				velocity = Vector2(0, 0)
 				if _drop_time >= _DROP_TIME_THRESHOLD:
 					_cur_state = State.WALK
+		
+		State.DYING:
+			velocity = Vector2(0, 0)
+			_death_time_elapsed += delta
+			_update_death_visuals()
+			if _death_time_elapsed >= _DEATH_SEQUENCE_TIME:
+				die()
+
+
+func _check_if_flees_from_burning() -> void:
+	if not _burned_previously and _burn_component.is_burning():
+		_burned_previously = true
+		if _burn_component.does_scare_enemies():
+			_cur_dir = _burn_component.get_burn_flee_direction()
 
 
 func _handle_animation() -> void:

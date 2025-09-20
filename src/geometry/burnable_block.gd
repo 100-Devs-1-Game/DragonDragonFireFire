@@ -1,18 +1,54 @@
 class_name BurnableBlock
 extends FallableGeometry
 
-const _BURN_DESTROY_TIME : float = 3.0
+enum State
+{
+	DEFAULT,
+	INCINERATING, # Fully burned down.
+}
 
+const _BURN_DESTROY_TIME : float = 3.0
+const _DEATH_SEQUENCE_TIME : float = 0.17 # To be synched with incinerate shader animation.
+
+var _cur_state : State = State.DEFAULT
+var _incinerate_time_elapsed : float = 0.0
+
+@onready var _visuals : Node2D = $Visuals
 @onready var _burn_component : BurnComponent = $BurnComponent
 @onready var _burn_sprite : AnimatedSprite2D = $Visuals/BurnSprite
 
 
-func _process(_delta : float) -> void:
+func _ready() -> void:
+	# Assert that _visuals has its shader material attached.
+	assert(_visuals.get("material") is ShaderMaterial)
+
+
+func _process(delta : float) -> void:
 	_burn_sprite.visible = _burn_component.is_burning()
 
-	if _burn_component.is_burning() and _burn_component.get_burn_time() >= _BURN_DESTROY_TIME:
-		queue_free()
+	match _cur_state:
+		State.DEFAULT:
+			if _burn_component.is_burning() and _burn_component.get_burn_time() >= _BURN_DESTROY_TIME:
+				_cur_state = State.INCINERATING
+		State.INCINERATING:
+			# Deactivate burn spreading and clear all collision layers.
+			_burn_component.set_inactive()
+			collision_layer = 0
+
+			_incinerate_time_elapsed += delta
+			_update_incinerate_visuals()
+
+			if _incinerate_time_elapsed >= _DEATH_SEQUENCE_TIME:
+				queue_free()
+
+
+func _update_incinerate_visuals() -> void:
+	var shader_material : ShaderMaterial = _visuals.get("material") as ShaderMaterial
+	assert(shader_material)
+	shader_material.set_shader_parameter("current_time", _incinerate_time_elapsed)
 
 
 func _physics_process(delta : float) -> void:
-	_handle_fall_logic(delta)
+	# Only fall in default state.
+	if _cur_state == State.DEFAULT:
+		_handle_fall_logic(delta)

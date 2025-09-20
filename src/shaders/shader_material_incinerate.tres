@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dyx1yhurrujxn"]
+
+[ext_resource type="Shader" uid="uid://cew32kpokoxdg" path="res://shaders/incinerate.gdshader" id="1_a3vbs"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_a3vbs")
+shader_parameter/fade_duration = 0.08000000310148
+shader_parameter/step_delay = 0.030000001425
+shader_parameter/current_time = 0.0
