@@ -26,7 +26,7 @@ func set_spawn_position(pos : Vector2) -> void:
 
 
 func _process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 	
 	position += _MOTION * delta

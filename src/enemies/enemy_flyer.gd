@@ -30,7 +30,7 @@ func _ready() -> void:
 func _process(_delta : float) -> void:
 	_handle_animation() # Handle animation even when paused as pausing the animation needs to be handled.
 
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 	
 	_burn_visuals.visible = _burn_component.is_burning()
@@ -45,7 +45,7 @@ func _process(_delta : float) -> void:
 
 
 func _physics_process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 
 	_check_if_flees_from_burning()
@@ -88,7 +88,7 @@ func _check_if_flees_from_burning() -> void:
 
 
 func _handle_animation() -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		_sprite.pause()
 		return
 

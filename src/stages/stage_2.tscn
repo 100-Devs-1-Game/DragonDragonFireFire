@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=4 uid="uid://y2mviqhnvlg7"]
+[gd_scene load_steps=7 format=4 uid="uid://y2mviqhnvlg7"]
 
 [ext_resource type="TileSet" uid="uid://cj0foed3p6jmm" path="res://geometry/tileset_static_geometry.tres" id="1_c6umw"]
+[ext_resource type="Script" uid="uid://bbq3fl67mngl8" path="res://stages/stage.gd" id="1_txogb"]
 [ext_resource type="TileSet" uid="uid://b8adolhf1jwt3" path="res://geometry/tileset_dynamic_geometry.tres" id="2_txogb"]
 [ext_resource type="PackedScene" uid="uid://nfwtfgygpjt8" path="res://enemies/enemy_walker.tscn" id="3_85jxm"]
 [ext_resource type="PackedScene" uid="uid://dv30hcnyvv1t7" path="res://enemies/enemy_flyer.tscn" id="4_013ri"]
 [ext_resource type="PackedScene" uid="uid://dk42xswvh07t0" path="res://player/player.tscn" id="5_mghc5"]
 
-[node name="Stage1" type="Node2D"]
+[node name="Stage2" type="ColorRect"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 180)
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_txogb")
 metadata/_edit_vertical_guides_ = [320.0]
 metadata/_edit_horizontal_guides_ = [180.0]
 
@@ -51,4 +56,4 @@ position = Vector2(64, 132)
 position = Vector2(256, 132)
 
 [node name="Player" parent="." instance=ExtResource("5_mghc5")]
-position = Vector2(112, 160)
+position = Vector2(212, 172)

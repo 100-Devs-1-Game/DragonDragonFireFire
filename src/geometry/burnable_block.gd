@@ -15,19 +15,21 @@ var _incinerate_time_elapsed : float = 0.0
 
 @onready var _visuals : Node2D = $Visuals
 @onready var _burn_component : BurnComponent = $BurnComponent
-@onready var _burn_sprite : AnimatedSprite2D = $Visuals/BurnSprite
+@onready var _burn_visuals : Node2D = $Visuals/BurnVisuals
 
 
 func _ready() -> void:
+	_burn_visuals.visible = false
+
 	# Assert that _visuals has its shader material attached.
 	assert(_visuals.get("material") is ShaderMaterial)
 
 
 func _process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 	
-	_burn_sprite.visible = _burn_component.is_burning()
+	_burn_visuals.visible = _burn_component.is_burning()
 
 	match _cur_state:
 		State.DEFAULT:
@@ -52,7 +54,7 @@ func _update_incinerate_visuals() -> void:
 
 
 func _physics_process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 		
 	# Only fall in default state.

@@ -3,7 +3,7 @@ extends FallableGeometry
 
 
 func _physics_process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 	
 	_handle_fall_logic(delta)

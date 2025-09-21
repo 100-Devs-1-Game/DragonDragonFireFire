@@ -15,7 +15,7 @@ func _ready():
 
 
 func _physics_process(_delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 		
 	if _check_if_hit():

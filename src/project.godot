@@ -33,6 +33,10 @@ window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+enemies=""
+
 [gui]
 
 theme/custom="uid://c2bp156wiol35"

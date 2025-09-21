@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 enum State
@@ -21,7 +22,7 @@ var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
 
 func _physics_process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 		
 	match _cur_state:
