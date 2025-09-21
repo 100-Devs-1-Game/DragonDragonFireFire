@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 
 	if not _is_burning:

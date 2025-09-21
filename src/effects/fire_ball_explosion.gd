@@ -8,7 +8,7 @@ var _lifetime : float = 0.0
 
 func _process(delta: float) -> void:
 	# Pause animation in paused mode.
-	if GameState.paused:
+	if GameState.is_halted():
 		pause()
 		return
 

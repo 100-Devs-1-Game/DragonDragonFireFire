@@ -10,7 +10,7 @@ var _motion_vector : Vector2 = Vector2(_SPEED, 0)
 
 
 func _physics_process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 		
 	position += _motion_vector * delta

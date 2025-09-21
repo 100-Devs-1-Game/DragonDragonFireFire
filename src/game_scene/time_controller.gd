@@ -3,7 +3,7 @@ extends Node
 
 
 func _process(delta : float) -> void:
-	if GameState.paused:
+	if GameState.is_halted():
 		return
 	
 	# Update the time left.
