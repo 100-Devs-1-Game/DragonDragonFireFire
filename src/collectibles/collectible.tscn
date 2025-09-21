@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://s471kpgknaxv"]
+
+[ext_resource type="Script" uid="uid://8lx35134fwif" path="res://collectibles/collectible.gd" id="1_mctxo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mctxo"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0tds"]
+size = Vector2(12, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mctxo"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5esu"]
+size = Vector2(2, 2)
+
+[node name="Collectible" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_mctxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_mctxo")
+debug_color = Color(0.6910079, 0.4935971, 0.1830126, 0.41960785)
+
+[node name="ShapeCastAnything" type="ShapeCast2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_m0tds")
+target_position = Vector2(0, 0)
+collision_mask = 55
+
+[node name="ShapeCastGeometry" type="ShapeCast2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_m0tds")
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="ShapeCastObjectRange" type="ShapeCast2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_mctxo")
+target_position = Vector2(0, 0)
+collision_mask = 33
+collide_with_areas = true
+
+[node name="ShapeCastValidGroundLeft" type="ShapeCast2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_k5esu")
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="ShapeCastValidGroundRight" type="ShapeCast2D" parent="."]
+position = Vector2(6, 0)
+shape = SubResource("RectangleShape2D_k5esu")
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dk42xswvh07t0" path="res://player/player.tscn" id="5_mghc5"]
 
 [node name="Stage2" type="ColorRect"]
-clip_contents = true
-custom_minimum_size = Vector2(320, 180)
 color = Color(1, 1, 1, 0)
 script = ExtResource("1_txogb")
 metadata/_edit_vertical_guides_ = [320.0]
