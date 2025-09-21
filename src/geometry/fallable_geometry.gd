@@ -23,6 +23,7 @@ func _handle_fall_logic(delta : float) -> void:
 
 	match fall_state:
 		FallState.ON_GROUND:
+			visuals.position.x = 0
 			if not object_beneath:
 				fall_begin_time = 0.0
 				fall_state = FallState.FALL_BEGIN

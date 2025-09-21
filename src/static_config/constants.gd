@@ -10,3 +10,5 @@ const FIRE_TICK_TIME : float = 0.05
 
 const FALL_TELEGRAPH_TIME : float = 0.5
 const FALL_SHAKE_SPEED_FACTOR : float = 10.0
+
+const STAGE_COMPLETION_BONUS_SCORE : int = 1000

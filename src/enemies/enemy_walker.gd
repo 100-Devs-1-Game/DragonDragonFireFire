@@ -33,6 +33,7 @@ var _burned_previously : bool = false
 
 
 func _ready() -> void:
+	super._ready()
 	_burn_visuals.visible = false
 
 

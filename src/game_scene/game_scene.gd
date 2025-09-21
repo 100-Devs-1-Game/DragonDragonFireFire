@@ -10,7 +10,7 @@ enum State
 }
 
 # Grace time to not have a sudden transition immediately after last enemy is defeated.
-const _TRANSITION_ENTERING_TIME : float = 1.5
+const _TRANSITION_ENTERING_TIME : float = 2.0
 
 var _transition_entering_time_elapsed : float = 0.0
 
@@ -52,6 +52,7 @@ func _process(delta : float) -> void:
 			_time_controller.set_running(false) # Stop timer during transition enter stage, would be unfair not to.
 			_transition_entering_time_elapsed += delta
 			if _transition_entering_time_elapsed >= _TRANSITION_ENTERING_TIME:
+				_current_stage.grant_completion_bonus()
 				_cur_state = State.TRANSITIONING
 				_transition_stages()
 
@@ -77,6 +78,8 @@ func _callback_intro_finished() -> void:
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
 	_time_controller.set_running(true)
+
+	_current_stage.do_setup()
 
 
 func _transition_stages() -> void:
@@ -122,6 +125,8 @@ func _callback_transition_finished() -> void:
 	player.visible = true
 	_player_cutscene.visible = false
 
-	_time_controller.set_running(true)
-	GameState.cutscene = false
 	_cur_state = State.PLAYING
+	GameState.cutscene = false
+	_time_controller.set_running(true)
+
+	_current_stage.do_setup()
