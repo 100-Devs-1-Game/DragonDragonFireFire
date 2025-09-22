@@ -19,26 +19,35 @@ const _MAX_FALL_SPEED = 130.0
 const _INVINCIBILITY_TIME : float = 2.0
 const _INVINCIBILITY_FLASH_SPEED : float = 20.0
 
+const _FIRE_SPIT_ANIMATION_TIME : float = 0.15
+
 var _cur_state : State = State.MOVE
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 var _touched_by_enemy : bool = false
 
-var has_invincibility_frames : bool = false
-var invincibility_frames : float = 0.0
+var _has_invincibility_frames : bool = false
+var _invincibility_frames : float = 0.0
 
-@onready var _sprite : AnimatedSprite2D = $AnimatedSprite2D
+var _time_since_last_fire_spit : float = 0.0
+
+@onready var _visuals : Node2D = $Visuals
+@onready var _sprite : AnimatedSprite2D = $Visuals/AnimatedSprite2D
+@onready var _sprite_fire : AnimatedSprite2D = $Visuals/AnimatedSprite2DFire
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
 
 
 func _physics_process(delta : float) -> void:
 	if GameState.is_halted():
+		_update_animation() # Update animation regardless.
 		return
 
-	if has_invincibility_frames:
-		invincibility_frames -= delta
-		if invincibility_frames <= 0.0:
-			has_invincibility_frames = false
+	if _has_invincibility_frames:
+		_invincibility_frames -= delta
+		if _invincibility_frames <= 0.0:
+			_has_invincibility_frames = false
 	
+	_time_since_last_fire_spit += delta
+
 	_update_invincibility_visuals()
 	
 	match _cur_state:
@@ -48,6 +57,8 @@ func _physics_process(delta : float) -> void:
 			_physics_process_dead(delta)
 		_:
 			pass
+	
+	_update_animation()
 	
 	Teleport.handle_teleport(self)
 
@@ -83,15 +94,15 @@ func _physics_process_dead(_delta : float) -> void:
 
 
 func grant_invincibility() -> void:
-	has_invincibility_frames = true
-	invincibility_frames = _INVINCIBILITY_TIME
+	_has_invincibility_frames = true
+	_invincibility_frames = _INVINCIBILITY_TIME
 
 
 func _update_invincibility_visuals() -> void:
-	if has_invincibility_frames:
-		_sprite.modulate.a = 1.0 if int(invincibility_frames * _INVINCIBILITY_FLASH_SPEED) % 2 == 0 else 0.5
+	if _has_invincibility_frames:
+		_visuals.modulate.a = 1.0 if int(_invincibility_frames * _INVINCIBILITY_FLASH_SPEED) % 2 == 0 else 0.5
 	else:
-		_sprite.modulate.a = 1.0
+		_visuals.modulate.a = 1.0
 
 
 func _handle_direction_actions() -> void:
@@ -121,14 +132,55 @@ func _shoot_fire_ball() -> void:
 
 	fire_ball.global_position = global_position + fire_ball_offset
 
+	_time_since_last_fire_spit = 0.0
+
 
 func _handle_death() -> void:
 	Signals.player_died.emit()
 	_cur_state = State.DEAD
 
 
+func _update_animation() -> void:
+	if GameState.is_halted():
+		_sprite.pause()
+		_sprite_fire.pause()
+		return
+	
+	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
+
+	match _cur_state:
+		State.UNDEFINED:
+			_sprite.play("idle")
+			_sprite_fire.play("idle_fire")
+		State.MOVE:
+			if not is_on_floor():
+				if velocity.y < 0.0:
+					_sprite.play("jump_up")
+					_sprite_fire.play("jump_up_fire")
+				else:
+					_sprite.play("jump_down")
+					_sprite_fire.play("jump_down_fire")
+			elif abs(velocity.x) > 0.1:
+				_sprite.play("walk")
+				_sprite_fire.play("walk_fire")
+			else:
+				_sprite.play("idle")
+				_sprite_fire.play("idle_fire")
+
+		State.DEAD:
+			_sprite.play("hurt")
+			_sprite_fire.play("hurt_fire")
+	
+	if _time_since_last_fire_spit < _FIRE_SPIT_ANIMATION_TIME:
+		_sprite_fire.visible = true
+		_sprite.visible = false
+	else:
+		_sprite_fire.visible = false
+		_sprite.visible = true
+
+
 func _on_enemy_detection_hitbox_body_entered(_body):
-	if has_invincibility_frames:
+	if _has_invincibility_frames:
 		return
 	
 	_touched_by_enemy = true

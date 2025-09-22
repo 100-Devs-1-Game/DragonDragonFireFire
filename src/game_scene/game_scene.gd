@@ -72,14 +72,15 @@ func _process(delta : float) -> void:
 
 func _play_intro_sequence() -> void:
 	var player : Player = _current_stage.get_player() # The actual player in the stage.
-	_current_stage_starting_pos = player.global_position
-
-	# TODO: Play walk animation.
+	_current_stage_starting_pos = player.global_position # TODO: Starting pos handling is stage responsibility.
+	player.visible = false
 
 	_time_controller.set_running(false)
 
 	var intro_tween : Tween = get_tree().create_tween()
+	intro_tween.tween_callback(_player_cutscene.play.bind("walk"))
 	intro_tween.tween_property(_player_cutscene, "global_position", player.global_position, 1.0)
+	intro_tween.tween_callback(_player_cutscene.play.bind("idle"))
 	intro_tween.tween_interval(0.2)
 	intro_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 1.0, 0.75)
 	# TODO: Play cheer animation.
@@ -87,6 +88,9 @@ func _play_intro_sequence() -> void:
 
 
 func _callback_intro_finished() -> void:
+	var player : Player = _current_stage.get_player()
+	player.visible = true
+
 	_player_cutscene.visible = false
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
@@ -112,7 +116,7 @@ func _transition_stages() -> void:
 
 	var player : Player = _current_stage.get_player()
 	_player_cutscene.global_position = player.global_position
-	_player_cutscene.play("stage_transition")
+	_player_cutscene.play("spin")
 	_player_cutscene.visible = true
 	player.visible = false
 	var next_stage_player : Player = _next_stage.get_player()
@@ -156,7 +160,7 @@ func _on_player_died() -> void:
 	var player : Player = _current_stage.get_player()
 	_player_cutscene.global_position = player.global_position
 
-	_player_cutscene.play("dead")
+	_player_cutscene.play("hurt")
 	_player_cutscene.visible = true
 	player.visible = false
 
@@ -172,19 +176,11 @@ func _on_player_died() -> void:
 func _do_death_transition() -> void:
 	var death_transition_tween : Tween = get_tree().create_tween()
 	death_transition_tween.tween_interval(0.75)
-	death_transition_tween.tween_callback(_callback_play_death_transition_animation)
+	death_transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
 	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 2.0)
-	death_transition_tween.tween_callback(_callback_play_idle_animation)
+	death_transition_tween.tween_callback(_player_cutscene.play.bind("idle"))
 	death_transition_tween.tween_interval(0.5)
 	death_transition_tween.tween_callback(_callback_death_transition_finished)
-
-
-func _callback_play_idle_animation() -> void:
-	_player_cutscene.play("default")
-
-
-func _callback_play_death_transition_animation() -> void:
-	_player_cutscene.play("dead_transition")
 
 
 func _callback_death_transition_finished() -> void:

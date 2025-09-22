@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbxryce6ob4pc"]
+[gd_scene load_steps=11 format=3 uid="uid://bbxryce6ob4pc"]
 
 [ext_resource type="Script" uid="uid://cou2py78batyp" path="res://game_scene/game_scene.gd" id="1_k340r"]
 [ext_resource type="PackedScene" uid="uid://0b8gkxjmmmak" path="res://stages/stage_1.tscn" id="1_n4lbc"]
@@ -9,6 +9,50 @@
 [ext_resource type="PackedScene" uid="uid://pwy1g0xius4r" path="res://ui/pause_overlay.tscn" id="4_e0oqy"]
 [ext_resource type="Script" uid="uid://djmjyhwmjdg5l" path="res://enemies/enemy_controller.gd" id="9_mw77h"]
 
+[sub_resource type="Shader" id="Shader_8l73x"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform float clear_progress : hint_range(0.0, 1.0) = 0.0; // 0 -> 1 where 1 is fully cleared.
+
+void fragment()
+{
+    vec4 tex_color = texture(TEXTURE, UV);
+
+	// Figure out which pixel we are in the texture (integer coords) and if they are odd/even.
+    ivec2 px = ivec2(floor(UV / TEXTURE_PIXEL_SIZE));
+    int x_odd = px.x & 1;
+    int y_odd = px.y & 1;
+    
+    float sweepA = (UV.x + UV.y) * 0.5;
+	float sweepB = (UV.x + (1.0 - UV.y)) * 0.5;
+	float sweepC = ((1.0 - UV.x) + UV.y) * 0.5;
+	float sweepD = ((1.0 - UV.x) + (1.0 - UV.y)) * 0.5;
+
+	float sweep = sweepA;
+    if (x_odd == 1 && y_odd == 1) {
+        sweep = sweepB;
+    } else if (x_odd == 1 && y_odd == 0) {
+        sweep = sweepC;
+    } else if (x_odd == 0 && y_odd == 1) {
+        sweep = sweepD;
+    }
+    
+    if (sweep <= clear_progress) {
+        // Cleared pixel → make transparent
+        COLOR = vec4(tex_color.rgb, 0.0);
+    } else {
+        // Black with full alpha.
+        COLOR = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mw77h"]
+resource_local_to_scene = true
+shader = SubResource("Shader_8l73x")
+shader_parameter/clear_progress = 1.0
+
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k340r")
 
@@ -17,6 +61,7 @@ script = ExtResource("1_k340r")
 [node name="GameUI" parent="." instance=ExtResource("2_m1k14")]
 
 [node name="TransitionRect" parent="." instance=ExtResource("3_mw77h")]
+material = SubResource("ShaderMaterial_mw77h")
 custom_minimum_size = Vector2(320, 180)
 
 [node name="PlayerCutscene" parent="." instance=ExtResource("3_8l73x")]
