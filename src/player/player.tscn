@@ -15,6 +15,7 @@ radius = 4.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
+platform_on_leave = 2
 script = ExtResource("1_rkbax")
 
 [node name="Visuals" type="Node2D" parent="."]

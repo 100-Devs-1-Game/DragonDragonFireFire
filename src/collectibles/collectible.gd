@@ -104,6 +104,7 @@ func _perform_pickup_logic_fruit() -> void:
 	score_indicator.set_score(score)
 
 	GameState.score += score
+	GameState.food_eaten += 1
 
 
 func _on_body_entered(_body):
