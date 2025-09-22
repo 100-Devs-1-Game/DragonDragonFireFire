@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk42xswvh07t0"]
+[gd_scene load_steps=7 format=3 uid="uid://dk42xswvh07t0"]
 
 [ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cdalc5l8qtll0" path="res://player/player.gd" id="1_rkbax"]
@@ -9,6 +9,9 @@ size = Vector2(12, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
 size = Vector2(10, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1dw6"]
+radius = 4.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -28,3 +31,14 @@ shape = SubResource("RectangleShape2D_oul6g")
 position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_yw30f")
 debug_color = Color(0.96020204, 0, 0.52006775, 0.41960785)
+
+[node name="EnemyDetectionHitbox" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionHitbox"]
+shape = SubResource("CircleShape2D_g1dw6")
+debug_color = Color(0.600112, 0.36984047, 1, 0.41960785)
+
+[connection signal="body_entered" from="EnemyDetectionHitbox" to="." method="_on_enemy_detection_hitbox_body_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://8d30jhpgc64o"]
+[gd_scene load_steps=4 format=3 uid="uid://8d30jhpgc64o"]
 
 [ext_resource type="Script" uid="uid://cyecl4ol6lhyv" path="res://ui/score_label.gd" id="1_dcmab"]
 [ext_resource type="Script" uid="uid://bqd1mtvc33yal" path="res://ui/time_label.gd" id="2_w46tp"]
+[ext_resource type="Script" uid="uid://c0j3o8v7rrh86" path="res://ui/lives_label.gd" id="3_7hrjk"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -86,7 +87,7 @@ theme_override_colors/font_color = Color(0.31764707, 0.63529414, 0, 1)
 text = "LIVES"
 horizontal_alignment = 2
 
-[node name="LivesScoreLabel" type="Label" parent="Background"]
+[node name="LivesLabel" type="Label" parent="Background"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -98,3 +99,4 @@ offset_bottom = 19.0
 grow_horizontal = 2
 text = "ooo"
 horizontal_alignment = 2
+script = ExtResource("3_7hrjk")

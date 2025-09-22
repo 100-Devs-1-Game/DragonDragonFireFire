@@ -5,6 +5,7 @@ enum State
 {
 	UNDEFINED,
 	MOVE,
+	DEAD,
 }
 
 const _FIRE_BALL_SCENE : PackedScene = preload("res://projectiles/fire_ball.tscn")
@@ -15,29 +16,50 @@ const _SPEED = 80.0
 const _JUMP_VELOCITY = -166.0
 const _MAX_FALL_SPEED = 130.0
 
+const _INVINCIBILITY_TIME : float = 2.0
+const _INVINCIBILITY_FLASH_SPEED : float = 20.0
+
 var _cur_state : State = State.MOVE
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
+var _touched_by_enemy : bool = false
 
+var has_invincibility_frames : bool = false
+var invincibility_frames : float = 0.0
+
+@onready var _sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
 
 
 func _physics_process(delta : float) -> void:
 	if GameState.is_halted():
 		return
-		
+
+	if has_invincibility_frames:
+		invincibility_frames -= delta
+		if invincibility_frames <= 0.0:
+			has_invincibility_frames = false
+	
+	_update_invincibility_visuals()
+	
 	match _cur_state:
 		State.MOVE:
 			_physics_process_move(delta)
+		State.DEAD:
+			_physics_process_dead(delta)
 		_:
 			pass
 	
 	Teleport.handle_teleport(self)
 
 	if _head_check_component.is_hit():
-		queue_free()
+		_handle_death()
 
 
 func _physics_process_move(delta : float) -> void:
+	if _touched_by_enemy and not Debug.player_invincible:
+		_handle_death()
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -54,6 +76,22 @@ func _physics_process_move(delta : float) -> void:
 	if velocity.y > _MAX_FALL_SPEED:
 		velocity.y = _MAX_FALL_SPEED
 	move_and_slide()
+
+
+func _physics_process_dead(_delta : float) -> void:
+	pass
+
+
+func grant_invincibility() -> void:
+	has_invincibility_frames = true
+	invincibility_frames = _INVINCIBILITY_TIME
+
+
+func _update_invincibility_visuals() -> void:
+	if has_invincibility_frames:
+		_sprite.modulate.a = 1.0 if int(invincibility_frames * _INVINCIBILITY_FLASH_SPEED) % 2 == 0 else 0.5
+	else:
+		_sprite.modulate.a = 1.0
 
 
 func _handle_direction_actions() -> void:
@@ -82,3 +120,15 @@ func _shoot_fire_ball() -> void:
 		fire_ball.set_right()
 
 	fire_ball.global_position = global_position + fire_ball_offset
+
+
+func _handle_death() -> void:
+	Signals.player_died.emit()
+	_cur_state = State.DEAD
+
+
+func _on_enemy_detection_hitbox_body_entered(_body):
+	if has_invincibility_frames:
+		return
+	
+	_touched_by_enemy = true
