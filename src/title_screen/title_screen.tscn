@@ -1,31 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://3j6mbl5516uy"]
+[gd_scene load_steps=6 format=3 uid="uid://3j6mbl5516uy"]
 
 [ext_resource type="Script" uid="uid://lfin03e4chuk" path="res://title_screen/title_screen.gd" id="1_dxpbd"]
 [ext_resource type="PackedScene" uid="uid://dmub8ct7sq4o6" path="res://ui/control_blink_component.tscn" id="1_g2mvh"]
 [ext_resource type="Shader" uid="uid://ng8jsrw7vop2" path="res://shaders/fire_gradient.gdshader" id="2_2dq6q"]
+[ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="4_vbjqi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dq6q"]
 shader = ExtResource("2_2dq6q")
 shader_parameter/direction = Vector2(1, 1)
 shader_parameter/speed = 0.5000001187500001
 shader_parameter/scale = 2.00000009174012
-shader_parameter/respect_alpha = true
 shader_parameter/fire1 = Color(0.55, 0, 0, 1)
 shader_parameter/fire2 = Color(0.8, 0.2, 0, 1)
 shader_parameter/fire3 = Color(1, 0.55, 0, 1)
 shader_parameter/fire4 = Color(1, 0.8, 0.2, 1)
-shader_parameter/band_softness = 0.0
 
 [node name="TitleScreen" type="Control"]
 custom_minimum_size = Vector2(320, 180)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1600.0
-offset_bottom = -900.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
 script = ExtResource("1_dxpbd")
 metadata/_edit_vertical_guides_ = [320.0]
 metadata/_edit_horizontal_guides_ = [180.0]
@@ -96,3 +91,6 @@ horizontal_alignment = 1
 
 [node name="ControlBlinkComponent" parent="InsertCoinLabel" instance=ExtResource("1_g2mvh")]
 layout_mode = 1
+
+[node name="TransitionRect" parent="." instance=ExtResource("4_vbjqi")]
+layout_mode = 0

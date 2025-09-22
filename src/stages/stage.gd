@@ -20,6 +20,10 @@ func do_setup() -> void:
 	add_child(collectible_spawner)
 
 
+func set_player(player_ref : Player) -> void:
+	_player = player_ref
+
+
 func get_player() -> Player:
 	return _player
 

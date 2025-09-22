@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://vqnw6jvlujgw"]
+
+[ext_resource type="Shader" uid="uid://r4tl5h1pumgl" path="res://shaders/transition_shader.gdshader" id="1_l7vid"]
+[ext_resource type="Texture2D" uid="uid://d07kmb6dfo3gd" path="res://assets/misc/full_res_black.png" id="2_cp33f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ps1j"]
+resource_local_to_scene = true
+shader = ExtResource("1_l7vid")
+shader_parameter/clear_progress = 1.0
+
+[node name="TransitionRect" type="TextureRect"]
+material = SubResource("ShaderMaterial_7ps1j")
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_cp33f")

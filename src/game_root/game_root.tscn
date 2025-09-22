@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://3j6mbl5516uy" path="res://title_screen/title_screen.tscn" id="3_lssg5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lssg5"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("GameViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6nmxx"]
 resource_local_to_scene = true
@@ -28,11 +28,20 @@ script = ExtResource("1_lssg5")
 material = SubResource("ShaderMaterial_6nmxx")
 offset_right = 1920.0
 offset_bottom = 1080.0
+metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="GameViewport" type="SubViewport" parent="."]
 snap_2d_transforms_to_pixel = true
 size = Vector2i(320, 180)
 
-[node name="TitleScreen" parent="SubViewport" instance=ExtResource("3_lssg5")]
-offset_right = 0.0
-offset_bottom = 0.0
+[node name="SceneContainer" type="Node2D" parent="GameViewport"]
+unique_name_in_owner = true
+
+[node name="TitleScreen" parent="GameViewport/SceneContainer" instance=ExtResource("3_lssg5")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 1
+grow_vertical = 1

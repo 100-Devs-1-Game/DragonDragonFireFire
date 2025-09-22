@@ -8,6 +8,7 @@ var current_stage : int = 1
 
 var score : int = 0
 var time_left : float = float(Constants.PLAY_TIME)
+var lives : int = Constants.STARTING_LIVES
 
 
 func is_in_cutscene() -> bool:

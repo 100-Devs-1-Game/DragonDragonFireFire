@@ -7,7 +7,10 @@ enum State
 	PLAYING,
 	TRANSITION_ENTERING,
 	TRANSITIONING,
+	PLAYER_DEAD,
 }
+
+const _PLAYER_SCENE : PackedScene = preload("res://player/player.tscn")
 
 # Grace time to not have a sudden transition immediately after last enemy is defeated.
 const _TRANSITION_ENTERING_TIME : float = 2.0
@@ -16,6 +19,8 @@ var _transition_entering_time_elapsed : float = 0.0
 
 var _cur_state : State = State.INTRO
 var _next_stage : Stage = null # Reference to where next stage will be instantiated.
+
+var _current_stage_starting_pos : Vector2 = Vector2.ZERO
 
 @onready var _player_cutscene : PlayerCutscene = $PlayerCutscene
 @onready var _transition_rect : TextureRect = $TransitionRect
@@ -26,6 +31,8 @@ var _next_stage : Stage = null # Reference to where next stage will be instantia
 
 
 func _ready() -> void:
+	Signals.player_died.connect(_on_player_died)
+
 	GameState.cutscene = true
 
 	assert(_transition_rect.material)
@@ -58,19 +65,25 @@ func _process(delta : float) -> void:
 
 		State.TRANSITIONING:
 			pass
+		
+		State.PLAYER_DEAD:
+			pass
 
 
 func _play_intro_sequence() -> void:
 	var player : Player = _current_stage.get_player() # The actual player in the stage.
+	_current_stage_starting_pos = player.global_position
 
 	# TODO: Play walk animation.
+
+	_time_controller.set_running(false)
 
 	var intro_tween : Tween = get_tree().create_tween()
 	intro_tween.tween_property(_player_cutscene, "global_position", player.global_position, 1.0)
 	intro_tween.tween_interval(0.2)
 	intro_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 1.0, 0.75)
 	# TODO: Play cheer animation.
-	intro_tween.tween_callback(Callable(self, "_callback_intro_finished"))
+	intro_tween.tween_callback(_callback_intro_finished)
 
 
 func _callback_intro_finished() -> void:
@@ -113,7 +126,7 @@ func _transition_stages() -> void:
 	transition_tween.tween_property(_player_cutscene, "global_position", player_target_pos, 2.0)
 
 	transition_tween.set_parallel(false)
-	transition_tween.tween_callback(Callable(self, "_callback_transition_finished"))
+	transition_tween.tween_callback(_callback_transition_finished)
 
 
 func _callback_transition_finished() -> void:
@@ -122,6 +135,7 @@ func _callback_transition_finished() -> void:
 	_next_stage = null
 
 	var player : Player = _current_stage.get_player()
+	_current_stage_starting_pos = player.global_position
 	player.visible = true
 	_player_cutscene.visible = false
 
@@ -130,3 +144,63 @@ func _callback_transition_finished() -> void:
 	_time_controller.set_running(true)
 
 	_current_stage.do_setup()
+
+
+func _on_player_died() -> void:
+	assert(_cur_state != State.PLAYER_DEAD)
+	_cur_state = State.PLAYER_DEAD
+
+	GameState.cutscene = true
+	_time_controller.set_running(false)
+
+	var player : Player = _current_stage.get_player()
+	_player_cutscene.global_position = player.global_position
+
+	_player_cutscene.play("dead")
+	_player_cutscene.visible = true
+	player.visible = false
+
+	GameState.lives -= 1
+	if GameState.lives <= 0:
+		# TODO: Polish with a nice transition.
+		Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
+		pass
+	else:
+		_do_death_transition()
+
+
+func _do_death_transition() -> void:
+	var death_transition_tween : Tween = get_tree().create_tween()
+	death_transition_tween.tween_interval(0.75)
+	death_transition_tween.tween_callback(_callback_play_death_transition_animation)
+	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 2.0)
+	death_transition_tween.tween_callback(_callback_play_idle_animation)
+	death_transition_tween.tween_interval(0.5)
+	death_transition_tween.tween_callback(_callback_death_transition_finished)
+
+
+func _callback_play_idle_animation() -> void:
+	_player_cutscene.play("default")
+
+
+func _callback_play_death_transition_animation() -> void:
+	_player_cutscene.play("dead_transition")
+
+
+func _callback_death_transition_finished() -> void:
+	var player : Player = _current_stage.get_player()
+	player.queue_free()
+
+	var new_player : Player = _PLAYER_SCENE.instantiate()
+	_current_stage.add_child(new_player)
+	_current_stage.set_player(new_player)
+
+	new_player.grant_invincibility()
+
+	new_player.global_position = _current_stage_starting_pos
+	new_player.visible = true
+	_player_cutscene.visible = false
+
+	_cur_state = State.PLAYING
+	GameState.cutscene = false
+	_time_controller.set_running(true)
