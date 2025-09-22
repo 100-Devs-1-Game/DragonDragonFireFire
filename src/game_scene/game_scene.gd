@@ -162,7 +162,8 @@ func _on_player_died() -> void:
 
 	GameState.lives -= 1
 	if GameState.lives <= 0:
-		# _do_game_over_transition() # TODO: Implement.
+		# TODO: Polish with a nice transition.
+		Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
 		pass
 	else:
 		_do_death_transition()

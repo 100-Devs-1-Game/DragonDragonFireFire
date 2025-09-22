@@ -1,0 +1,193 @@
+[gd_scene load_steps=4 format=3 uid="uid://btb3ktgnrdtit"]
+
+[ext_resource type="Texture2D" uid="uid://x81840evf2gg" path="res://assets/ui/game_over_border.png" id="1_72q5w"]
+[ext_resource type="Script" uid="uid://d2quw7csckdsd" path="res://end_screen/end_screen.gd" id="1_hmshp"]
+[ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="3_mkgft"]
+
+[node name="EndScreen" type="Control"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_hmshp")
+metadata/_edit_vertical_guides_ = [320.0, 160.0]
+metadata/_edit_horizontal_guides_ = [180.0, 90.0]
+
+[node name="GameOverLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="GameOverLabel"]
+position = Vector2(84, -4)
+texture = ExtResource("1_72q5w")
+centered = false
+
+[node name="StatisticsSection" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 176.0
+
+[node name="ScoreLabel" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = -72.0
+offset_right = 184.0
+offset_bottom = -64.0
+text = "SCORE"
+
+[node name="Score" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = -72.0
+offset_right = 224.0
+offset_bottom = -64.0
+text = "99999"
+horizontal_alignment = 2
+
+[node name="StagesClearedLabel" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -52.0
+offset_right = 196.0
+offset_bottom = -44.0
+text = "STAGES CLEARED"
+
+[node name="StagesCleared" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = -52.0
+offset_right = 244.0
+offset_bottom = -44.0
+text = "12"
+horizontal_alignment = 2
+
+[node name="PlaytimeLabel" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -40.0
+offset_right = 196.0
+offset_bottom = -32.0
+text = "PLAY TIME"
+
+[node name="Playtime" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = -40.0
+offset_right = 244.0
+offset_bottom = -32.0
+text = "01:45"
+horizontal_alignment = 2
+
+[node name="FiendsBurnedLabel" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -28.0
+offset_right = 188.0
+offset_bottom = -20.0
+text = "FIENDS BURNED"
+
+[node name="FiendsBurned" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = -28.0
+offset_right = 244.0
+offset_bottom = -20.0
+text = "1456"
+horizontal_alignment = 2
+
+[node name="FruitEatenLabel" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -16.0
+offset_right = 188.0
+offset_bottom = -8.0
+text = "FRUIT EATEN"
+
+[node name="FruitEaten" type="Label" parent="StatisticsSection"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = -16.0
+offset_right = 244.0
+offset_bottom = -8.0
+text = "132"
+horizontal_alignment = 2
+
+[node name="HighscoresSection" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 76.0
+offset_top = 112.0
+offset_right = 236.0
+offset_bottom = 200.0
+
+[node name="HighscoresLabel" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = -76.0
+offset_top = 12.0
+offset_right = 244.0
+offset_bottom = 20.0
+text = "HIGHSCORES"
+horizontal_alignment = 1
+
+[node name="Highscore1Label" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = 60.0
+offset_bottom = 32.0
+text = "1ST"
+horizontal_alignment = 2
+
+[node name="Highscore1" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 132.0
+offset_bottom = 32.0
+text = "999999"
+horizontal_alignment = 2
+
+[node name="Highscore2Label" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 36.0
+offset_right = 60.0
+offset_bottom = 44.0
+text = "2ND"
+horizontal_alignment = 2
+
+[node name="Highscore2" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 36.0
+offset_right = 132.0
+offset_bottom = 44.0
+text = "99999"
+horizontal_alignment = 2
+
+[node name="Highscore3Label" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 48.0
+offset_right = 60.0
+offset_bottom = 56.0
+text = "3RD"
+horizontal_alignment = 2
+
+[node name="Highscore3" type="Label" parent="HighscoresSection"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 48.0
+offset_right = 132.0
+offset_bottom = 56.0
+text = "9999"
+horizontal_alignment = 2
+
+[node name="TransitionRect" parent="." instance=ExtResource("3_mkgft")]
+layout_mode = 0
