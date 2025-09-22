@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dv30hcnyvv1t7" path="res://enemies/enemy_flyer.tscn" id="4_nndgx"]
 
 [node name="Stage1" type="ColorRect"]
+offset_left = -1.0
+offset_right = -1.0
 color = Color(1, 1, 1, 0)
 script = ExtResource("1_0p8va")
 metadata/_edit_vertical_guides_ = [320.0]
