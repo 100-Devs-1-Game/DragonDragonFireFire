@@ -177,7 +177,7 @@ func _do_death_transition() -> void:
 	var death_transition_tween : Tween = get_tree().create_tween()
 	death_transition_tween.tween_interval(0.75)
 	death_transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
-	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 2.0)
+	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 1.5)
 	death_transition_tween.tween_callback(_player_cutscene.play.bind("idle"))
 	death_transition_tween.tween_interval(0.5)
 	death_transition_tween.tween_callback(_callback_death_transition_finished)
