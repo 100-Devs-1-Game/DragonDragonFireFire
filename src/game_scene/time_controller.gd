@@ -13,6 +13,7 @@ func _process(delta : float) -> void:
 	
 	# Update the time left.
 	GameState.time_left -= delta
+	GameState.playtime_elapsed += delta
 
 
 func set_running(value : bool) -> void:

@@ -1,11 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://itqfe8lse353"]
 
 [ext_resource type="Script" uid="uid://c4dkj2md2e718" path="res://player/player_cutscene.gd" id="1_snqka"]
-[ext_resource type="SpriteFrames" uid="uid://d28ufytq8p1" path="res://player/player_cutscene_sprite_frames.tres" id="1_ul7h1"]
+[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="2_snqka"]
 
 [node name="PlayerCutscene" type="Node2D"]
 script = ExtResource("1_snqka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = ExtResource("1_ul7h1")
+sprite_frames = ExtResource("2_snqka")
+animation = &"hurt"
+autoplay = "idle"

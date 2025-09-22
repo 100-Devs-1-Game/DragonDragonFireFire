@@ -15,11 +15,22 @@ radius = 4.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
+platform_on_leave = 2
 script = ExtResource("1_rkbax")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("1_oul6g")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="AnimatedSprite2DFire" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("1_oul6g")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
