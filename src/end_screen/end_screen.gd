@@ -27,7 +27,6 @@ var _entered_name : String = "---"
 @onready var _initials : Array = [%Initial0, %Initial1, %Initial2]
 @onready var _ok_label : OKLabel = %OKLabel
 
-@onready var _score_label : Label = %Score
 @onready var _stages_cleared_label : Label = %StagesCleared
 @onready var _playtime_label : Label = %Playtime
 @onready var _food_eaten_label : Label = %FoodEaten
@@ -65,7 +64,6 @@ func _process(delta : float) -> void:
 
 
 func _set_statistics() -> void:
-	_score_label.text = str(GameState.score)
 	_stages_cleared_label.text = str(GameState.current_stage - 1)
 	_food_eaten_label.text = str(GameState.food_eaten)
 	

@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://itqfe8lse353"]
+[gd_scene load_steps=5 format=3 uid="uid://itqfe8lse353"]
 
 [ext_resource type="Script" uid="uid://c4dkj2md2e718" path="res://player/player_cutscene.gd" id="1_snqka"]
+[ext_resource type="Shader" uid="uid://cew32kpokoxdg" path="res://shaders/incinerate.gdshader" id="2_sel8o"]
 [ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="2_snqka"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sel8o"]
+resource_local_to_scene = true
+shader = ExtResource("2_sel8o")
+shader_parameter/fade_duration = 0.30000001355148
+shader_parameter/step_delay = 0.10000000475
+shader_parameter/current_time = 0.0
+
 [node name="PlayerCutscene" type="Node2D"]
+material = SubResource("ShaderMaterial_sel8o")
 script = ExtResource("1_snqka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_snqka")
 animation = &"hurt"

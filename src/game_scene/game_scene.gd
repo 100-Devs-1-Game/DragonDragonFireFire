@@ -168,9 +168,7 @@ func _on_player_died() -> void:
 
 	GameState.lives -= 1
 	if GameState.lives <= 0:
-		# TODO: Polish with a nice transition.
-		Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
-		pass
+		_do_game_over_transition()
 	else:
 		_do_death_transition()
 
@@ -202,3 +200,21 @@ func _callback_death_transition_finished() -> void:
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
 	_time_controller.set_running(true)
+
+
+func _do_game_over_transition() -> void:
+	var transition_tween : Tween = get_tree().create_tween()
+	transition_tween.tween_interval(1.0)
+	transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
+	transition_tween.tween_interval(0.8)
+	transition_tween.tween_callback(_player_cutscene.pause)
+	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.6, 0.6)
+	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.0, 0.001)
+	transition_tween.tween_callback(_player_cutscene.play.bind("explode"))
+	transition_tween.tween_interval(0.8)
+	transition_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 0.0, 0.75)
+	transition_tween.tween_callback(_callback_game_over_transition_finished)
+
+
+func _callback_game_over_transition_finished() -> void:
+	Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
