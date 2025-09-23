@@ -1,6 +1,23 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://b4dfese7m67yy"]
+[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://b4dfese7m67yy"]
 
+[ext_resource type="Texture2D" uid="uid://cygfu8auq32qh" path="res://assets/effects/fire_ball_explosion.png" id="1_e2h3v"]
 [ext_resource type="Texture2D" uid="uid://7ti5idigms35" path="res://assets/player/player.png" id="1_vtti7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q80o1"]
+atlas = ExtResource("1_e2h3v")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxyft"]
+atlas = ExtResource("1_e2h3v")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q53li"]
+atlas = ExtResource("1_e2h3v")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w5yd"]
+atlas = ExtResource("1_e2h3v")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b3j7s"]
 atlas = ExtResource("1_vtti7")
@@ -84,6 +101,23 @@ region = Rect2(48, 64, 16, 16)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q80o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxyft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q53li")
+}, {
+"duration": 100.0,
+"texture": SubResource("AtlasTexture_7w5yd")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b3j7s")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://btb3ktgnrdtit"]
+[gd_scene load_steps=13 format=3 uid="uid://btb3ktgnrdtit"]
 
 [ext_resource type="Texture2D" uid="uid://x81840evf2gg" path="res://assets/ui/game_over_border.png" id="1_72q5w"]
 [ext_resource type="Script" uid="uid://d2quw7csckdsd" path="res://end_screen/end_screen.gd" id="1_hmshp"]
+[ext_resource type="Script" uid="uid://cyecl4ol6lhyv" path="res://ui/score_label.gd" id="3_fjggk"]
 [ext_resource type="Script" uid="uid://dm7colb1puq7c" path="res://end_screen/highscores_section.gd" id="3_fwhm7"]
 [ext_resource type="Script" uid="uid://2nf18myw0mkf" path="res://end_screen/initial.gd" id="3_kpdng"]
 [ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="3_mkgft"]
@@ -10,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ccbd37lt20el1" path="res://assets/ui/arrow_down.png" id="5_i5gnp"]
 [ext_resource type="Script" uid="uid://bvjycsd0dsjwb" path="res://end_screen/ok_label.gd" id="7_fjggk"]
 
-[sub_resource type="Shader" id="Shader_mkgft"]
+[sub_resource type="Shader" id="Shader_fjggk"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -51,7 +52,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fwhm7"]
 resource_local_to_scene = true
-shader = SubResource("Shader_mkgft")
+shader = SubResource("Shader_fjggk")
 shader_parameter/clear_progress = 1.0
 
 [node name="EndScreen" type="Control"]
@@ -100,6 +101,7 @@ offset_right = 220.0
 offset_bottom = 48.0
 text = "99999"
 horizontal_alignment = 2
+script = ExtResource("3_fjggk")
 
 [node name="NewHighscoreScreen" type="Control" parent="."]
 unique_name_in_owner = true

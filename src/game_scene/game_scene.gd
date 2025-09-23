@@ -24,6 +24,7 @@ var _current_stage_starting_pos : Vector2 = Vector2.ZERO
 
 @onready var _player_cutscene : PlayerCutscene = $PlayerCutscene
 @onready var _transition_rect : TextureRect = $TransitionRect
+@onready var _game_over_label : Label = $GameOverLabel
 @onready var _time_controller : TimeController = $TimeController
 @onready var _enemy_controller : EnemyController = $EnemyController
 
@@ -34,11 +35,16 @@ func _ready() -> void:
 	GameState.reset_game_state()
 
 	Signals.player_died.connect(_on_player_died)
+	Signals.time_over.connect(_on_time_over)
 
 	GameState.cutscene = true
+	_player_cutscene.z_index = 1 # Visible above transition.
 
 	assert(_transition_rect.material)
 	_transition_rect.material.set_shader_parameter("clear_progress", 0.0)
+
+	_game_over_label.visible = false
+	_game_over_label.visible_ratio = 0.0
 
 	_play_intro_sequence()
 
@@ -57,7 +63,6 @@ func _process(delta : float) -> void:
 				_cur_state = State.TRANSITION_ENTERING
 
 		State.TRANSITION_ENTERING:
-			# TODO: Make player invulnerable.
 			_time_controller.set_running(false) # Stop timer during transition enter stage, would be unfair not to.
 			_transition_entering_time_elapsed += delta
 			if _transition_entering_time_elapsed >= _TRANSITION_ENTERING_TIME:
@@ -94,6 +99,7 @@ func _callback_intro_finished() -> void:
 	player.visible = true
 
 	_player_cutscene.visible = false
+	_player_cutscene.z_index = 0 # Reset back to zero.
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
 	_time_controller.set_running(true)
@@ -168,11 +174,29 @@ func _on_player_died() -> void:
 
 	GameState.lives -= 1
 	if GameState.lives <= 0:
-		# TODO: Polish with a nice transition.
-		Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
-		pass
+		_game_over_label.visible = true
+		_game_over_label.text = "GAME OVER!"
+		_do_game_over_transition()
 	else:
 		_do_death_transition()
+
+
+func _on_time_over() -> void:
+	_cur_state = State.PLAYER_DEAD
+
+	GameState.cutscene = true
+	_time_controller.set_running(false)
+
+	var player : Player = _current_stage.get_player()
+	_player_cutscene.global_position = player.global_position
+
+	_player_cutscene.play("hurt")
+	_player_cutscene.visible = true
+	player.visible = false
+
+	_game_over_label.visible = true
+	_game_over_label.text = "TIME OVER!"
+	_do_game_over_transition()
 
 
 func _do_death_transition() -> void:
@@ -202,3 +226,24 @@ func _callback_death_transition_finished() -> void:
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
 	_time_controller.set_running(true)
+
+
+func _do_game_over_transition() -> void:
+	var transition_tween : Tween = get_tree().create_tween()
+	transition_tween.set_parallel(true)
+	transition_tween.tween_property(_game_over_label, "visible_ratio", 1.0, 0.2)
+	transition_tween.tween_interval(1.0)
+	transition_tween.set_parallel(false)
+	transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
+	transition_tween.tween_interval(0.8)
+	transition_tween.tween_callback(_player_cutscene.pause)
+	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.6, 0.6)
+	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.0, 0.001)
+	transition_tween.tween_callback(_player_cutscene.play.bind("explode"))
+	transition_tween.tween_interval(0.8)
+	transition_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 0.0, 0.75)
+	transition_tween.tween_callback(_callback_game_over_transition_finished)
+
+
+func _callback_game_over_transition_finished() -> void:
+	Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.END_SCREEN)
