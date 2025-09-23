@@ -5,12 +5,23 @@ var cutscene : bool = false
 var paused : bool = false
 
 var current_stage : int = 1
-
 var score : int = 0
 var time_left : float = float(Constants.PLAY_TIME)
 var playtime_elapsed : float = 0.0
 var lives : int = Constants.STARTING_LIVES
 var food_eaten : int = 0
+
+
+func reset_game_state() -> void:
+	cutscene = false
+	paused = false
+	
+	current_stage = 1
+	score = 0
+	time_left = float(Constants.PLAY_TIME)
+	playtime_elapsed = 0.0
+	lives = Constants.STARTING_LIVES
+	food_eaten = 0
 
 
 func is_in_cutscene() -> bool:

@@ -7,6 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	Signals.scene_change_triggered.connect(_on_scene_change_triggered)
+	Initialization.initialize()
 
 
 func _on_scene_change_triggered(new_scene : SceneDefinitions.Scenes) -> void:

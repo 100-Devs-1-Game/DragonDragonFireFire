@@ -31,6 +31,8 @@ var _current_stage_starting_pos : Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
+	GameState.reset_game_state()
+
 	Signals.player_died.connect(_on_player_died)
 
 	GameState.cutscene = true

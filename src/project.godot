@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 Signals="*res://autoloads/signals.gd"
 GameState="*res://autoloads/game_state.gd"
 Debug="*res://autoloads/debug.gd"
+Highscores="*res://autoloads/highscores.gd"
 
 [debug]
 
