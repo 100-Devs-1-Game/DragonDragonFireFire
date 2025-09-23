@@ -13,7 +13,7 @@ radius = 6.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ju4oa"]
 size = Vector2(10, 5)
 
-[node name="EnemyFlyer" type="CharacterBody2D"]
+[node name="EnemyFlyer" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 16
 collision_mask = 6
 script = ExtResource("1_ue0bs")

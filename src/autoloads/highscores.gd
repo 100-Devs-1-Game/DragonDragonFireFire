@@ -32,12 +32,12 @@ func reset_highscores() -> void:
 	highscores.append(entry1)
 
 	var entry2 = ScoreEntry.new()
-	entry2.score_value = 10000
+	entry2.score_value = 25000
 	entry2.name = "AST"
 	highscores.append(entry2)
 
 	var entry3 = ScoreEntry.new()
-	entry3.score_value = 1000
+	entry3.score_value = 5000
 	entry3.name = "ENV"
 	highscores.append(entry3)
 
