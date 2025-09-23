@@ -202,7 +202,7 @@ func _on_time_over() -> void:
 func _do_death_transition() -> void:
 	var death_transition_tween : Tween = get_tree().create_tween()
 	death_transition_tween.tween_interval(0.75)
-	death_transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
+	death_transition_tween.tween_callback(_player_cutscene.play.bind("spin_hurt"))
 	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 1.5)
 	death_transition_tween.tween_callback(_player_cutscene.play.bind("idle"))
 	death_transition_tween.tween_interval(0.5)
@@ -234,7 +234,7 @@ func _do_game_over_transition() -> void:
 	transition_tween.tween_property(_game_over_label, "visible_ratio", 1.0, 0.2)
 	transition_tween.tween_interval(1.0)
 	transition_tween.set_parallel(false)
-	transition_tween.tween_callback(_player_cutscene.play.bind("spin"))
+	transition_tween.tween_callback(_player_cutscene.play.bind("spin_hurt"))
 	transition_tween.tween_interval(0.8)
 	transition_tween.tween_callback(_player_cutscene.pause)
 	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.6, 0.6)

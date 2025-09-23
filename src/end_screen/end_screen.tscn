@@ -114,7 +114,7 @@ layout_mode = 0
 offset_left = 24.0
 offset_top = 64.0
 offset_right = 296.0
-offset_bottom = 94.0
+offset_bottom = 72.0
 text = "CONGRATULATIONS!"
 horizontal_alignment = 1
 
@@ -123,9 +123,16 @@ layout_mode = 0
 offset_left = 24.0
 offset_top = 80.0
 offset_right = 296.0
-offset_bottom = 110.0
-text = "YOU'VE MADE IT TO THE LEADERBOARD.
-ENTER YOU INITIALS:"
+offset_bottom = 88.0
+text = "YOU'VE MADE IT TO THE LEADERBOARD."
+
+[node name="CongratulationsLabel3" type="Label" parent="NewHighscoreScreen"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 92.0
+offset_right = 296.0
+offset_bottom = 100.0
+text = "ENTER YOU INITIALS:"
 
 [node name="Initial0" type="Label" parent="NewHighscoreScreen"]
 unique_name_in_owner = true
