@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ccbd37lt20el1" path="res://assets/ui/arrow_down.png" id="5_i5gnp"]
 [ext_resource type="Script" uid="uid://bvjycsd0dsjwb" path="res://end_screen/ok_label.gd" id="7_fjggk"]
 
-[sub_resource type="Shader" id="Shader_mkgft"]
+[sub_resource type="Shader" id="Shader_fjggk"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -52,7 +52,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fwhm7"]
 resource_local_to_scene = true
-shader = SubResource("Shader_mkgft")
+shader = SubResource("Shader_fjggk")
 shader_parameter/clear_progress = 1.0
 
 [node name="EndScreen" type="Control"]

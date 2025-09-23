@@ -10,7 +10,13 @@
 [ext_resource type="Shader" uid="uid://cew32kpokoxdg" path="res://shaders/incinerate.gdshader" id="6_mw77h"]
 [ext_resource type="Script" uid="uid://djmjyhwmjdg5l" path="res://enemies/enemy_controller.gd" id="9_mw77h"]
 
-[sub_resource type="Shader" id="Shader_mmqx0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fx1fl"]
+shader = ExtResource("6_mw77h")
+shader_parameter/fade_duration = 0.30000001355148
+shader_parameter/step_delay = 0.10000000475
+shader_parameter/current_time = 0.0
+
+[sub_resource type="Shader" id="Shader_mw77h"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -51,14 +57,8 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mw77h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_mmqx0")
+shader = SubResource("Shader_mw77h")
 shader_parameter/clear_progress = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fx1fl"]
-shader = ExtResource("6_mw77h")
-shader_parameter/fade_duration = 0.30000001355148
-shader_parameter/step_delay = 0.10000000475
-shader_parameter/current_time = 0.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k340r")
@@ -67,16 +67,30 @@ script = ExtResource("1_k340r")
 
 [node name="GameUI" parent="." instance=ExtResource("2_m1k14")]
 
-[node name="TransitionRect" parent="." instance=ExtResource("3_mw77h")]
-material = SubResource("ShaderMaterial_mw77h")
-custom_minimum_size = Vector2(320, 180)
-
 [node name="PlayerCutscene" parent="." instance=ExtResource("3_8l73x")]
 material = SubResource("ShaderMaterial_fx1fl")
 position = Vector2(-8, 172)
 
 [node name="PauseOverlay" parent="." instance=ExtResource("4_e0oqy")]
 visible = false
+
+[node name="GameOverLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = 88.0
+offset_right = 224.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TIME OVER!"
+
+[node name="TransitionRect" parent="." instance=ExtResource("3_mw77h")]
+material = SubResource("ShaderMaterial_mw77h")
+custom_minimum_size = Vector2(320, 180)
 
 [node name="TimeController" type="Node" parent="."]
 script = ExtResource("3_3kg8t")

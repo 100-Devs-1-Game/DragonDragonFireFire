@@ -20,7 +20,7 @@ func reset_game_state() -> void:
 	score = 0
 	time_left = float(Constants.PLAY_TIME)
 	playtime_elapsed = 0.0
-	lives = 1
+	lives = Constants.STARTING_LIVES
 	food_eaten = 0
 
 
