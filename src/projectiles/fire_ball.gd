@@ -25,6 +25,10 @@ func set_right() -> void:
 	_motion_vector = Vector2(_SPEED, 0)
 
 
+func set_up() -> void:
+	_motion_vector = Vector2(0, -_SPEED)
+
+
 func _check_bounds() -> void:
 	var oob_x : bool = position.x < 0 or position.x > Constants.ARENA_WIDTH
 	var oob_y : bool = position.y < 0 or position.y > Constants.ARENA_HEIGHT

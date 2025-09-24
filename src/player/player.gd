@@ -9,8 +9,10 @@ enum State
 }
 
 const _FIRE_BALL_SCENE : PackedScene = preload("res://projectiles/fire_ball.tscn")
-const _FIRE_BALL_OFFSET_X : float = 8.0
-const _FIRE_BALL_OFFSET_Y : float = -8.0
+const _FIRE_BALL_OFFSET_LEFT : Vector2 = Vector2(-8.0, -8.0)
+const _FIRE_BALL_OFFSET_RIGHT : Vector2 = Vector2(8.0, -8.0)
+const _FIRE_BALL_OFFSET_UP_LEFT : Vector2 = Vector2(-3.0, -16.0)
+const _FIRE_BALL_OFFSET_UP_RIGHT : Vector2 = Vector2(3.0, -16.0)
 
 const _SPEED = 80.0
 const _JUMP_VELOCITY = -166.0
@@ -28,12 +30,19 @@ var _touched_by_enemy : bool = false
 var _has_invincibility_frames : bool = false
 var _invincibility_frames : float = 0.0
 
-var _time_since_last_fire_spit : float = 0.0
+var _time_since_last_fire_spit : float = _FIRE_SPIT_ANIMATION_TIME + 0.01 # Don't play fire animation at start.
+
+var _looking_up : bool = false
 
 @onready var _visuals : Node2D = $Visuals
-@onready var _sprite : AnimatedSprite2D = $Visuals/AnimatedSprite2D
-@onready var _sprite_fire : AnimatedSprite2D = $Visuals/AnimatedSprite2DFire
+@onready var _sprite_head : AnimatedSprite2D = $Visuals/AnimatedSprite2DHead
+@onready var _sprite_body : AnimatedSprite2D = $Visuals/AnimatedSprite2DBody
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
+
+
+func _ready() -> void:
+	_sprite_head.play("normal")
+	_sprite_body.play("idle")
 
 
 func _physics_process(delta : float) -> void:
@@ -81,6 +90,9 @@ func _physics_process_move(delta : float) -> void:
 	
 	if Input.is_action_just_pressed("fire"):
 		_shoot_fire_ball()
+	
+	# Handle looking up.
+	_looking_up = Input.is_action_pressed("up")
 
 	_handle_direction_actions()
 	
@@ -123,14 +135,19 @@ func _shoot_fire_ball() -> void:
 	var fire_ball : FireBall = _FIRE_BALL_SCENE.instantiate()
 	get_parent().add_child(fire_ball)
 
-	var fire_ball_offset : Vector2 = Vector2(_FIRE_BALL_OFFSET_X, _FIRE_BALL_OFFSET_Y)
-	if _cur_dir == Types.Direction.LEFT:
-		fire_ball.set_left()
-		fire_ball_offset.x *= -1
+	if _looking_up:
+		fire_ball.set_up()
+		if _cur_dir == Types.Direction.LEFT:
+			fire_ball.global_position = global_position + _FIRE_BALL_OFFSET_UP_LEFT
+		else:
+			fire_ball.global_position = global_position + _FIRE_BALL_OFFSET_UP_RIGHT
 	else:
-		fire_ball.set_right()
-
-	fire_ball.global_position = global_position + fire_ball_offset
+		if _cur_dir == Types.Direction.LEFT:
+			fire_ball.set_left()
+			fire_ball.global_position = global_position + _FIRE_BALL_OFFSET_LEFT
+		else:
+			fire_ball.set_right()
+			fire_ball.global_position = global_position + _FIRE_BALL_OFFSET_RIGHT
 
 	_time_since_last_fire_spit = 0.0
 
@@ -142,41 +159,59 @@ func _handle_death() -> void:
 
 func _update_animation() -> void:
 	if GameState.is_halted():
-		_sprite.pause()
-		_sprite_fire.pause()
+		_sprite_head.pause()
+		_sprite_body.pause()
 		return
 	
 	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
 
+	# Body animations.
 	match _cur_state:
 		State.UNDEFINED:
-			_sprite.play("idle")
-			_sprite_fire.play("idle_fire")
+			assert(false)
+			_sprite_body.play("idle")
 		State.MOVE:
 			if not is_on_floor():
 				if velocity.y < 0.0:
-					_sprite.play("jump_up")
-					_sprite_fire.play("jump_up_fire")
+					_sprite_body.play("jump_up")
 				else:
-					_sprite.play("jump_down")
-					_sprite_fire.play("jump_down_fire")
+					_sprite_body.play("jump_down")
 			elif abs(velocity.x) > 0.1:
-				_sprite.play("walk")
-				_sprite_fire.play("walk_fire")
+				_sprite_body.play("walk")
 			else:
-				_sprite.play("idle")
-				_sprite_fire.play("idle_fire")
+				_sprite_body.play("idle")
 
 		State.DEAD:
-			_sprite.play("hurt")
-			_sprite_fire.play("hurt_fire")
-	
-	if _time_since_last_fire_spit < _FIRE_SPIT_ANIMATION_TIME:
-		_sprite_fire.visible = true
-		_sprite.visible = false
+			_sprite_body.play("hurt")
+
+	# Head animations.
+	if _cur_state == State.MOVE:
+		if _time_since_last_fire_spit < _FIRE_SPIT_ANIMATION_TIME:
+			if _looking_up:
+				if not is_on_floor() and velocity.y < 0.0:
+					_sprite_head.play("jump_fire_up") # Fire&Jump + Looking up
+				else:
+					_sprite_head.play("fire_up") # Fire + Looking up
+			else:
+				if not is_on_floor() and velocity.y < 0.0:
+					_sprite_head.play("jump_fire") # Fire&Jump
+				else:
+					_sprite_head.play("fire") # Fire
+		else:
+			if _looking_up:
+				if not is_on_floor() and velocity.y < 0.0:
+					_sprite_head.play("jump_up") # Jump + Looking up
+				else:
+					_sprite_head.play("normal_up") # Looking up
+			else:
+				if not is_on_floor() and velocity.y < 0.0:
+					_sprite_head.play("jump") # Jump
+				else:
+					_sprite_head.play("normal") # -
+
 	else:
-		_sprite_fire.visible = false
-		_sprite.visible = true
+		_sprite_head.play("invisible")
+
 
 
 func _on_enemy_detection_hitbox_body_entered(_body):
