@@ -14,7 +14,7 @@ size = Vector2(23.8, 8)
 
 [node name="MovablePlatform24x8P" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 6
+collision_mask = 70
 script = ExtResource("1_7d1ka")
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -34,7 +34,7 @@ texture = ExtResource("4_7k42j")
 [node name="GroundShapeCast" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_qdr1h")
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

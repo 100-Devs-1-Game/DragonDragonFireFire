@@ -21,7 +21,7 @@ size = Vector2(2, 2)
 
 [node name="EnemyWalker" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 16
-collision_mask = 6
+collision_mask = 70
 script = ExtResource("1_kjv7w")
 score = 100
 
@@ -76,18 +76,18 @@ debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)
 visible = false
 shape = SubResource("RectangleShape2D_vya6k")
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 70
 
 [node name="EdgeShapeCastLeft" type="ShapeCast2D" parent="."]
 visible = false
 position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_j7cfi")
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 70
 
 [node name="EdgeShapeCastRight" type="ShapeCast2D" parent="."]
 visible = false
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_j7cfi")
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 70

@@ -15,7 +15,7 @@ size = Vector2(10, 5)
 
 [node name="EnemyFlyer" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 16
-collision_mask = 6
+collision_mask = 70
 script = ExtResource("1_ue0bs")
 score = 300
 
