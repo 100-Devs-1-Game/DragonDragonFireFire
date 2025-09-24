@@ -104,6 +104,8 @@ func _callback_intro_finished() -> void:
 	GameState.cutscene = false
 	_time_controller.set_running(true)
 
+	MusicPlayer.play_track(MusicPlayer.TRACK_TEST)
+
 	_current_stage.do_setup()
 
 
@@ -229,6 +231,8 @@ func _callback_death_transition_finished() -> void:
 
 
 func _do_game_over_transition() -> void:
+	MusicPlayer.stop_track()
+	
 	var transition_tween : Tween = get_tree().create_tween()
 	transition_tween.set_parallel(true)
 	transition_tween.tween_property(_game_over_label, "visible_ratio", 1.0, 0.2)

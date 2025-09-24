@@ -22,6 +22,8 @@ Signals="*res://autoloads/signals.gd"
 GameState="*res://autoloads/game_state.gd"
 Debug="*res://autoloads/debug.gd"
 Highscores="*res://autoloads/highscores.gd"
+SoundPool="*res://autoloads/sound_pool.gd"
+MusicPlayer="*res://autoloads/music_player.gd"
 
 [debug]
 
