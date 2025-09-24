@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://s471kpgknaxv"]
+[gd_scene load_steps=9 format=3 uid="uid://s471kpgknaxv"]
 
 [ext_resource type="Script" uid="uid://8lx35134fwif" path="res://collectibles/collectible.gd" id="1_mctxo"]
+[ext_resource type="Shader" uid="uid://b20o28llb12ur" path="res://shaders/bling_shader.gdshader" id="2_m0tds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mctxo"]
 size = Vector2(12, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5esu"]
+resource_local_to_scene = true
+shader = ExtResource("2_m0tds")
+shader_parameter/progress = 0.0
+shader_parameter/is_active = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m0tds"]
 size = Vector2(12, 12)
@@ -14,17 +21,25 @@ radius = 24.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5esu"]
 size = Vector2(2, 2)
 
-[node name="Collectible" type="Area2D"]
-collision_layer = 32
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjpvi"]
+size = Vector2(10, 11)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 70
 script = ExtResource("1_mctxo")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -6)
+[node name="CollectibleArea" type="Area2D" parent="."]
+collision_layer = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleArea"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_mctxo")
 debug_color = Color(0.6910079, 0.4935971, 0.1830126, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k5esu")
+position = Vector2(0, -6)
 
 [node name="ShapeCastAnything" type="ShapeCast2D" parent="."]
 position = Vector2(0, -6)
@@ -57,4 +72,9 @@ shape = SubResource("RectangleShape2D_k5esu")
 target_position = Vector2(0, 0)
 collision_mask = 70
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_pjpvi")
+debug_color = Color(0.65441453, 0.4481778, 0.6877562, 0.41960785)
+
+[connection signal="body_entered" from="CollectibleArea" to="." method="_on_collectible_area_body_entered"]
