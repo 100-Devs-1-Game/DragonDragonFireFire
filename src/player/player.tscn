@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk42xswvh07t0"]
+[gd_scene load_steps=8 format=3 uid="uid://dk42xswvh07t0"]
 
-[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="1_oul6g"]
+[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames_body.tres" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://cdalc5l8qtll0" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="SpriteFrames" uid="uid://vq8ulwddi37x" path="res://player/player_sprite_frames_head.tres" id="2_yw30f"]
 [ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="3_g1dw6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oul6g"]
@@ -20,13 +21,12 @@ script = ExtResource("1_rkbax")
 
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+[node name="AnimatedSprite2DHead" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
-sprite_frames = ExtResource("1_oul6g")
-animation = &"idle"
-autoplay = "idle"
+sprite_frames = ExtResource("2_yw30f")
+animation = &"invisible"
 
-[node name="AnimatedSprite2DFire" type="AnimatedSprite2D" parent="Visuals"]
+[node name="AnimatedSprite2DBody" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("1_oul6g")
 animation = &"idle"

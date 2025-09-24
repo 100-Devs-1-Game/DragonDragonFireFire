@@ -2,7 +2,7 @@ class_name ScoreLabel
 extends Label
 
 const _NUM_DIGITS : int = 0
-const _MIN_TRANSITION_SPEED : float = 500.0
+const _MIN_TRANSITION_SPEED : float = 750.0
 
 var _cur_displayed_score : int = 0
 

@@ -85,12 +85,18 @@ func _play_intro_sequence() -> void:
 	_time_controller.set_running(false)
 
 	var intro_tween : Tween = get_tree().create_tween()
-	intro_tween.tween_callback(_player_cutscene.play.bind("walk"))
-	intro_tween.tween_property(_player_cutscene, "global_position", player.global_position, 1.0)
-	intro_tween.tween_callback(_player_cutscene.play.bind("idle"))
-	intro_tween.tween_interval(0.2)
+	intro_tween.tween_callback(_player_cutscene.play_body.bind("walk"))
+	intro_tween.tween_callback(_player_cutscene.play_head.bind("normal"))
+	intro_tween.tween_property(_player_cutscene, "global_position", player.global_position, 0.7)
+	intro_tween.tween_callback(_player_cutscene.play_body.bind("idle"))
+	intro_tween.tween_callback(_player_cutscene.play_head.bind("normal"))
+	intro_tween.tween_interval(0.1)
+	intro_tween.tween_callback(_player_cutscene.play_body.bind("cheer"))
+	intro_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	intro_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 1.0, 0.75)
-	# TODO: Play cheer animation.
+	intro_tween.tween_callback(_player_cutscene.play_body.bind("idle"))
+	intro_tween.tween_callback(_player_cutscene.play_head.bind("normal"))
+	intro_tween.tween_interval(0.3)
 	intro_tween.tween_callback(_callback_intro_finished)
 
 
@@ -126,7 +132,8 @@ func _transition_stages() -> void:
 
 	var player : Player = _current_stage.get_player()
 	_player_cutscene.global_position = player.global_position
-	_player_cutscene.play("spin")
+	_player_cutscene.play_body("spin")
+	_player_cutscene.play_head("invisible")
 	_player_cutscene.visible = true
 	player.visible = false
 	var next_stage_player : Player = _next_stage.get_player()
@@ -170,7 +177,8 @@ func _on_player_died() -> void:
 	var player : Player = _current_stage.get_player()
 	_player_cutscene.global_position = player.global_position
 
-	_player_cutscene.play("hurt")
+	_player_cutscene.play_body("hurt")
+	_player_cutscene.play_head("invisible")
 	_player_cutscene.visible = true
 	player.visible = false
 
@@ -192,7 +200,8 @@ func _on_time_over() -> void:
 	var player : Player = _current_stage.get_player()
 	_player_cutscene.global_position = player.global_position
 
-	_player_cutscene.play("hurt")
+	_player_cutscene.play_body("hurt")
+	_player_cutscene.play_head("invisible")
 	_player_cutscene.visible = true
 	player.visible = false
 
@@ -204,9 +213,11 @@ func _on_time_over() -> void:
 func _do_death_transition() -> void:
 	var death_transition_tween : Tween = get_tree().create_tween()
 	death_transition_tween.tween_interval(0.75)
-	death_transition_tween.tween_callback(_player_cutscene.play.bind("spin_hurt"))
+	death_transition_tween.tween_callback(_player_cutscene.play_body.bind("spin_hurt"))
+	death_transition_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 1.5)
-	death_transition_tween.tween_callback(_player_cutscene.play.bind("idle"))
+	death_transition_tween.tween_callback(_player_cutscene.play_body.bind("idle"))
+	death_transition_tween.tween_callback(_player_cutscene.play_head.bind("normal"))
 	death_transition_tween.tween_interval(0.5)
 	death_transition_tween.tween_callback(_callback_death_transition_finished)
 
@@ -238,12 +249,14 @@ func _do_game_over_transition() -> void:
 	transition_tween.tween_property(_game_over_label, "visible_ratio", 1.0, 0.2)
 	transition_tween.tween_interval(1.0)
 	transition_tween.set_parallel(false)
-	transition_tween.tween_callback(_player_cutscene.play.bind("spin_hurt"))
+	transition_tween.tween_callback(_player_cutscene.play_body.bind("spin_hurt"))
+	transition_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	transition_tween.tween_interval(0.8)
 	transition_tween.tween_callback(_player_cutscene.pause)
 	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.6, 0.6)
 	transition_tween.tween_property(_player_cutscene, "dissolve_shader_time", 0.0, 0.001)
-	transition_tween.tween_callback(_player_cutscene.play.bind("explode"))
+	transition_tween.tween_callback(_player_cutscene.play_body.bind("explode"))
+	transition_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	transition_tween.tween_interval(0.8)
 	transition_tween.tween_property(_transition_rect, "material:shader_parameter/clear_progress", 0.0, 0.75)
 	transition_tween.tween_callback(_callback_game_over_transition_finished)

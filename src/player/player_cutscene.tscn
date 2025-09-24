@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://itqfe8lse353"]
+[gd_scene load_steps=6 format=3 uid="uid://itqfe8lse353"]
 
 [ext_resource type="Script" uid="uid://c4dkj2md2e718" path="res://player/player_cutscene.gd" id="1_snqka"]
 [ext_resource type="Shader" uid="uid://cew32kpokoxdg" path="res://shaders/incinerate.gdshader" id="2_sel8o"]
-[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames.tres" id="2_snqka"]
+[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames_body.tres" id="2_snqka"]
+[ext_resource type="SpriteFrames" uid="uid://vq8ulwddi37x" path="res://player/player_sprite_frames_head.tres" id="3_8tvy3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sel8o"]
 resource_local_to_scene = true
@@ -15,9 +16,16 @@ shader_parameter/current_time = 0.0
 material = SubResource("ShaderMaterial_sel8o")
 script = ExtResource("1_snqka")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2DHead" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+position = Vector2(0, -8)
+sprite_frames = ExtResource("3_8tvy3")
+animation = &"normal"
+autoplay = "normal"
+
+[node name="AnimatedSprite2DBody" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_snqka")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
