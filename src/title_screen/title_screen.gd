@@ -28,6 +28,8 @@ var _leave_screen_action : LeaveScreenAction = LeaveScreenAction.START_GAME
 @onready var _menu_screen_settings_menu : MenuScreenSettingsMenu = $MenuScreenContainer/MenuScreenSettingsMenu
 @onready var _menu_screen_credits_screen : MenuScreenCreditsScreen = $MenuScreenContainer/MenuScreenCreditsScreen
 
+@onready var _title_graphic_control : Control = $TitleGraphicControl
+
 
 func _ready() -> void:
 	Signals.menu_screen_requested.connect(_on_menu_screen_requested)
@@ -53,6 +55,7 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	_update_transition(delta)
+	_update_title_graphic_visibility()
 
 
 func _update_transition(delta : float) -> void:
@@ -63,6 +66,13 @@ func _update_transition(delta : float) -> void:
 			_process_transition_idle(delta)
 		TransitionState.TRANSITION_OUT:
 			_process_transition_out(delta)
+
+
+func _update_title_graphic_visibility() -> void:
+	if _current_screen == MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN:
+		_title_graphic_control.visible = false
+	else:
+		_title_graphic_control.visible = true
 
 
 func _activate_menu_screen(new_screen : MenuScreenDefinitions.MenuScreen) -> void:

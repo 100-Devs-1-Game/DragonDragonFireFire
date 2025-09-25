@@ -1,7 +1,7 @@
 class_name MenuScreen
 extends Control
 
-@export var initial_focus : MenuItemButton = null
+@export var initial_focus : Button = null
 @export var store_previous_selection : bool = false
 
 var _previously_visited : bool = false

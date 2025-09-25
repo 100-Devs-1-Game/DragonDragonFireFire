@@ -53,7 +53,7 @@ shape = SubResource("CircleShape2D_273yy")
 position = Vector2(0, -7)
 _ignition_range = 10.0
 _force_immediate = true
-_catch_fire_range = 7.0
+_catch_fire_range = 8.0
 
 [node name="HeadCheckComponent" parent="." instance=ExtResource("2_5lxk0")]
 position = Vector2(0, -7)

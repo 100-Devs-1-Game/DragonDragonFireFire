@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkhcaimwew6an"]
+
+[ext_resource type="Texture2D" uid="uid://dc40v8282s8ih" path="res://assets/credits/pic_empty.png" id="1_dak6k"]
+[ext_resource type="Script" uid="uid://c4v12g1ob2kul" path="res://ui/credits_entry.gd" id="1_e6rgu"]
+[ext_resource type="Texture2D" uid="uid://ddivkshuts8h4" path="res://assets/ui/credits_border.png" id="2_dak6k"]
+[ext_resource type="Script" uid="uid://bf6elh7hjb33q" path="res://ui/credits_border.gd" id="3_e6rgu"]
+
+[node name="CreditsEntry" type="Button"]
+offset_right = 218.0
+offset_bottom = 28.0
+script = ExtResource("1_e6rgu")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 24.0
+texture = ExtResource("1_dak6k")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 5.0
+offset_right = 94.0
+offset_bottom = 13.0
+text = "MISSING NAME"
+
+[node name="RoleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 230.0
+offset_bottom = 23.0
+text = "MISSING ROLE"
+
+[node name="Border" type="TextureRect" parent="." node_paths=PackedStringArray("associated_button")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 217.0
+offset_bottom = 26.0
+texture = ExtResource("2_dak6k")
+script = ExtResource("3_e6rgu")
+associated_button = NodePath("..")

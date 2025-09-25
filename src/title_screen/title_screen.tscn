@@ -34,13 +34,13 @@ script = ExtResource("1_dxpbd")
 metadata/_edit_vertical_guides_ = [320.0]
 metadata/_edit_horizontal_guides_ = [180.0]
 
-[node name="TitleControl" type="Control" parent="."]
+[node name="TitleGraphicControl" type="Control" parent="."]
 material = SubResource("ShaderMaterial_2dq6q")
 anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 105.0
 
-[node name="TitleLabel1" type="Label" parent="TitleControl"]
+[node name="TitleLabel1" type="Label" parent="TitleGraphicControl"]
 use_parent_material = true
 layout_mode = 0
 offset_left = 11.0
@@ -51,7 +51,7 @@ theme_override_font_sizes/font_size = 24
 text = "DRAGON"
 horizontal_alignment = 2
 
-[node name="TitleLabel2" type="Label" parent="TitleControl"]
+[node name="TitleLabel2" type="Label" parent="TitleGraphicControl"]
 use_parent_material = true
 layout_mode = 0
 offset_left = 168.0
@@ -61,7 +61,7 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 24
 text = "DRAGON"
 
-[node name="TitleLabel3" type="Label" parent="TitleControl"]
+[node name="TitleLabel3" type="Label" parent="TitleGraphicControl"]
 use_parent_material = true
 layout_mode = 0
 offset_left = 10.0
@@ -72,7 +72,7 @@ theme_override_font_sizes/font_size = 16
 text = "FIRE"
 horizontal_alignment = 2
 
-[node name="TitleLabel4" type="Label" parent="TitleControl"]
+[node name="TitleLabel4" type="Label" parent="TitleGraphicControl"]
 use_parent_material = true
 layout_mode = 0
 offset_left = 168.0

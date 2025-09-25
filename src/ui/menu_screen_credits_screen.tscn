@@ -1,11 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc804bbbum0dm"]
+[gd_scene load_steps=7 format=3 uid="uid://dc804bbbum0dm"]
 
 [ext_resource type="Script" uid="uid://dgbmjfkpyrjyo" path="res://ui/menu_screen_credits_screen.gd" id="1_28xr2"]
+[ext_resource type="PackedScene" uid="uid://dkhcaimwew6an" path="res://ui/credits_entry.tscn" id="2_8g2as"]
+[ext_resource type="Texture2D" uid="uid://b5mj6t8ud2j6q" path="res://assets/credits/pic_zephyrix.png" id="3_1hldw"]
+[ext_resource type="Texture2D" uid="uid://dc40v8282s8ih" path="res://assets/credits/pic_empty.png" id="4_ee6qa"]
+[ext_resource type="Texture2D" uid="uid://c5a7jikfhip7h" path="res://assets/credits/pic_100devs.png" id="5_7ujgi"]
+[ext_resource type="PackedScene" uid="uid://cvusc0sjkj8ms" path="res://ui/menu_item_button.tscn" id="5_oishy"]
 
-[node name="MenuScreenCreditsScreen" type="Control"]
+[node name="MenuScreenCreditsScreen" type="Control" node_paths=PackedStringArray("initial_focus")]
 custom_minimum_size = Vector2(320, 180)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 180.0
 script = ExtResource("1_28xr2")
+initial_focus = NodePath("CreditsEntry")
+metadata/_edit_vertical_guides_ = [320.0]
+metadata/_edit_horizontal_guides_ = [180.0]
+
+[node name="CreditsEntry" parent="." instance=ExtResource("2_8g2as")]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 24.0
+offset_right = 270.0
+offset_bottom = 52.0
+entry_name = "ZEPHYRIX"
+entry_role = "LEAD,DESIGN,PROGRAMMING"
+entry_texture = ExtResource("3_1hldw")
+
+[node name="CreditsEntry2" parent="." instance=ExtResource("2_8g2as")]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 52.0
+offset_right = 270.0
+offset_bottom = 80.0
+entry_name = "ASTENRA"
+entry_role = "PIXEL ART"
+entry_texture = ExtResource("4_ee6qa")
+
+[node name="CreditsEntry3" parent="." instance=ExtResource("2_8g2as")]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 80.0
+offset_right = 270.0
+offset_bottom = 108.0
+entry_name = "ENVY"
+entry_role = "MUSIC,SOUND"
+entry_texture = ExtResource("4_ee6qa")
+
+[node name="CreditsEntry4" parent="." instance=ExtResource("2_8g2as")]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 108.0
+offset_right = 270.0
+offset_bottom = 136.0
+entry_name = "THE 100 DEVS COMMUNITY"
+entry_role = "ORGANIZATION,SUPPORT"
+entry_texture = ExtResource("5_7ujgi")
+
+[node name="MenuItemButton" parent="." instance=ExtResource("5_oishy")]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 156.0
+offset_right = 176.0
+offset_bottom = 164.0
+text = "BACK"
+
+[connection signal="pressed" from="MenuItemButton" to="." method="_on_menu_item_button_pressed"]
