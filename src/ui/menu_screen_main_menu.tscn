@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://imialj7iujhl"]
+
+[ext_resource type="Script" uid="uid://b6tj4a6k6kd0a" path="res://ui/menu_screen_main_menu.gd" id="1_38tuo"]
+[ext_resource type="PackedScene" uid="uid://cvusc0sjkj8ms" path="res://ui/menu_item_button.tscn" id="2_38tuo"]
+
+[node name="MenuScreenMainMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_38tuo")
+initial_focus = NodePath("PlayButton")
+metadata/_edit_vertical_guides_ = [320.0]
+metadata/_edit_horizontal_guides_ = [180.0]
+
+[node name="PlayButton" parent="." instance=ExtResource("2_38tuo")]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 108.0
+offset_right = 168.0
+offset_bottom = 116.0
+text = "PLAY"
+
+[node name="SettingsButton" parent="." instance=ExtResource("2_38tuo")]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 120.0
+offset_right = 196.0
+offset_bottom = 128.0
+text = "SETTINGS"
+
+[node name="CreditsButton" parent="." instance=ExtResource("2_38tuo")]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 132.0
+offset_right = 188.0
+offset_bottom = 140.0
+text = "CREDITS"
+
+[node name="ExitButton" parent="." instance=ExtResource("2_38tuo")]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 144.0
+offset_right = 204.0
+offset_bottom = 152.0
+text = "EXIT GAME"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

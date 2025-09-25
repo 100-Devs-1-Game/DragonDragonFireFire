@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvusc0sjkj8ms"]
+
+[ext_resource type="Script" uid="uid://dx45b5t003ced" path="res://ui/menu_item_button.gd" id="1_53pli"]
+[ext_resource type="Texture2D" uid="uid://dxy1508rk5pi7" path="res://assets/ui/arrow_right.png" id="2_ds227"]
+
+[node name="MenuItemButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "BUTTON LABEL"
+alignment = 0
+script = ExtResource("1_53pli")
+
+[node name="SelectionArrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -12.0
+offset_right = -4.0
+offset_bottom = 8.0
+texture = ExtResource("2_ds227")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

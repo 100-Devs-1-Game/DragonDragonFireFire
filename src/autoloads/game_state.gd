@@ -1,6 +1,9 @@
 # Class name intentionally omitted, intended to be used as Autoload.
 extends Node
 
+# Whether the initial title screen has been shown once.
+var title_shown : bool = false
+
 var cutscene : bool = false
 var paused : bool = false
 
@@ -20,6 +23,7 @@ func reset_game_state() -> void:
 	current_stage = 1
 	score = 0
 	time_left = float(Constants.PLAY_TIME)
+	bonus_seconds = 0
 	playtime_elapsed = 0.0
 	lives = Constants.STARTING_LIVES
 	food_eaten = 0

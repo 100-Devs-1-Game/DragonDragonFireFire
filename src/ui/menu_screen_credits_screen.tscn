@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc804bbbum0dm"]
+
+[ext_resource type="Script" uid="uid://dgbmjfkpyrjyo" path="res://ui/menu_screen_credits_screen.gd" id="1_28xr2"]
+
+[node name="MenuScreenCreditsScreen" type="Control"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_28xr2")

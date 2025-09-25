@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://kkr1juhke4x1"]
+
+[ext_resource type="PackedScene" uid="uid://dmub8ct7sq4o6" path="res://ui/control_blink_component.tscn" id="1_tffby"]
+[ext_resource type="Script" uid="uid://sq6cx1k8dcd6" path="res://ui/menu_screen_insert_coin.gd" id="1_v1342"]
+
+[node name="MenuScreenInsertCoin" type="Control"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_v1342")
+
+[node name="InsertCoinLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 39.0
+offset_right = 44.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "INSERT COIN"
+horizontal_alignment = 1
+
+[node name="ControlBlinkComponent" parent="InsertCoinLabel" instance=ExtResource("1_tffby")]
+layout_mode = 1

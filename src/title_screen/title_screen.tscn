@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://3j6mbl5516uy"]
+[gd_scene load_steps=11 format=3 uid="uid://3j6mbl5516uy"]
 
 [ext_resource type="Script" uid="uid://lfin03e4chuk" path="res://title_screen/title_screen.gd" id="1_dxpbd"]
-[ext_resource type="PackedScene" uid="uid://dmub8ct7sq4o6" path="res://ui/control_blink_component.tscn" id="1_g2mvh"]
 [ext_resource type="Shader" uid="uid://ng8jsrw7vop2" path="res://shaders/fire_gradient.gdshader" id="2_2dq6q"]
+[ext_resource type="PackedScene" uid="uid://kkr1juhke4x1" path="res://ui/menu_screen_insert_coin.tscn" id="3_0m3ch"]
+[ext_resource type="Shader" uid="uid://r4tl5h1pumgl" path="res://shaders/transition_shader.gdshader" id="4_0m3ch"]
+[ext_resource type="PackedScene" uid="uid://imialj7iujhl" path="res://ui/menu_screen_main_menu.tscn" id="4_fv0o7"]
 [ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="4_vbjqi"]
+[ext_resource type="PackedScene" uid="uid://b5snvku6yk86l" path="res://ui/menu_screen_settings_menu.tscn" id="5_1oos5"]
+[ext_resource type="PackedScene" uid="uid://dc804bbbum0dm" path="res://ui/menu_screen_credits_screen.tscn" id="6_fh6ay"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dq6q"]
 shader = ExtResource("2_2dq6q")
@@ -14,6 +18,11 @@ shader_parameter/fire1 = Color(0.55, 0, 0, 1)
 shader_parameter/fire2 = Color(0.8, 0.2, 0, 1)
 shader_parameter/fire3 = Color(1, 0.55, 0, 1)
 shader_parameter/fire4 = Color(1, 0.8, 0.2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk0fn"]
+resource_local_to_scene = true
+shader = ExtResource("4_0m3ch")
+shader_parameter/clear_progress = 1.0
 
 [node name="TitleScreen" type="Control"]
 custom_minimum_size = Vector2(320, 180)
@@ -73,24 +82,29 @@ offset_bottom = 88.0
 theme_override_font_sizes/font_size = 16
 text = "FIRE"
 
-[node name="InsertCoinLabel" type="Label" parent="."]
+[node name="MenuScreenContainer" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 180)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = 39.0
-offset_right = 44.0
-offset_bottom = 47.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "INSERT COIN"
-horizontal_alignment = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="ControlBlinkComponent" parent="InsertCoinLabel" instance=ExtResource("1_g2mvh")]
-layout_mode = 1
+[node name="MenuScreenInsertCoin" parent="MenuScreenContainer" instance=ExtResource("3_0m3ch")]
+visible = false
+layout_mode = 0
+
+[node name="MenuScreenMainMenu" parent="MenuScreenContainer" instance=ExtResource("4_fv0o7")]
+layout_mode = 0
+
+[node name="MenuScreenSettingsMenu" parent="MenuScreenContainer" instance=ExtResource("5_1oos5")]
+visible = false
+layout_mode = 0
+
+[node name="MenuScreenCreditsScreen" parent="MenuScreenContainer" instance=ExtResource("6_fh6ay")]
+visible = false
+layout_mode = 0
 
 [node name="TransitionRect" parent="." instance=ExtResource("4_vbjqi")]
+material = SubResource("ShaderMaterial_fk0fn")
 layout_mode = 0
