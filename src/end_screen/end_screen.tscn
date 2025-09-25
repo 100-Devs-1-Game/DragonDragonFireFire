@@ -160,7 +160,7 @@ offset_left = 24.0
 offset_top = 84.0
 offset_right = 296.0
 offset_bottom = 92.0
-text = "ENTER YOU INITIALS:"
+text = "ENTER YOUR INITIALS:"
 
 [node name="Initial0" type="Label" parent="NewHighscoreScreen"]
 unique_name_in_owner = true

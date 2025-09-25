@@ -4,10 +4,19 @@ extends Node2D
 # The node to which the game scenes will be attached as children.
 @onready var _scene_container_node : Node = %SceneContainer
 
+# The viewport i.e. the internal stage of the game.
+@onready var _game_viewport : Viewport = %GameViewport
+
 
 func _ready() -> void:
 	Signals.scene_change_triggered.connect(_on_scene_change_triggered)
 	Initialization.initialize()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Keyboard/gamepad -> pass through.
+	if event is InputEventKey or event is InputEventJoypadButton:
+		_game_viewport.push_input(event)
 
 
 func _on_scene_change_triggered(new_scene : SceneDefinitions.Scenes) -> void:

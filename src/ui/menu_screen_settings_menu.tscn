@@ -1,0 +1,105 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5snvku6yk86l"]
+
+[ext_resource type="Script" uid="uid://4aunxcaq13ux" path="res://ui/menu_screen_settings_menu.gd" id="1_yq3kb"]
+[ext_resource type="PackedScene" uid="uid://cvusc0sjkj8ms" path="res://ui/menu_item_button.tscn" id="2_x7una"]
+[ext_resource type="Texture2D" uid="uid://dvlfkeex608fu" path="res://assets/ui/bar_background.png" id="3_6deh6"]
+[ext_resource type="Texture2D" uid="uid://cv0idynfkkbjb" path="res://assets/ui/bar_fill.png" id="4_k5amu"]
+
+[node name="MenuScreenSettingsMenu" type="Control" node_paths=PackedStringArray("initial_focus")]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_yq3kb")
+initial_focus = NodePath("MasterVolumeButton")
+metadata/_edit_vertical_guides_ = [320.0]
+metadata/_edit_horizontal_guides_ = [180.0]
+
+[node name="MasterVolumeButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 100.0
+offset_right = 156.0
+offset_bottom = 108.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../EffectsVolumeButton")
+text = "MASTER VOLUME"
+alignment = 2
+
+[node name="EffectsVolumeButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 112.0
+offset_right = 156.0
+offset_bottom = 120.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../MasterVolumeButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../MusicVolumeButton")
+text = "EFFECTS VOLUME"
+alignment = 2
+
+[node name="MusicVolumeButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 124.0
+offset_right = 156.0
+offset_bottom = 132.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../EffectsVolumeButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../BackButton")
+text = "MUSIC VOLUME"
+alignment = 2
+
+[node name="BackButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 248.0
+offset_bottom = 152.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../MusicVolumeButton")
+focus_neighbor_right = NodePath(".")
+text = "BACK"
+
+[node name="MasterVolumeBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 100.0
+offset_right = 268.0
+offset_bottom = 108.0
+max_value = 1.0
+step = 0.05
+texture_under = ExtResource("3_6deh6")
+texture_progress = ExtResource("4_k5amu")
+
+[node name="EffectsVolumeBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 112.0
+offset_right = 268.0
+offset_bottom = 120.0
+max_value = 1.0
+step = 0.05
+texture_under = ExtResource("3_6deh6")
+texture_progress = ExtResource("4_k5amu")
+
+[node name="MusicVolumeBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 124.0
+offset_right = 268.0
+offset_bottom = 132.0
+max_value = 1.0
+step = 0.05
+texture_under = ExtResource("3_6deh6")
+texture_progress = ExtResource("4_k5amu")
+
+[connection signal="focus_entered" from="MasterVolumeButton" to="." method="_on_master_volume_button_focus_entered"]
+[connection signal="focus_entered" from="EffectsVolumeButton" to="." method="_on_effects_volume_button_focus_entered"]
+[connection signal="focus_entered" from="MusicVolumeButton" to="." method="_on_music_volume_button_focus_entered"]
+[connection signal="focus_entered" from="BackButton" to="." method="_on_back_button_focus_entered"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

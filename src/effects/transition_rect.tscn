@@ -12,4 +12,5 @@ shader_parameter/clear_progress = 1.0
 material = SubResource("ShaderMaterial_7ps1j")
 offset_right = 320.0
 offset_bottom = 180.0
+mouse_filter = 2
 texture = ExtResource("2_cp33f")

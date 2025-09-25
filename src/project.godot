@@ -24,6 +24,7 @@ Debug="*res://autoloads/debug.gd"
 Highscores="*res://autoloads/highscores.gd"
 SoundPool="*res://autoloads/sound_pool.gd"
 MusicPlayer="*res://autoloads/music_player.gd"
+Settings="*res://autoloads/settings.gd"
 
 [debug]
 
