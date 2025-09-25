@@ -38,6 +38,7 @@ var _looking_up : bool = false
 @onready var _sprite_head : AnimatedSprite2D = $Visuals/AnimatedSprite2DHead
 @onready var _sprite_body : AnimatedSprite2D = $Visuals/AnimatedSprite2DBody
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
+@onready var _one_way_platform_detector : ShapeCast2D = %OneWayPlatformDetector
 
 
 func _ready() -> void:
@@ -85,8 +86,15 @@ func _physics_process_move(delta : float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
+	var down_pressed : bool = Input.is_action_pressed("down")
+	_one_way_platform_detector.force_shapecast_update()
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = _JUMP_VELOCITY
+		if down_pressed and _one_way_platform_detector.is_colliding():
+			# Drop down through one-way platform.
+			position.y += 1.0
+
+		else:
+			velocity.y = _JUMP_VELOCITY
 	
 	if Input.is_action_just_pressed("fire"):
 		_shoot_fire_ball()

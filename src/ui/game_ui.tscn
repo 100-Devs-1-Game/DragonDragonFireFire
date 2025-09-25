@@ -64,13 +64,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -24.0
+offset_left = -8.0
 offset_top = 11.0
-offset_right = 24.0
+offset_right = 40.0
 offset_bottom = 19.0
 grow_horizontal = 2
 text = "99"
-horizontal_alignment = 1
 script = ExtResource("2_w46tp")
 
 [node name="LivesDescriptionLabel" type="Label" parent="Background"]

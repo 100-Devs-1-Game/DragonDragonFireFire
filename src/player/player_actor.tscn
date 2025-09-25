@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdsvt4f48syfr"]
+
+[ext_resource type="SpriteFrames" uid="uid://vq8ulwddi37x" path="res://player/player_sprite_frames_head.tres" id="1_ngbu6"]
+[ext_resource type="Script" uid="uid://cwxl1q7ytubll" path="res://player/player_actor.gd" id="1_sbgst"]
+[ext_resource type="SpriteFrames" uid="uid://b4dfese7m67yy" path="res://player/player_sprite_frames_body.tres" id="2_sbgst"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khtt3"]
+size = Vector2(16, 16)
+
+[node name="PlayerActor" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 70
+script = ExtResource("1_sbgst")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2DHead" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("1_ngbu6")
+animation = &"normal"
+
+[node name="AnimatedSprite2DBody" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("2_sbgst")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_khtt3")

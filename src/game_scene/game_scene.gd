@@ -140,6 +140,8 @@ func _transition_stages() -> void:
 	next_stage_player.visible = false
 	var player_target_pos : Vector2 = next_stage_player.global_position + Vector2(0, Constants.ARENA_HEIGHT)
 
+	GameState.bonus_seconds += Constants.BONUS_SECONDS_PER_COMPLETED_STAGE
+
 	var transition_tween : Tween = get_tree().create_tween()
 	transition_tween.set_parallel(true)
 	transition_tween.tween_property(_next_stage, "global_position", Vector2(0, 0), 2.0)

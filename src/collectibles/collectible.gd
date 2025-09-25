@@ -17,10 +17,14 @@ enum FruitType
 
 const _COLLECTIBLE_SIZE : Vector2 = Vector2(12, 12)
 
-const _GRAVITY_MODIFIER : float = 0.5
+const _GRAVITY_MODIFIER : float = 0.6
 const _ACTIVATION_VELOCITY_Y : float = -50.0
 
 const _BLING_SHADER_SPEED : float = 3.0
+
+const _COLLECTIBLE_LIFETIME : float = 10.0
+const _COLLECTIBLE_LIFETIME_BLINK : float = 1.5
+const _COLLECTIBLE_LIFETIME_BLINK_SPEED : float = 20.0
 
 const _FRUIT_SCORES : Dictionary[FruitType, int] = {
 	FruitType.MUSHROOM: 100,
@@ -48,6 +52,7 @@ var _collectible_type: Type = Type.FRUIT
 var _fruit_type : FruitType = FruitType.MUSHROOM
 var _fixed_x_position : float = 0.0
 var _bling_shader_progress : float = 0.0
+var _lifetime : float = _COLLECTIBLE_LIFETIME
 
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _shape_cast_anything : ShapeCast2D = $ShapeCastAnything
@@ -72,6 +77,13 @@ func _process(delta : float) -> void:
 	_sprite.material.set_shader_parameter("progress", _bling_shader_progress)
 	if _bling_shader_progress > 1.0:
 		_sprite.material.set_shader_parameter("is_active", false)
+	
+	_lifetime -= delta
+	if _lifetime < _COLLECTIBLE_LIFETIME_BLINK:
+		visible = int(_lifetime * _COLLECTIBLE_LIFETIME_BLINK_SPEED) % 2 == 0
+
+	if _lifetime <= 0.0:
+		queue_free()
 
 
 func _physics_process(delta : float) -> void:

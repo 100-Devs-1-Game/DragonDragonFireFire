@@ -1,17 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://btb3ktgnrdtit"]
+[gd_scene load_steps=16 format=4 uid="uid://btb3ktgnrdtit"]
 
 [ext_resource type="Texture2D" uid="uid://x81840evf2gg" path="res://assets/ui/game_over_border.png" id="1_72q5w"]
 [ext_resource type="Script" uid="uid://d2quw7csckdsd" path="res://end_screen/end_screen.gd" id="1_hmshp"]
+[ext_resource type="TileSet" uid="uid://cj0foed3p6jmm" path="res://geometry/tileset_static_geometry.tres" id="2_g4t2j"]
 [ext_resource type="Script" uid="uid://cyecl4ol6lhyv" path="res://ui/score_label.gd" id="3_fjggk"]
 [ext_resource type="Script" uid="uid://dm7colb1puq7c" path="res://end_screen/highscores_section.gd" id="3_fwhm7"]
 [ext_resource type="Script" uid="uid://2nf18myw0mkf" path="res://end_screen/initial.gd" id="3_kpdng"]
 [ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="3_mkgft"]
+[ext_resource type="PackedScene" uid="uid://nfwtfgygpjt8" path="res://enemies/enemy_walker.tscn" id="3_p1ayw"]
 [ext_resource type="Texture2D" uid="uid://kmw657lomrwm" path="res://assets/ui/initials_border.png" id="3_q7ipi"]
 [ext_resource type="Texture2D" uid="uid://bbc0m5jv1gkf4" path="res://assets/ui/arrow_up.png" id="4_1odwr"]
 [ext_resource type="Texture2D" uid="uid://ccbd37lt20el1" path="res://assets/ui/arrow_down.png" id="5_i5gnp"]
 [ext_resource type="Script" uid="uid://bvjycsd0dsjwb" path="res://end_screen/ok_label.gd" id="7_fjggk"]
+[ext_resource type="PackedScene" uid="uid://bdsvt4f48syfr" path="res://player/player_actor.tscn" id="13_7o74m"]
 
-[sub_resource type="Shader" id="Shader_fjggk"]
+[sub_resource type="Shader" id="Shader_7o74m"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -52,7 +55,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fwhm7"]
 resource_local_to_scene = true
-shader = SubResource("Shader_fjggk")
+shader = SubResource("Shader_7o74m")
 shader_parameter/clear_progress = 1.0
 
 [node name="EndScreen" type="Control"]
@@ -64,6 +67,31 @@ offset_bottom = 180.0
 script = ExtResource("1_hmshp")
 metadata/_edit_vertical_guides_ = [320.0, 160.0]
 metadata/_edit_horizontal_guides_ = [180.0, 90.0]
+
+[node name="TilemapBackground" type="TileMapLayer" parent="."]
+position = Vector2(0, -4)
+tile_map_data = PackedByteArray("AAAfABQAAAAAAAQAAAAfABUAAAAAAAQAAAAjABQAAAACAAQAAAAjABUAAAACAAQAAAAmABUAAAAEAAMAAAADABUAAAAEAAMAAAAIABUAAAACAAQAAAAFABIAAAAAAAQAAAAFABMAAAAAAAQAAAAFABQAAAAAAAQAAAAFABUAAAAAAAQAAAAIABIAAAACAAQAAAAIABMAAAACAAQAAAAIABQAAAACAAQAAAAKABUAAAAEAAMAAAAfABMAAAAAAAQAAAAjABMAAAACAAQAAAAgABIAAAAAAAQAAAAiABIAAAACAAQAAAAgABEAAAAAAAQAAAAiABEAAAACAAQAAAAgABAAAAAAAAQAAAAiABAAAAACAAQAAAA=")
+tile_set = ExtResource("2_g4t2j")
+
+[node name="TilemapStatic" type="TileMapLayer" parent="."]
+position = Vector2(0, -4)
+tile_map_data = PackedByteArray("AAAdABYAAAABAAAAAAAeABYAAAABAAAAAAAfABYAAAABAAAAAAAgABYAAAABAAAAAAAhABYAAAABAAAAAAAiABYAAAABAAAAAAAjABYAAAABAAAAAAAkABYAAAABAAAAAAAlABYAAAABAAAAAAAmABYAAAABAAAAAAAnABYAAAABAAAAAAAcABYAAAAAAAAAAAAoABYAAAABAAAAAAApABYAAAABAAAAAAD+/xYAAAABAAAAAAD//xYAAAABAAAAAAAAABYAAAABAAAAAAABABYAAAABAAAAAAACABYAAAABAAAAAAADABYAAAABAAAAAAAEABIAAAADAAQAAAAEABYAAAABAAAAAAAFABIAAAAEAAQAAAAFABYAAAABAAAAAAAGABIAAAAEAAQAAAAGABYAAAABAAAAAAAHABIAAAAEAAQAAAAHABYAAAABAAAAAAAIABYAAAABAAAAAAAJABYAAAABAAAAAAAIABIAAAAEAAQAAAAJABIAAAAFAAQAAAAKABYAAAABAAAAAAALABYAAAACAAAAAAD9/xYAAAABAAAAAAD8/xYAAAABAAAAAAD7/xYAAAABAAAAAAD6/xYAAAABAAAAAAAqABYAAAABAAAAAAArABYAAAABAAAAAAAsABYAAAABAAAAAAAtABYAAAABAAAAAAAfABMAAAADAAUAAAAgABMAAAAEAAUAAAAhABMAAAAEAAUAAAAiABMAAAAEAAUAAAAjABMAAAAFAAUAAAAgAA8AAAADAAQAAAAhAA8AAAAEAAQAAAAiAA8AAAAFAAQAAAA=")
+tile_set = ExtResource("2_g4t2j")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemyWalker" parent="Enemies" instance=ExtResource("3_p1ayw")]
+position = Vector2(272, 148)
+starting_direction = 0
+is_dummy = true
+
+[node name="EnemyWalker2" parent="Enemies" instance=ExtResource("3_p1ayw")]
+position = Vector2(316, 172)
+starting_direction = 0
+is_dummy = true
+
+[node name="PlayerActor" parent="." instance=ExtResource("13_7o74m")]
+position = Vector2(-40, 172)
 
 [node name="GameOverLabel" type="Label" parent="."]
 layout_mode = 0
@@ -112,35 +140,35 @@ offset_bottom = 180.0
 [node name="CongratulationsLabel1" type="Label" parent="NewHighscoreScreen"]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 64.0
+offset_top = 56.0
 offset_right = 296.0
-offset_bottom = 72.0
+offset_bottom = 64.0
 text = "CONGRATULATIONS!"
 horizontal_alignment = 1
 
 [node name="CongratulationsLabel2" type="Label" parent="NewHighscoreScreen"]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 80.0
+offset_top = 72.0
 offset_right = 296.0
-offset_bottom = 88.0
+offset_bottom = 80.0
 text = "YOU'VE MADE IT TO THE LEADERBOARD."
 
 [node name="CongratulationsLabel3" type="Label" parent="NewHighscoreScreen"]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 92.0
+offset_top = 84.0
 offset_right = 296.0
-offset_bottom = 100.0
+offset_bottom = 92.0
 text = "ENTER YOU INITIALS:"
 
 [node name="Initial0" type="Label" parent="NewHighscoreScreen"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 133.0
-offset_top = 120.0
+offset_top = 108.0
 offset_right = 149.0
-offset_bottom = 136.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 16
 text = "A"
 script = ExtResource("3_kpdng")
@@ -178,9 +206,9 @@ texture = ExtResource("5_i5gnp")
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 153.0
-offset_top = 120.0
+offset_top = 108.0
 offset_right = 169.0
-offset_bottom = 136.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 16
 text = "A"
 script = ExtResource("3_kpdng")
@@ -218,9 +246,9 @@ texture = ExtResource("5_i5gnp")
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 173.0
-offset_top = 120.0
+offset_top = 108.0
 offset_right = 189.0
-offset_bottom = 136.0
+offset_bottom = 124.0
 theme_override_font_sizes/font_size = 16
 text = "A"
 script = ExtResource("3_kpdng")
@@ -258,9 +286,9 @@ texture = ExtResource("5_i5gnp")
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 197.0
-offset_top = 120.0
+offset_top = 108.0
 offset_right = 213.0
-offset_bottom = 136.0
+offset_bottom = 124.0
 text = "OK"
 vertical_alignment = 1
 script = ExtResource("7_fjggk")
@@ -348,9 +376,9 @@ horizontal_alignment = 2
 [node name="HighscoresSection" type="Control" parent="StatisticsScreen"]
 anchors_preset = 0
 offset_left = 76.0
-offset_top = 88.0
+offset_top = 84.0
 offset_right = 236.0
-offset_bottom = 176.0
+offset_bottom = 172.0
 script = ExtResource("3_fwhm7")
 
 [node name="HighscoresHeadingLabel" type="Label" parent="StatisticsScreen/HighscoresSection"]

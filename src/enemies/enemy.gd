@@ -19,6 +19,7 @@ const _DEATH_SEQUENCE_TIME : float = 0.17 # To be synched with incinerate shader
 const _DESPAWN_DISTANCE : float = 64.0
 
 @export var score : int = 0
+@export var is_dummy : bool = false
 
 var _death_time_elapsed : float = 0.0
 
@@ -41,12 +42,14 @@ func die() -> void:
 	get_parent().add_child(poof_effect)
 	poof_effect.global_position = _visuals.global_position
 
-	var score_indicator : ScoreIndicator = _SCORE_INDICATOR_SCENE.instantiate() as ScoreIndicator
-	get_parent().add_child(score_indicator)
-	score_indicator.set_spawn_position(_visuals.global_position)
-	score_indicator.set_score(score)
+	# Dummies don't grant score.
+	if not is_dummy:
+		var score_indicator : ScoreIndicator = _SCORE_INDICATOR_SCENE.instantiate() as ScoreIndicator
+		get_parent().add_child(score_indicator)
+		score_indicator.set_spawn_position(_visuals.global_position)
+		score_indicator.set_score(score)
 
-	GameState.score += score
+		GameState.score += score
 
 	queue_free()
 
