@@ -89,6 +89,8 @@ func _activate_menu_screen(new_screen : MenuScreenDefinitions.MenuScreen) -> voi
 			_menu_screen_credits_screen.activate()
 		_:
 			push_error("Invalid screen specified to activate: %s" % str(new_screen))
+	
+	_current_screen = new_screen
 
 
 func _process_transition_in(delta : float) -> void:

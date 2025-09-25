@@ -96,6 +96,7 @@ layout_mode = 0
 
 [node name="MenuScreenMainMenu" parent="MenuScreenContainer" instance=ExtResource("4_fv0o7")]
 layout_mode = 0
+store_previous_selection = true
 
 [node name="MenuScreenSettingsMenu" parent="MenuScreenContainer" instance=ExtResource("5_1oos5")]
 visible = false

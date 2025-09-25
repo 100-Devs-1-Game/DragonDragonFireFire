@@ -20,6 +20,9 @@ offset_left = 132.0
 offset_top = 108.0
 offset_right = 168.0
 offset_bottom = 116.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../SettingsButton")
 text = "PLAY"
 
 [node name="SettingsButton" parent="." instance=ExtResource("2_38tuo")]
@@ -28,6 +31,10 @@ offset_left = 132.0
 offset_top = 120.0
 offset_right = 196.0
 offset_bottom = 128.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../CreditsButton")
 text = "SETTINGS"
 
 [node name="CreditsButton" parent="." instance=ExtResource("2_38tuo")]
@@ -36,6 +43,10 @@ offset_left = 132.0
 offset_top = 132.0
 offset_right = 188.0
 offset_bottom = 140.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../ExitButton")
 text = "CREDITS"
 
 [node name="ExitButton" parent="." instance=ExtResource("2_38tuo")]
@@ -44,7 +55,11 @@ offset_left = 132.0
 offset_top = 144.0
 offset_right = 204.0
 offset_bottom = 152.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_neighbor_right = NodePath(".")
 text = "EXIT GAME"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

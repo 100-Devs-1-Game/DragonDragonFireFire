@@ -17,8 +17,8 @@ func activate() -> void:
 
 
 func deactivate() -> void:
-	visible = false
 	if not is_active:
+		visible = false
 		return
 
 	is_active = false
@@ -28,6 +28,8 @@ func deactivate() -> void:
 		_previous_selection = focus_owner
 	else:
 		_previous_selection = null
+	
+	visible = false
 
 
 func _set_initial_focus() -> void:
