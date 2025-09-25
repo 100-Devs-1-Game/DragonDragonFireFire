@@ -97,6 +97,7 @@ menu={
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_5="Enemies"
 2d_physics/layer_6="Collectibles"
+2d_physics/layer_7="StaticGeometryOneway"
 
 [physics]
 

@@ -15,7 +15,7 @@ size = Vector2(10, 4)
 radius = 4.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 6
+collision_mask = 70
 platform_on_leave = 2
 script = ExtResource("1_rkbax")
 
@@ -24,7 +24,7 @@ script = ExtResource("1_rkbax")
 [node name="AnimatedSprite2DHead" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_yw30f")
-animation = &"invisible"
+animation = &"normal"
 
 [node name="AnimatedSprite2DBody" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
