@@ -17,7 +17,7 @@ enum FruitType
 
 const _COLLECTIBLE_SIZE : Vector2 = Vector2(12, 12)
 
-const _GRAVITY_MODIFIER : float = 0.5
+const _GRAVITY_MODIFIER : float = 0.6
 const _ACTIVATION_VELOCITY_Y : float = -50.0
 
 const _BLING_SHADER_SPEED : float = 3.0
