@@ -12,6 +12,10 @@ enum State
 const _NUM_INITIALS : int = 3
 const _MAX_INITIALS_IDX : int = _NUM_INITIALS + 1 # +1 for OK label.
 
+const _ANIMATION_GRACE_TIME = 0.2 # Don't start animation immediately to let all physics properly settle first.
+
+var _animation_started : bool = false
+
 var _cur_state : State = State.TRANSITION_IN
 var _transition_time : float = 0.0
 var _is_new_highscore : bool = false
@@ -20,6 +24,8 @@ var _selected_initial_idx : int = 0
 var _entered_name : String = "---"
 
 @onready var _transition_rect : TextureRect = $TransitionRect
+
+@onready var _player_actor : PlayerActor = $PlayerActor
 
 @onready var _new_highscore_screen : Control = %NewHighscoreScreen
 @onready var _statistics_screen : Control = %StatisticsScreen
@@ -49,6 +55,9 @@ func _ready() -> void:
 	
 	_selected_initial_idx = 0
 	_update_initials_selection()
+
+	GameState.cutscene = true
+	GameState.paused = false
 
 
 func _process(delta : float) -> void:
@@ -82,6 +91,12 @@ func _set_statistics() -> void:
 func _process_transition_in(delta : float) -> void:
 	_transition_time += delta
 	_transition_rect.material.set_shader_parameter("clear_progress", _transition_time)
+
+	if not _animation_started and _transition_time >= _ANIMATION_GRACE_TIME:
+		GameState.cutscene = false # To have enemies move.
+		_player_actor.play_end_screen_sequence()
+		_animation_started = true
+
 	if _transition_time >= 1.0:
 		_cur_state = State.NEW_HIGHSCORE if _is_new_highscore else State.WAITING_FOR_INPUT
 		_transition_time = 0.0

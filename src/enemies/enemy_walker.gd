@@ -12,6 +12,8 @@ enum State
 
 const _SPEED : float = 20.0
 
+@export var starting_direction : Types.Direction = Types.Direction.RIGHT
+
 var _cur_state : State = State.WALK
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
@@ -35,6 +37,8 @@ var _burned_previously : bool = false
 func _ready() -> void:
 	super._ready()
 	_burn_visuals.visible = false
+
+	_cur_dir = starting_direction
 
 
 func _process(_delta : float) -> void:
