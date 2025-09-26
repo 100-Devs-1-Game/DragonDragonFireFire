@@ -13,10 +13,13 @@ const _FIRE_BALL_OFFSET_LEFT : Vector2 = Vector2(-8.0, -8.0)
 const _FIRE_BALL_OFFSET_RIGHT : Vector2 = Vector2(8.0, -8.0)
 const _FIRE_BALL_OFFSET_UP_LEFT : Vector2 = Vector2(-3.0, -16.0)
 const _FIRE_BALL_OFFSET_UP_RIGHT : Vector2 = Vector2(3.0, -16.0)
+const _FIRE_BALL_CADENCE : float = (1.0 / 5.5) # 5.5 per second
 
 const _SPEED = 80.0
 const _JUMP_VELOCITY = -166.0
 const _MAX_FALL_SPEED = 130.0
+
+const _FIRE_BALL_BUFFER_TIME : float = 0.1
 
 const _INVINCIBILITY_TIME : float = 2.0
 const _INVINCIBILITY_FLASH_SPEED : float = 20.0
@@ -30,7 +33,9 @@ var _touched_by_enemy : bool = false
 var _has_invincibility_frames : bool = false
 var _invincibility_frames : float = 0.0
 
-var _time_since_last_fire_spit : float = _FIRE_SPIT_ANIMATION_TIME + 0.01 # Don't play fire animation at start.
+var _fire_ball_buffer_timer : float = 0.0 # Time since fire ball action requested
+
+var _time_since_last_fire_spit : float = _FIRE_SPIT_ANIMATION_TIME + 0.01 # Allow immediate fire at start.
 
 var _looking_up : bool = false
 
@@ -44,6 +49,17 @@ var _looking_up : bool = false
 func _ready() -> void:
 	_sprite_head.play("normal")
 	_sprite_body.play("idle")
+
+
+func _process(delta : float) -> void:
+	# Buffered inputs are handled independent from pause state
+	_handle_buffered_inputs(delta)
+
+
+func _handle_buffered_inputs(delta : float) -> void:
+	_fire_ball_buffer_timer += delta
+	if Input.is_action_just_pressed("fire"):
+		_fire_ball_buffer_timer = 0.0
 
 
 func _physics_process(delta : float) -> void:
@@ -96,7 +112,10 @@ func _physics_process_move(delta : float) -> void:
 		else:
 			velocity.y = _JUMP_VELOCITY
 	
-	if Input.is_action_just_pressed("fire"):
+
+	var fire_ball_shot_buffered : bool = _fire_ball_buffer_timer <= _FIRE_BALL_BUFFER_TIME
+	if fire_ball_shot_buffered and _time_since_last_fire_spit >= _FIRE_BALL_CADENCE:
+		_fire_ball_buffer_timer = 0.0
 		_shoot_fire_ball()
 	
 	# Handle looking up.
