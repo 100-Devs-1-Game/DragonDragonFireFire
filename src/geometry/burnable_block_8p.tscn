@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2pujn51tm6uu" path="res://geometry/burnable_block.gd" id="1_bxpog"]
 [ext_resource type="Material" uid="uid://dyx1yhurrujxn" path="res://shaders/shader_material_incinerate.tres" id="2_rd2lr"]
-[ext_resource type="Texture2D" uid="uid://bi2xfbhjcsbqp" path="res://assets/geometry/burnable_block_8.png" id="2_tlsna"]
+[ext_resource type="Texture2D" uid="uid://bi2xfbhjcsbqp" path="res://assets/geometry/burnable_block_8_red.png" id="2_tlsna"]
 [ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="3_lvq3l"]
 [ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="3_tlsna"]
 

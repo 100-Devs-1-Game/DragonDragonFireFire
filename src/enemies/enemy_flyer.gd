@@ -85,7 +85,8 @@ func _check_if_flees_from_burning() -> void:
 	if not _burned_previously and _burn_component.is_burning():
 		_burned_previously = true
 		if _burn_component.does_scare_enemies():
-			_cur_dir = _burn_component.get_burn_flee_direction()
+			_cur_dir = _burn_component.get_hor_burn_flee_direction()
+			_cur_vertical_dir = _burn_component.get_ver_burn_flee_direction()
 
 
 func _handle_animation() -> void:
@@ -98,4 +99,7 @@ func _handle_animation() -> void:
 	_sprite.speed_scale = 1.0 if not _burn_component.is_burning() else _BURNING_MODIFIER
 	match _cur_state:
 		State.FLYING:
-			_sprite.play("flying")
+			if _burn_component.is_burning():
+				_sprite.play("flying_hurt")
+			else:
+				_sprite.play("flying")

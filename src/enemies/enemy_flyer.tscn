@@ -27,7 +27,6 @@ position = Vector2(0, -7)
 use_parent_material = true
 sprite_frames = ExtResource("1_273yy")
 animation = &"flying"
-frame_progress = 0.79629123
 
 [node name="BurnVisuals" type="Node2D" parent="Visuals"]
 use_parent_material = true

@@ -4,7 +4,8 @@ extends Node
 const _STREAM_COUNT : int = 4
 const _MIN_VOLUME_DB : float = -80.0
 
-const TRACK_TEST: AudioStream = preload("res://assets/music/Level_1_Concept_Music_v2.ogg")
+const TRACK_TITLE : AudioStream = preload("res://assets/music/Title_Music_1.ogg")
+const TRACK_STAGE: AudioStream = preload("res://assets/music/Stage_1_Music_v3.ogg")
 
 var _curr_idx : int = 0
 var _players : Array[AudioStreamPlayer]

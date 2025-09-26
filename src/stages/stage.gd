@@ -6,11 +6,15 @@ const _SCORE_INDICATOR_SCENE : PackedScene = preload("res://effects/score_indica
 
 @onready var _player : Player = $Player
 
+@onready var _tilemap_background : TileMapLayer = $TilemapBackground
+@onready var _tilemap_static : TileMapLayer = $TilemapStatic
+
 
 func _ready() -> void:
 	# Enable clipping to ensure safety tiles above and below stage are never visible during transition.
 	size = Vector2(Constants.ARENA_WIDTH, Constants.ARENA_HEIGHT)
 	clip_contents = true
+	_assign_tileset()
 
 
 # Performs the initial stage setup steps that are the same each time a stage is entered.
@@ -39,3 +43,14 @@ func grant_completion_bonus() -> void:
 	score_indicator.increase_duration()
 
 	GameState.score += granted_score
+
+
+func _assign_tileset() -> void:
+	var selected_texture : Texture2D = GeometryColorDefinitions._TILESET_TEXTURE_DICT[GameState.next_color]
+
+	# Assumes background and static tilemaps use the same tileset.
+	var new_tileset : TileSet = _tilemap_background.tile_set.duplicate() as TileSet
+	new_tileset.get_source(0).texture = selected_texture
+
+	_tilemap_background.tile_set = new_tileset
+	_tilemap_static.tile_set = new_tileset
