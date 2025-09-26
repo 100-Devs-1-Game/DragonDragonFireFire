@@ -148,7 +148,10 @@ func _handle_animation() -> void:
 	_sprite.speed_scale = 1.0 if not _burn_component.is_burning() else _BURNING_MODIFIER
 	match _cur_state:
 		State.WALK:
-			_sprite.play("walking")
+			if _burn_component.is_burning():
+				_sprite.play("walking_hurt")
+			else:
+				_sprite.play("walking")
 		State.FALL_BEGIN:
 			_sprite.play("falling")
 		State.FALLING:
