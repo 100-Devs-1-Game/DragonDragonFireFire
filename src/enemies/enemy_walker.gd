@@ -135,7 +135,7 @@ func _check_if_flees_from_burning() -> void:
 	if not _burned_previously and _burn_component.is_burning():
 		_burned_previously = true
 		if _burn_component.does_scare_enemies():
-			_cur_dir = _burn_component.get_burn_flee_direction()
+			_cur_dir = _burn_component.get_hor_burn_flee_direction()
 
 
 func _handle_animation() -> void:

@@ -6,7 +6,6 @@
 [ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="3_lvq3l"]
 [ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="3_tlsna"]
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lvq3l"]
 size = Vector2(7.5, 1)
 

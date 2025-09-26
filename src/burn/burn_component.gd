@@ -4,7 +4,8 @@ extends Node2D
 var _is_burning : bool = false
 var _burn_time : float = 0.0
 var _time_since_last_tick : float = 0.0
-var _burn_flee_direction : Types.Direction = Types.Direction.LEFT
+var _hor_burn_flee_direction : Types.Direction = Types.Direction.LEFT
+var _ver_burn_flee_direction : Types.Direction = Types.Direction.UP
 var _scares_enemies : bool = false
 var _inactive : bool = false
 
@@ -49,8 +50,12 @@ func does_scare_enemies() -> bool:
 	return _scares_enemies
 
 
-func get_burn_flee_direction() -> Types.Direction:
-	return _burn_flee_direction
+func get_hor_burn_flee_direction() -> Types.Direction:
+	return _hor_burn_flee_direction
+
+
+func get_ver_burn_flee_direction() -> Types.Direction:
+	return _ver_burn_flee_direction
 
 
 func _make_burn_parameters() -> BurnParameters:
@@ -81,6 +86,11 @@ func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
 	# Flee direction is in the opposite direction from the fire source.
 	_scares_enemies = burn_parameters.scares_enemies
 	if burn_parameters.source_pos.x > destination_pos.x:
-		_burn_flee_direction = Types.Direction.LEFT
+		_hor_burn_flee_direction = Types.Direction.LEFT
 	else:
-		_burn_flee_direction = Types.Direction.RIGHT
+		_hor_burn_flee_direction = Types.Direction.RIGHT
+	
+	if burn_parameters.source_pos.y > destination_pos.y:
+		_ver_burn_flee_direction = Types.Direction.UP
+	else:
+		_ver_burn_flee_direction = Types.Direction.DOWN
