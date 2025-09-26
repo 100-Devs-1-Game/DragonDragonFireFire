@@ -7,6 +7,8 @@ var title_shown : bool = false
 var cutscene : bool = false
 var paused : bool = false
 
+var next_color : GeometryColorDefinitions.Colors = GeometryColorDefinitions.Colors.BLUE
+
 var current_stage : int = 1
 var score : int = 0
 var time_left : float = float(Constants.PLAY_TIME)

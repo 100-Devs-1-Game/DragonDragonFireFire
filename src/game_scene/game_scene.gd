@@ -31,6 +31,11 @@ var _current_stage_starting_pos : Vector2 = Vector2.ZERO
 @onready var _current_stage : Stage = $Stage1
 
 
+func _init() -> void:
+	# Pick the first color fixed pink.
+	GameState.next_color = GeometryColorDefinitions.Colors.BLUE
+
+
 func _ready() -> void:
 	GameState.reset_game_state()
 
@@ -124,6 +129,10 @@ func _transition_stages() -> void:
 	GameState.cutscene = true
 
 	GameState.current_stage += 1
+
+	# Cycle through stage colors.
+	var num_colors : int = GeometryColorDefinitions.Colors.size()
+	GameState.next_color = (int(GameState.next_color) + 1) % num_colors as GeometryColorDefinitions.Colors
 
 	# Determine the next stage to load, rotating cyclically through the available stages.
 	var num_stages : int = StageDefinitions.STAGES_DICT.size()

@@ -18,8 +18,8 @@ const _NUM_SPAWN_STEPS_Y : int = (_SPAWN_MAX_Y - _SPAWN_MIN_Y) / _SPAWN_STEP_SIZ
 const _NUM_SPAWN_TRIES : int = 32
 const _NUM_MAX_DISTANCE_VERTICAL_PLACEMENT : int = 64
 
-const _MIN_TIME_TO_NEXT_SPAWN : float = 5.0
-const _MAX_TIME_TO_NEXT_SPAWN : float = 10.0
+const _MIN_TIME_TO_NEXT_SPAWN : float = 4.0
+const _MAX_TIME_TO_NEXT_SPAWN : float = 8.0
 
 var _time_to_next_spawn : float = 0.0
 

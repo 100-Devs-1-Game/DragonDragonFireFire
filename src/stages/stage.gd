@@ -14,7 +14,7 @@ func _ready() -> void:
 	# Enable clipping to ensure safety tiles above and below stage are never visible during transition.
 	size = Vector2(Constants.ARENA_WIDTH, Constants.ARENA_HEIGHT)
 	clip_contents = true
-	_assign_random_tileset()
+	_assign_tileset()
 
 
 # Performs the initial stage setup steps that are the same each time a stage is entered.
@@ -45,9 +45,8 @@ func grant_completion_bonus() -> void:
 	GameState.score += granted_score
 
 
-func _assign_random_tileset() -> void:
-	var random_index : int = randi() % TilesetTextureDefinitions.TILESET_TEXTURES.size()
-	var selected_texture : Texture2D = TilesetTextureDefinitions.TILESET_TEXTURES[random_index]
+func _assign_tileset() -> void:
+	var selected_texture : Texture2D = GeometryColorDefinitions._TILESET_TEXTURE_DICT[GameState.next_color]
 
 	# Assumes background and static tilemaps use the same tileset.
 	var new_tileset : TileSet = _tilemap_background.tile_set.duplicate() as TileSet
