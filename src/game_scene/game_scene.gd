@@ -83,6 +83,7 @@ func _play_intro_sequence() -> void:
 	player.visible = false
 
 	_time_controller.set_running(false)
+	_jumpstart_stage_music()
 
 	var intro_tween : Tween = get_tree().create_tween()
 	intro_tween.tween_callback(_player_cutscene.play_body.bind("walk"))
@@ -109,10 +110,13 @@ func _callback_intro_finished() -> void:
 	_cur_state = State.PLAYING
 	GameState.cutscene = false
 	_time_controller.set_running(true)
-
-	MusicPlayer.play_track(MusicPlayer.TRACK_TEST)
-
+ 
 	_current_stage.do_setup()
+
+
+func _jumpstart_stage_music() -> void:
+	await get_tree().create_timer(0.28).timeout
+	MusicPlayer.play_track(MusicPlayer.TRACK_STAGE)
 
 
 func _transition_stages() -> void:
@@ -244,13 +248,15 @@ func _callback_death_transition_finished() -> void:
 
 
 func _do_game_over_transition() -> void:
-	MusicPlayer.stop_track()
-	
+	MusicPlayer.stop_track(0.4)
+
 	var transition_tween : Tween = get_tree().create_tween()
 	transition_tween.set_parallel(true)
 	transition_tween.tween_property(_game_over_label, "visible_ratio", 1.0, 0.2)
-	transition_tween.tween_interval(1.0)
+	transition_tween.tween_interval(0.9)
 	transition_tween.set_parallel(false)
+	transition_tween.tween_callback(SoundPool.play_sound.bind(SoundPool.SOUND_GAME_OVER_JINGLE))
+	transition_tween.tween_interval(0.1)
 	transition_tween.tween_callback(_player_cutscene.play_body.bind("spin_hurt"))
 	transition_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	transition_tween.tween_interval(0.8)

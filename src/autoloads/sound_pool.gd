@@ -4,7 +4,7 @@ extends Node
 const _STREAM_COUNT : int = 64
 const _MAX_TRIES : int = 10
 
-# const SOUND_TODO : AudioStream = preload("res://assets/sounds/todo.ogg")
+const SOUND_GAME_OVER_JINGLE : AudioStream = preload("res://assets/sounds/Game_Over_Jingle.ogg")
 
 var _next_idx : int = 0
 var _players : Array[AudioStreamPlayer]

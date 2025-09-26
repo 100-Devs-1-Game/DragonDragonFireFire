@@ -14,6 +14,8 @@ enum LeaveScreenAction
 	EXIT_GAME,
 }
 
+const _MUSIC_FADEOUT_TIME : float = 2.0
+
 
 var _cur_transition_state : TransitionState = TransitionState.TRANSITION_IN
 var _transition_time : float = 0.0
@@ -51,6 +53,8 @@ func _ready() -> void:
 
 	assert(_transition_rect.material)
 	_transition_rect.material.set_shader_parameter("clear_progress", 0.0)
+
+	MusicPlayer.play_track(MusicPlayer.TRACK_TITLE)
 
 
 func _process(delta : float) -> void:
@@ -133,12 +137,14 @@ func _on_menu_screen_requested(new_screen : MenuScreenDefinitions.MenuScreen) ->
 func _on_play_game_requested() -> void:
 	_leave_screen_action = LeaveScreenAction.START_GAME
 	_cur_transition_state = TransitionState.TRANSITION_OUT
+	MusicPlayer.stop_track(_MUSIC_FADEOUT_TIME)
 	_deactivate_all_menu_screens()
 
 
 func _on_exit_game_requested() -> void:
 	_leave_screen_action = LeaveScreenAction.EXIT_GAME
 	_cur_transition_state = TransitionState.TRANSITION_OUT
+	MusicPlayer.stop_track(_MUSIC_FADEOUT_TIME)
 	_deactivate_all_menu_screens()
 
 

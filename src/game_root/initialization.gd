@@ -8,3 +8,4 @@ static func initialize() -> void:
 
 	# Read settings file.
 	Settings.read_settings_file()
+	Settings.apply_audio_settings()
