@@ -120,15 +120,17 @@ func _physics_process_move(delta : float) -> void:
 
 	var jump_buffered : bool = _jump_buffer_timer <= _JUMP_BUFFER_TIME
 	if jump_buffered and _time_since_last_ground_contact <= _COYOTE_TIME:
+		_jump_buffer_timer = _JUMP_BUFFER_TIME + 0.01 # Consume buffered jump.
 		if down_pressed and _one_way_platform_detector.is_colliding():
 			# Drop down through one-way platform.
 			position.y += 1.0
 		else:
 			velocity.y = _JUMP_VELOCITY
+			_time_since_last_ground_contact = _COYOTE_TIME + 0.01 # Consume coyote time.
 
 	var fire_ball_shot_buffered : bool = _fire_ball_buffer_timer <= _FIRE_BALL_BUFFER_TIME
 	if fire_ball_shot_buffered and _time_since_last_fire_spit >= _FIRE_BALL_CADENCE:
-		_fire_ball_buffer_timer = 0.0
+		_fire_ball_buffer_timer = _FIRE_BALL_BUFFER_TIME + 0.01 # Consume buffered fire ball shot.
 		_shoot_fire_ball()
 	
 	# Handle looking up.
