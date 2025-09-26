@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coq2kj10jsu5n"
-path="res://.godot/imported/tileset_static_geometry.png-15b6ba3977bdc3ab3c6538b336bd86fa.ctex"
+uid="uid://bi2xfbhjcsbqp"
+path="res://.godot/imported/burnable_block_8_red.png-5ac9cfb3be0a69a040554a563ff2c8f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/geometry/tileset_static_geometry.png"
-dest_files=["res://.godot/imported/tileset_static_geometry.png-15b6ba3977bdc3ab3c6538b336bd86fa.ctex"]
+source_file="res://assets/geometry/burnable_block_8_red.png"
+dest_files=["res://.godot/imported/burnable_block_8_red.png-5ac9cfb3be0a69a040554a563ff2c8f5.ctex"]
 
 [params]
 
