@@ -28,6 +28,7 @@ offset_bottom = 52.0
 entry_name = "ZEPHYRIX"
 entry_role = "LEAD,DESIGN,PROGRAMMING"
 entry_texture = ExtResource("3_1hldw")
+entry_link = "https://store.steampowered.com/publisher/zephyrix"
 
 [node name="CreditsEntry2" parent="." instance=ExtResource("2_8g2as")]
 layout_mode = 0
@@ -38,6 +39,7 @@ offset_bottom = 80.0
 entry_name = "ASTENRA"
 entry_role = "PIXEL ART"
 entry_texture = ExtResource("4_abm7c")
+entry_link = "https://astenra.carrd.co"
 
 [node name="CreditsEntry3" parent="." instance=ExtResource("2_8g2as")]
 layout_mode = 0
@@ -48,6 +50,7 @@ offset_bottom = 108.0
 entry_name = "TYLER STONE"
 entry_role = "MUSIC,SOUND"
 entry_texture = ExtResource("5_vd7u8")
+entry_link = "https://wtwbb.net"
 
 [node name="CreditsEntry4" parent="." instance=ExtResource("2_8g2as")]
 layout_mode = 0
@@ -58,6 +61,7 @@ offset_bottom = 136.0
 entry_name = "THE 100 DEVS COMMUNITY"
 entry_role = "ORGANIZATION,SUPPORT"
 entry_texture = ExtResource("5_7ujgi")
+entry_link = "https://discord.gg/UHN4AjMw4d"
 
 [node name="MenuItemButton" parent="." instance=ExtResource("5_oishy")]
 layout_mode = 0

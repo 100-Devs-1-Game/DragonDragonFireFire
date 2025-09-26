@@ -43,3 +43,5 @@ offset_bottom = 26.0
 texture = ExtResource("2_dak6k")
 script = ExtResource("3_e6rgu")
 associated_button = NodePath("..")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
