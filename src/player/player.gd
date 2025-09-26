@@ -19,7 +19,9 @@ const _SPEED = 80.0
 const _JUMP_VELOCITY = -166.0
 const _MAX_FALL_SPEED = 130.0
 
+const _JUMP_BUFFER_TIME : float = 0.1
 const _FIRE_BALL_BUFFER_TIME : float = 0.1
+const _COYOTE_TIME : float = 0.075
 
 const _INVINCIBILITY_TIME : float = 2.0
 const _INVINCIBILITY_FLASH_SPEED : float = 20.0
@@ -33,8 +35,10 @@ var _touched_by_enemy : bool = false
 var _has_invincibility_frames : bool = false
 var _invincibility_frames : float = 0.0
 
-var _fire_ball_buffer_timer : float = 0.0 # Time since fire ball action requested
+var _jump_buffer_timer : float = _JUMP_BUFFER_TIME + 0.01 # Time since jump action requested
+var _fire_ball_buffer_timer : float = _FIRE_BALL_BUFFER_TIME + 0.01 # Time since fire ball action requested
 
+var _time_since_last_ground_contact : float = 0.0
 var _time_since_last_fire_spit : float = _FIRE_SPIT_ANIMATION_TIME + 0.01 # Allow immediate fire at start.
 
 var _looking_up : bool = false
@@ -57,6 +61,10 @@ func _process(delta : float) -> void:
 
 
 func _handle_buffered_inputs(delta : float) -> void:
+	_jump_buffer_timer += delta
+	if Input.is_action_just_pressed("jump"):
+		_jump_buffer_timer = 0.0
+
 	_fire_ball_buffer_timer += delta
 	if Input.is_action_just_pressed("fire"):
 		_fire_ball_buffer_timer = 0.0
@@ -101,17 +109,22 @@ func _physics_process_move(delta : float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	if is_on_floor():
+		_time_since_last_ground_contact = 0.0
+	else:
+		_time_since_last_ground_contact += delta
+
 	# Handle jump.
 	var down_pressed : bool = Input.is_action_pressed("down")
 	_one_way_platform_detector.force_shapecast_update()
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+
+	var jump_buffered : bool = _jump_buffer_timer <= _JUMP_BUFFER_TIME
+	if jump_buffered and _time_since_last_ground_contact <= _COYOTE_TIME:
 		if down_pressed and _one_way_platform_detector.is_colliding():
 			# Drop down through one-way platform.
 			position.y += 1.0
-
 		else:
 			velocity.y = _JUMP_VELOCITY
-	
 
 	var fire_ball_shot_buffered : bool = _fire_ball_buffer_timer <= _FIRE_BALL_BUFFER_TIME
 	if fire_ball_shot_buffered and _time_since_last_fire_spit >= _FIRE_BALL_CADENCE:
