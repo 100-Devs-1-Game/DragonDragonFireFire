@@ -13,6 +13,19 @@ const SOUND_PLAYER_HURT : AudioStream = preload("res://assets/sounds/Enemy_Impac
 const SOUND_PLAYER_JUMP : AudioStream = preload("res://assets/sounds/Jump_SFX_1.wav")
 const SOUND_STAGE_COMPLETED : AudioStream = preload("res://assets/sounds/Completed_SFX_1.wav")
 
+const GLOBAL_SOUND_VOLUME_DB : float = -6.0
+
+const VOLUME_CHANGE_DICT : Dictionary[AudioStream, float] = {
+	SOUND_ENEMY_DEATH: 0.0,
+	SOUND_FIRE_SHOT: -1.0,
+	SOUND_GAME_OVER_JINGLE: 2.0,
+	SOUND_MENU_SELECT: -1.0,
+	SOUND_MENU_SWITCH: 0.0,
+	SOUND_PLAYER_HURT: 0.0,
+	SOUND_PLAYER_JUMP: -1.0,
+	SOUND_STAGE_COMPLETED: -2.0,
+}
+
 var _next_idx : int = 0
 var _players : Array[AudioStreamPlayer]
 
@@ -51,11 +64,10 @@ func stop_all_sounds():
 		p.stop()
 
 
-func apply_custom_sound_volume(player : AudioStreamPlayer, _sound : AudioStream) -> void:
-	player.volume_db = 0.0
-	# if sound == x:
-	# 	player.volume_db = <+/-number>
-	# 	return
+func apply_custom_sound_volume(player : AudioStreamPlayer, sound : AudioStream) -> void:
+	player.volume_db = GLOBAL_SOUND_VOLUME_DB
+	assert(sound in VOLUME_CHANGE_DICT)
+	player.volume_db += VOLUME_CHANGE_DICT[sound]
 
 
 func apply_pitch_modulation(player : AudioStreamPlayer, _sound : AudioStream):
