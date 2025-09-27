@@ -42,6 +42,8 @@ func die() -> void:
 	get_parent().add_child(poof_effect)
 	poof_effect.global_position = _visuals.global_position
 
+	SoundPool.play_sound(SoundPool.SOUND_ENEMY_DEATH)
+
 	# Dummies don't grant score.
 	if not is_dummy:
 		var score_indicator : ScoreIndicator = _SCORE_INDICATOR_SCENE.instantiate() as ScoreIndicator

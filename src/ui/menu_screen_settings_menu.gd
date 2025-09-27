@@ -60,6 +60,8 @@ func _handle_volume_change() -> void:
 				Settings.music_volume = clamp(Settings.music_volume - _VOLUME_STEP, 0.0, 1.0)
 				Settings.apply_audio_settings()
 
+	if adjustment != Adjustment.NONE:
+		SoundPool.play_sound(SoundPool.SOUND_MENU_SWITCH)
 
 func _update_bars() -> void:
 	_master_volume_bar.value = Settings.master_volume
@@ -86,3 +88,4 @@ func _on_back_button_focus_entered():
 func _on_back_button_pressed():
 	Settings.write_settings_file()
 	Signals.menu_screen_requested.emit(MenuScreenDefinitions.MenuScreen.MAIN_MENU)
+	SoundPool.play_sound(SoundPool.SOUND_MENU_SELECT)

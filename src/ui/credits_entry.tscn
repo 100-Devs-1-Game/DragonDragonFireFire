@@ -44,4 +44,5 @@ texture = ExtResource("2_dak6k")
 script = ExtResource("3_e6rgu")
 associated_button = NodePath("..")
 
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

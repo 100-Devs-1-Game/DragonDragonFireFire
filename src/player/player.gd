@@ -127,6 +127,7 @@ func _physics_process_move(delta : float) -> void:
 		else:
 			velocity.y = _JUMP_VELOCITY
 			_time_since_last_ground_contact = _COYOTE_TIME + 0.01 # Consume coyote time.
+			SoundPool.play_sound(SoundPool.SOUND_PLAYER_JUMP)
 
 	var fire_ball_shot_buffered : bool = _fire_ball_buffer_timer <= _FIRE_BALL_BUFFER_TIME
 	if fire_ball_shot_buffered and _time_since_last_fire_spit >= _FIRE_BALL_CADENCE:
@@ -192,10 +193,12 @@ func _shoot_fire_ball() -> void:
 			fire_ball.global_position = global_position + _FIRE_BALL_OFFSET_RIGHT
 
 	_time_since_last_fire_spit = 0.0
+	SoundPool.play_sound(SoundPool.SOUND_FIRE_SHOT)
 
 
 func _handle_death() -> void:
 	Signals.player_died.emit()
+	SoundPool.play_sound(SoundPool.SOUND_PLAYER_HURT)
 	_cur_state = State.DEAD
 
 
