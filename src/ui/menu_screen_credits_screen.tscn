@@ -63,7 +63,7 @@ entry_role = "ORGANIZATION,SUPPORT"
 entry_texture = ExtResource("5_7ujgi")
 entry_link = "https://discord.gg/UHN4AjMw4d"
 
-[node name="MenuItemButton" parent="." instance=ExtResource("5_oishy")]
+[node name="BackButton" parent="." instance=ExtResource("5_oishy")]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 148.0
@@ -71,4 +71,4 @@ offset_right = 176.0
 offset_bottom = 156.0
 text = "BACK"
 
-[connection signal="pressed" from="MenuItemButton" to="." method="_on_menu_item_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

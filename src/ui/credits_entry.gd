@@ -24,3 +24,7 @@ func _ready() -> void:
 func _on_pressed():
 	if entry_link != "":
 		OS.shell_open(entry_link)
+
+
+func _on_focus_entered():
+	SoundPool.play_sound(SoundPool.SOUND_MENU_SWITCH)

@@ -154,6 +154,7 @@ func _transition_stages() -> void:
 	var player_target_pos : Vector2 = next_stage_player.global_position + Vector2(0, Constants.ARENA_HEIGHT)
 
 	GameState.bonus_seconds += Constants.BONUS_SECONDS_PER_COMPLETED_STAGE
+	SoundPool.play_sound(SoundPool.SOUND_STAGE_COMPLETED)
 
 	var transition_tween : Tween = get_tree().create_tween()
 	transition_tween.set_parallel(true)

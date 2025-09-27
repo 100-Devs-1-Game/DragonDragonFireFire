@@ -4,7 +4,14 @@ extends Node
 const _STREAM_COUNT : int = 64
 const _MAX_TRIES : int = 10
 
+const SOUND_ENEMY_DEATH : AudioStream = preload("res://assets/sounds/Enemy_Death_SFX_1.wav")
+const SOUND_FIRE_SHOT : AudioStream = preload("res://assets/sounds/Fire_Shoot_SFX_1.wav")
 const SOUND_GAME_OVER_JINGLE : AudioStream = preload("res://assets/sounds/Game_Over_Jingle.ogg")
+const SOUND_MENU_SELECT : AudioStream = preload("res://assets/sounds/Menu_Select_2.wav")
+const SOUND_MENU_SWITCH : AudioStream = preload("res://assets/sounds/Menu_Sound_2.wav")
+const SOUND_PLAYER_HURT : AudioStream = preload("res://assets/sounds/Enemy_Impact_SFX.wav")
+const SOUND_PLAYER_JUMP : AudioStream = preload("res://assets/sounds/Jump_SFX_1.wav")
+const SOUND_STAGE_COMPLETED : AudioStream = preload("res://assets/sounds/Completed_SFX_1.wav")
 
 var _next_idx : int = 0
 var _players : Array[AudioStreamPlayer]

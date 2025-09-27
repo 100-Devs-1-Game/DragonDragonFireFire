@@ -17,4 +17,5 @@ offset_right = -4.0
 offset_bottom = 8.0
 texture = ExtResource("2_ds227")
 
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
