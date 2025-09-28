@@ -31,33 +31,52 @@ tile_set = ExtResource("3_k8rir")
 
 [node name="EnemyWalker" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(160, 100)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker2" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(92, 124)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker3" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(228, 124)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker4" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(68, 148)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker5" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(252, 148)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker6" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(288, 60)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker7" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(32, 60)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker8" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(116, 44)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyWalker9" parent="Enemies" instance=ExtResource("5_134k0")]
 position = Vector2(204, 44)
+starting_direction = null
+is_dummy = null
 
 [node name="EnemyFlyer" parent="Enemies" instance=ExtResource("4_1wohy")]
 position = Vector2(236, 56)
+is_dummy = null
 
 [node name="Player" parent="." instance=ExtResource("6_ek58y")]
 position = Vector2(28, 172)

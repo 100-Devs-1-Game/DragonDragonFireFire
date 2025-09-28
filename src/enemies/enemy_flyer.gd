@@ -37,6 +37,9 @@ func _process(_delta : float) -> void:
 	_burn_visuals.visible = _burn_component.is_burning()
 	if _burn_component.is_burning() and _burn_component.get_burn_time() >= _BURN_TIME_TO_KILL:
 		_cur_state = State.DYING
+	
+	if _burn_component.is_incinerated():
+		_cur_state = State.DYING
 
 	if _head_check_component.is_hit():
 		_cur_state = State.DYING

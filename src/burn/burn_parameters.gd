@@ -15,4 +15,4 @@ var ignition_range : float = 0.0
 var force_immediate : bool = false
 
 # Whether this burn source scares away enemies.
-var scares_enemies : bool = false
+var is_player_induced : bool = false
