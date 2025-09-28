@@ -42,7 +42,7 @@ func _make_burn_parameters() -> BurnParameters:
 	params.source_burn_time = 0.0
 	params.ignition_range = _IGNITION_RANGE
 	params.force_immediate = true
-	params.scares_enemies = true
+	params.is_player_induced = true
 	return params
 
 

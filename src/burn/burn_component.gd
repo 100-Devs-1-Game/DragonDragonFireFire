@@ -2,11 +2,12 @@ class_name BurnComponent
 extends Node2D
 
 var _is_burning : bool = false
+var _is_incinerated : bool = false
 var _burn_time : float = 0.0
 var _time_since_last_tick : float = 0.0
 var _hor_burn_flee_direction : Types.Direction = Types.Direction.LEFT
 var _ver_burn_flee_direction : Types.Direction = Types.Direction.UP
-var _scares_enemies : bool = false
+var _is_player_induced : bool = false
 var _inactive : bool = false
 
 @export var _ignition_range : float = 0.0
@@ -42,12 +43,16 @@ func is_burning() -> bool:
 	return _is_burning
 
 
+func is_incinerated() -> bool:
+	return _is_incinerated
+
+
 func get_burn_time() -> float:
 	return _burn_time
 
 
 func does_scare_enemies() -> bool:
-	return _scares_enemies
+	return _is_player_induced
 
 
 func get_hor_burn_flee_direction() -> Types.Direction:
@@ -64,7 +69,7 @@ func _make_burn_parameters() -> BurnParameters:
 	params.source_burn_time = _burn_time
 	params.ignition_range = _ignition_range
 	params.force_immediate = _force_immediate
-	params.scares_enemies = false # Indirect fire does not scare enemies.
+	params.is_player_induced = false
 	return params
 
 
@@ -73,18 +78,22 @@ func set_inactive() -> void:
 
 
 func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
-	if _is_burning:
-		return
-	
+	# Distance check.
 	var destination_pos : Vector2 = global_position
 	if burn_parameters.source_pos.distance_to(destination_pos) > burn_parameters.ignition_range + _catch_fire_range:
 		return
 	
+	# Already burning target hit by fire ball?
+	if _is_burning and burn_parameters.is_player_induced:
+		_is_incinerated = true
+		return
+
+	# Burn start check.
 	if burn_parameters.source_burn_time >= _catch_burn_time or burn_parameters.force_immediate:
 		_is_burning = true
 
 	# Flee direction is in the opposite direction from the fire source.
-	_scares_enemies = burn_parameters.scares_enemies
+	_is_player_induced = burn_parameters.is_player_induced
 	if burn_parameters.source_pos.x > destination_pos.x:
 		_hor_burn_flee_direction = Types.Direction.LEFT
 	else:
