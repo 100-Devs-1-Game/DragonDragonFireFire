@@ -94,4 +94,10 @@ func _find_spawn_position(collectible: Collectible) -> bool:
 
 
 func _create_collectible(collectible: Collectible) -> void:
-	collectible.make_fruit()
+	# Every third collectible is a clock, otherwise fruit.
+	if GameState.collectibles_spawned % 3 == 1:
+		collectible.make_clock()
+	else:
+		collectible.make_fruit()
+
+	GameState.collectibles_spawned += 1

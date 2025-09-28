@@ -4,7 +4,7 @@ extends RefCounted
 const ARENA_WIDTH : int = 320
 const ARENA_HEIGHT : int = 180
 
-const PLAY_TIME : float = 60.0
+const PLAY_TIME : float = 80.0
 const MAX_PLAY_TIME : float = 99.0
 const STARTING_LIVES : int = 3
 
