@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://0b8gkxjmmmak"]
+[gd_scene load_steps=8 format=4 uid="uid://0b8gkxjmmmak"]
 
 [ext_resource type="Script" uid="uid://bbq3fl67mngl8" path="res://stages/stage.gd" id="1_0p8va"]
 [ext_resource type="TileSet" uid="uid://cj0foed3p6jmm" path="res://geometry/tileset_static_geometry.tres" id="1_nndgx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dk42xswvh07t0" path="res://player/player.tscn" id="2_p6prp"]
 [ext_resource type="PackedScene" uid="uid://nfwtfgygpjt8" path="res://enemies/enemy_walker.tscn" id="3_yor2l"]
 [ext_resource type="PackedScene" uid="uid://dv30hcnyvv1t7" path="res://enemies/enemy_flyer.tscn" id="4_nndgx"]
+[ext_resource type="PackedScene" uid="uid://b4v5ex073a51i" path="res://enemies/enemy_shooter.tscn" id="6_wd8hm"]
 
 [node name="Stage1" type="ColorRect"]
 offset_left = -1.0
@@ -48,6 +49,11 @@ position = Vector2(184, 60)
 
 [node name="EnemyFlyer2" parent="Enemies" instance=ExtResource("4_nndgx")]
 position = Vector2(80, 48)
+
+[node name="EnemyShooter" parent="Enemies" instance=ExtResource("6_wd8hm")]
+position = Vector2(101, 108)
+score = null
+is_dummy = null
 
 [node name="Player" parent="." instance=ExtResource("2_p6prp")]
 position = Vector2(32, 172)

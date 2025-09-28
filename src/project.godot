@@ -25,6 +25,7 @@ Highscores="*res://autoloads/highscores.gd"
 SoundPool="*res://autoloads/sound_pool.gd"
 MusicPlayer="*res://autoloads/music_player.gd"
 Settings="*res://autoloads/settings.gd"
+PlayerUtils="*res://player/player_utils.gd"
 
 [debug]
 
@@ -41,6 +42,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 enemies=""
+player=""
 
 [gui]
 

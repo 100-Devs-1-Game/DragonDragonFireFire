@@ -17,7 +17,7 @@ radius = 4.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
 size = Vector2(12, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 70
 platform_on_leave = 2
 script = ExtResource("1_rkbax")
