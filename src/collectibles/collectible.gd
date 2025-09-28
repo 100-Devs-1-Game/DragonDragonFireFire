@@ -5,6 +5,7 @@ enum Type
 {
 	UNDEFINED,
 	FRUIT,
+	CLOCK,
 }
 
 enum FruitType
@@ -22,8 +23,8 @@ const _ACTIVATION_VELOCITY_Y : float = -50.0
 
 const _BLING_SHADER_SPEED : float = 3.0
 
-const _COLLECTIBLE_LIFETIME : float = 10.0
-const _COLLECTIBLE_LIFETIME_BLINK : float = 1.5
+const _COLLECTIBLE_LIFETIME : float = 9.0
+const _COLLECTIBLE_LIFETIME_BLINK : float = 1.25
 const _COLLECTIBLE_LIFETIME_BLINK_SPEED : float = 20.0
 
 const _FRUIT_SCORES : Dictionary[FruitType, int] = {
@@ -32,6 +33,8 @@ const _FRUIT_SCORES : Dictionary[FruitType, int] = {
 	FruitType.BURGER: 400,
 	FruitType.CAKE: 800,
 }
+
+const _CLOCK_SECONDS_BONUS : int = 5
 
 const _SCORE_INDICATOR_SCENE : PackedScene = preload("res://effects/score_indicator.tscn")
 
@@ -46,6 +49,8 @@ const _FRUIT_TEXTURE_DICT : Dictionary[FruitType, Texture2D] = {
 	FruitType.BURGER: _TEXTURE_BURGER,
 	FruitType.CAKE: _TEXTURE_CAKE,
 }
+
+const _CLOCK_TEXTURE : Texture2D = preload("res://assets/collectibles/clock.png")
 
 var _is_active : bool = false
 var _collectible_type: Type = Type.FRUIT
@@ -112,6 +117,14 @@ func make_fruit() -> void:
 	_activate()
 
 
+func make_clock() -> void:
+	_collectible_type = Type.CLOCK
+	_sprite.texture = _CLOCK_TEXTURE
+	assert(_sprite.texture.get_size() == _COLLECTIBLE_SIZE)
+
+	_activate()
+
+
 func _activate() -> void:
 	_is_active = true
 	visible = true
@@ -145,7 +158,9 @@ func _perform_pickup_logic() -> void:
 	match _collectible_type:
 		Type.FRUIT:
 			_perform_pickup_logic_fruit()
-	
+		Type.CLOCK:
+			_perform_pickup_logic_clock()
+
 	queue_free()
 
 
@@ -159,6 +174,10 @@ func _perform_pickup_logic_fruit() -> void:
 
 	GameState.score += score
 	GameState.food_eaten += 1
+
+
+func _perform_pickup_logic_clock() -> void:
+	GameState.bonus_seconds += _CLOCK_SECONDS_BONUS
 
 
 func _on_collectible_area_body_entered(_body):

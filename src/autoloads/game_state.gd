@@ -16,6 +16,7 @@ var bonus_seconds : int = 0
 var playtime_elapsed : float = 0.0
 var lives : int = Constants.STARTING_LIVES
 var food_eaten : int = 0
+var collectibles_spawned : int = 0
 
 
 func reset_game_state() -> void:
@@ -29,6 +30,7 @@ func reset_game_state() -> void:
 	playtime_elapsed = 0.0
 	lives = Constants.STARTING_LIVES
 	food_eaten = 0
+	collectibles_spawned = 0
 
 
 func is_in_cutscene() -> bool:
