@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://6thasun1l7ps"]
+[gd_scene load_steps=9 format=3 uid="uid://6thasun1l7ps"]
 
 [ext_resource type="Script" uid="uid://bu6eoatch50ty" path="res://game_root/game_root.gd" id="1_lssg5"]
 [ext_resource type="Shader" uid="uid://l216h1rx3xxf" path="res://shaders/crt_shader.gdshader" id="1_ndwrs"]
+[ext_resource type="Shader" uid="uid://cg7a7pytvfhy8" path="res://shaders/no_shader_renderer.gdshader" id="3_6nmxx"]
 [ext_resource type="PackedScene" uid="uid://3j6mbl5516uy" path="res://title_screen/title_screen.tscn" id="3_lssg5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lssg5"]
@@ -11,9 +12,9 @@ viewport_path = NodePath("GameViewport")
 resource_local_to_scene = true
 shader = ExtResource("1_ndwrs")
 shader_parameter/tex = SubResource("ViewportTexture_lssg5")
-shader_parameter/mask_type = 5
-shader_parameter/curve = 0.0730000034675
-shader_parameter/sharpness = 0.8030000143925
+shader_parameter/mask_type = 0
+shader_parameter/curve = 0.0450000021375
+shader_parameter/sharpness = 0.92000001995
 shader_parameter/color_offset = 0.0
 shader_parameter/mask_brightness = 0.94800004503
 shader_parameter/scanline_brightness = 0.974000022515
@@ -21,14 +22,33 @@ shader_parameter/min_scanline_thickness = 0.81800002698
 shader_parameter/aspect = 0.562000002945
 shader_parameter/wobble_strength = 0.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_d5gm5"]
+viewport_path = NodePath("GameViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1k51"]
+resource_local_to_scene = true
+shader = ExtResource("3_6nmxx")
+shader_parameter/viewport_tex = SubResource("ViewportTexture_d5gm5")
+
 [node name="GameRoot" type="Node2D"]
 script = ExtResource("1_lssg5")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="RenderRectShader" type="ColorRect" parent="."]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_6nmxx")
 offset_right = 1920.0
 offset_bottom = 1080.0
 metadata/_edit_use_anchors_ = true
+
+[node name="RenderRectNoShader" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_j1k51")
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -2.0
+offset_right = 1918.0
+offset_bottom = 1080.0
 
 [node name="GameViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true

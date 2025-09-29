@@ -12,17 +12,56 @@ anchors_preset = 0
 offset_right = 320.0
 offset_bottom = 180.0
 script = ExtResource("1_yq3kb")
-initial_focus = NodePath("MasterVolumeButton")
+initial_focus = NodePath("WindowModeButton")
 metadata/_edit_vertical_guides_ = [320.0]
 metadata/_edit_horizontal_guides_ = [180.0]
 
-[node name="MasterVolumeButton" parent="." instance=ExtResource("2_x7una")]
+[node name="WindowModeButton" parent="." instance=ExtResource("2_x7una")]
 layout_mode = 0
 offset_left = 44.0
 offset_top = 100.0
 offset_right = 156.0
 offset_bottom = 108.0
 focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../VSyncButton")
+text = "WINDOW MODE"
+alignment = 2
+
+[node name="VSyncButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 108.0
+offset_right = 156.0
+offset_bottom = 116.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../WindowModeButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../RenderModeButton")
+text = "V-SYNC"
+alignment = 2
+
+[node name="RenderModeButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 116.0
+offset_right = 156.0
+offset_bottom = 124.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../VSyncButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../MasterVolumeButton")
+text = "RENDER MODE"
+alignment = 2
+
+[node name="MasterVolumeButton" parent="." instance=ExtResource("2_x7una")]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 132.0
+offset_right = 156.0
+offset_bottom = 140.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../RenderModeButton")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath("../EffectsVolumeButton")
 text = "MASTER VOLUME"
@@ -31,9 +70,9 @@ alignment = 2
 [node name="EffectsVolumeButton" parent="." instance=ExtResource("2_x7una")]
 layout_mode = 0
 offset_left = 44.0
-offset_top = 112.0
+offset_top = 140.0
 offset_right = 156.0
-offset_bottom = 120.0
+offset_bottom = 148.0
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../MasterVolumeButton")
 focus_neighbor_right = NodePath(".")
@@ -44,9 +83,9 @@ alignment = 2
 [node name="MusicVolumeButton" parent="." instance=ExtResource("2_x7una")]
 layout_mode = 0
 offset_left = 44.0
-offset_top = 124.0
+offset_top = 148.0
 offset_right = 156.0
-offset_bottom = 132.0
+offset_bottom = 156.0
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../EffectsVolumeButton")
 focus_neighbor_right = NodePath(".")
@@ -57,9 +96,9 @@ alignment = 2
 [node name="BackButton" parent="." instance=ExtResource("2_x7una")]
 layout_mode = 0
 offset_left = 144.0
-offset_top = 144.0
+offset_top = 164.0
 offset_right = 248.0
-offset_bottom = 152.0
+offset_bottom = 172.0
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath("../MusicVolumeButton")
 focus_neighbor_right = NodePath(".")
@@ -68,9 +107,9 @@ text = "BACK"
 [node name="MasterVolumeBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 168.0
-offset_top = 100.0
+offset_top = 132.0
 offset_right = 268.0
-offset_bottom = 108.0
+offset_bottom = 140.0
 max_value = 1.0
 step = 0.05
 texture_under = ExtResource("3_6deh6")
@@ -79,9 +118,9 @@ texture_progress = ExtResource("4_k5amu")
 [node name="EffectsVolumeBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 168.0
-offset_top = 112.0
+offset_top = 140.0
 offset_right = 268.0
-offset_bottom = 120.0
+offset_bottom = 148.0
 max_value = 1.0
 step = 0.05
 texture_under = ExtResource("3_6deh6")
@@ -90,14 +129,41 @@ texture_progress = ExtResource("4_k5amu")
 [node name="MusicVolumeBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
 offset_left = 168.0
-offset_top = 124.0
+offset_top = 148.0
 offset_right = 268.0
-offset_bottom = 132.0
+offset_bottom = 156.0
 max_value = 1.0
 step = 0.05
 texture_under = ExtResource("3_6deh6")
 texture_progress = ExtResource("4_k5amu")
 
+[node name="WindowModeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 100.0
+offset_right = 239.0
+offset_bottom = 108.0
+text = "TEXT HERE"
+
+[node name="VSyncLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 108.0
+offset_right = 239.0
+offset_bottom = 116.0
+text = "TEXT HERE"
+
+[node name="RenderModeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 116.0
+offset_right = 239.0
+offset_bottom = 124.0
+text = "TEXT HERE"
+
+[connection signal="focus_entered" from="WindowModeButton" to="." method="_on_window_mode_button_focus_entered"]
+[connection signal="focus_entered" from="VSyncButton" to="." method="_on_v_sync_button_focus_entered"]
+[connection signal="focus_entered" from="RenderModeButton" to="." method="_on_render_mode_button_focus_entered"]
 [connection signal="focus_entered" from="MasterVolumeButton" to="." method="_on_master_volume_button_focus_entered"]
 [connection signal="focus_entered" from="EffectsVolumeButton" to="." method="_on_effects_volume_button_focus_entered"]
 [connection signal="focus_entered" from="MusicVolumeButton" to="." method="_on_music_volume_button_focus_entered"]
