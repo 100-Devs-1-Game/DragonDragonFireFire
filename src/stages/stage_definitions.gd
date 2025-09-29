@@ -1,14 +1,20 @@
 class_name StageDefinitions
 extends Resource
 
-const STAGE_1 : PackedScene = preload("res://stages/stage_1.tscn")
-const STAGE_2 : PackedScene = preload("res://stages/stage_2.tscn")
-const STAGE_3 : PackedScene = preload("res://stages/stage_3.tscn")
-const STAGE_4 : PackedScene = preload("res://stages/stage_4.tscn")
+const HELLO_WALKER : PackedScene = preload("res://stages/hello_walker.tscn")
+const HELLO_FLYER : PackedScene = preload("res://stages/hello_flyer.tscn")
+const THE_TOWER : PackedScene = preload("res://stages/the_tower.tscn")
+const HELLO_SHOOTER : PackedScene = preload("res://stages/hello_shooter.tscn")
+const ALL_TOGETHER : PackedScene = preload("res://stages/all_together.tscn")
+const CRAZY_PLATFORMS : PackedScene = preload("res://stages/crazy_platforms.tscn")
+const SHOOTER_MADNESS : PackedScene = preload("res://stages/shooter_madness.tscn")
 
 const STAGES_DICT : Dictionary[int, PackedScene] = {
-	1: STAGE_1,
-	2: STAGE_2,
-	3: STAGE_3,
-	4: STAGE_4,
+	1: HELLO_WALKER,
+	2: HELLO_FLYER,
+	3: THE_TOWER,
+	4: HELLO_SHOOTER,
+	5: ALL_TOGETHER,
+	6: CRAZY_PLATFORMS,
+	7: SHOOTER_MADNESS,
 }

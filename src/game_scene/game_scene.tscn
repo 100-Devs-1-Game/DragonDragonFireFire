@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bbxryce6ob4pc"]
 
 [ext_resource type="Script" uid="uid://cou2py78batyp" path="res://game_scene/game_scene.gd" id="1_k340r"]
-[ext_resource type="PackedScene" uid="uid://0b8gkxjmmmak" path="res://stages/stage_1.tscn" id="1_n4lbc"]
+[ext_resource type="PackedScene" uid="uid://0b8gkxjmmmak" path="res://stages/hello_walker.tscn" id="1_n4lbc"]
 [ext_resource type="PackedScene" uid="uid://8d30jhpgc64o" path="res://ui/game_ui.tscn" id="2_m1k14"]
 [ext_resource type="Script" uid="uid://bvh2cr587fm7k" path="res://game_scene/time_controller.gd" id="3_3kg8t"]
 [ext_resource type="PackedScene" uid="uid://itqfe8lse353" path="res://player/player_cutscene.tscn" id="3_8l73x"]

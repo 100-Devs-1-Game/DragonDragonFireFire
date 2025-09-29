@@ -16,6 +16,7 @@ size = Vector2(7.8, 8)
 collision_layer = 4
 collision_mask = 70
 script = ExtResource("1_bxpog")
+variant = 1
 
 [node name="Visuals" type="Node2D" parent="."]
 material = ExtResource("2_rd2lr")

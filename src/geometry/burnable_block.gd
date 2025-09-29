@@ -7,8 +7,17 @@ enum State
 	INCINERATING, # Fully burned down.
 }
 
+enum Variant
+{
+	UNDEFINED,
+	EIGHT_PIXELS,
+	SIXTEEN_PIXELS,
+}
+
 const _BURN_DESTROY_TIME : float = 3.0
 const _DEATH_SEQUENCE_TIME : float = 0.17 # To be synched with incinerate shader animation.
+
+@export var variant : Variant = Variant.UNDEFINED
 
 var _cur_state : State = State.DEFAULT
 var _incinerate_time_elapsed : float = 0.0
@@ -65,7 +74,17 @@ func _update_incinerate_visuals() -> void:
 
 
 func _assign_texture() -> void:
-	var selected_texture : Texture2D = GeometryColorDefinitions._BOX_TEXTURE_DICT[GameState.next_color]
+	var selected_texture : Texture2D = null
+	if variant == Variant.UNDEFINED:
+		push_error("BurnableBlock variant is UNDEFINED. Cannot assign texture.")
+		return
+	elif variant == Variant.EIGHT_PIXELS:
+		selected_texture = GeometryColorDefinitions._BOX_8_TEXTURE_DICT[GameState.next_color]
+	elif variant == Variant.SIXTEEN_PIXELS:
+		selected_texture = GeometryColorDefinitions._BOX_16_TEXTURE_DICT[GameState.next_color]
+	else:
+		push_error("BurnableBlock variant is invalid. Cannot assign texture.")
+		return
 	
 	for child in _visuals.get_children():
 		if child is Sprite2D:

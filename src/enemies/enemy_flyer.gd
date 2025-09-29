@@ -9,6 +9,9 @@ enum State
 
 const _SPEED : float = 50.0
 
+@export var starting_direction : Types.Direction = Types.Direction.RIGHT
+@export var starting_vertical_direction : Types.Direction = Types.Direction.DOWN
+
 var _cur_state : State = State.FLYING
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 var _cur_vertical_dir : Types.Direction = Types.Direction.DOWN
@@ -26,6 +29,11 @@ var _burned_previously : bool = false
 func _ready() -> void:
 	super._ready()
 	_burn_visuals.visible = false
+
+	assert(starting_direction == Types.Direction.LEFT or starting_direction == Types.Direction.RIGHT)
+	assert(starting_vertical_direction == Types.Direction.UP or starting_vertical_direction == Types.Direction.DOWN)
+	_cur_dir = starting_direction
+	_cur_vertical_dir = starting_vertical_direction
 
 
 func _process(_delta : float) -> void:
