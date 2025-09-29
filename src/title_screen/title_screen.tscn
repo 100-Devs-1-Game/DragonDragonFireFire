@@ -109,3 +109,10 @@ layout_mode = 0
 [node name="TransitionRect" parent="." instance=ExtResource("4_vbjqi")]
 material = SubResource("ShaderMaterial_fk0fn")
 layout_mode = 0
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 172.0
+offset_right = 320.0
+offset_bottom = 180.0
+horizontal_alignment = 2
