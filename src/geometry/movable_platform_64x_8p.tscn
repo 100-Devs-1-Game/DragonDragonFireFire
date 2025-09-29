@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj4axie3xaeal"]
+
+[ext_resource type="Script" uid="uid://cmvj8ybsxqofs" path="res://geometry/movable_platform.gd" id="1_sxh17"]
+[ext_resource type="Texture2D" uid="uid://bfjptl75hf1dl" path="res://assets/geometry/platform_movable_8_left.png" id="2_26hpy"]
+[ext_resource type="Texture2D" uid="uid://cjhfur22urh0s" path="res://assets/geometry/platform_movable_8_mid.png" id="3_b5n0b"]
+[ext_resource type="Texture2D" uid="uid://cvxseoh57kvx6" path="res://assets/geometry/platform_movable_8_right.png" id="4_4b7ej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esmxb"]
+resource_local_to_scene = true
+size = Vector2(63.8, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epyog"]
+size = Vector2(63.8, 8)
+
+[node name="MovablePlatform64x8P" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 70
+script = ExtResource("1_sxh17")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite0" type="Sprite2D" parent="Visuals"]
+position = Vector2(-24, -4)
+texture = ExtResource("2_26hpy")
+
+[node name="Sprite1" type="Sprite2D" parent="Visuals"]
+position = Vector2(-16, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite2" type="Sprite2D" parent="Visuals"]
+position = Vector2(-8, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite3" type="Sprite2D" parent="Visuals"]
+position = Vector2(0, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite4" type="Sprite2D" parent="Visuals"]
+position = Vector2(8, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite5" type="Sprite2D" parent="Visuals"]
+position = Vector2(16, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite6" type="Sprite2D" parent="Visuals"]
+position = Vector2(24, -4)
+texture = ExtResource("3_b5n0b")
+
+[node name="Sprite7" type="Sprite2D" parent="Visuals"]
+position = Vector2(32, -4)
+texture = ExtResource("4_4b7ej")
+
+[node name="GroundShapeCast" type="ShapeCast2D" parent="."]
+position = Vector2(4.0000005, 0)
+shape = SubResource("RectangleShape2D_esmxb")
+target_position = Vector2(0, 0)
+collision_mask = 70
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_epyog")

@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3dqkr1rni2ml"]
+
+[ext_resource type="Script" uid="uid://c2pujn51tm6uu" path="res://geometry/burnable_block.gd" id="1_8bh4v"]
+[ext_resource type="Material" uid="uid://dyx1yhurrujxn" path="res://shaders/shader_material_incinerate.tres" id="2_8swmc"]
+[ext_resource type="Texture2D" uid="uid://dklv7gu4p7our" path="res://assets/geometry/burnable_block_16_red.png" id="3_8bh4v"]
+[ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="4_vxp3f"]
+[ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="5_4dpiy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvq3l"]
+size = Vector2(15.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlsna"]
+size = Vector2(15.8, 16)
+
+[node name="BurnableBlock16P" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 70
+script = ExtResource("1_8bh4v")
+variant = 2
+
+[node name="Visuals" type="Node2D" parent="."]
+material = ExtResource("2_8swmc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+use_parent_material = true
+position = Vector2(4, -8)
+texture = ExtResource("3_8bh4v")
+
+[node name="BurnVisuals" type="Node2D" parent="Visuals"]
+
+[node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(0, -12)
+sprite_frames = ExtResource("4_vxp3f")
+autoplay = "default"
+
+[node name="BurnSprite2" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(7, -11)
+sprite_frames = ExtResource("4_vxp3f")
+autoplay = "default"
+
+[node name="BurnSprite3" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(8, -4)
+sprite_frames = ExtResource("4_vxp3f")
+autoplay = "default"
+
+[node name="BurnSprite4" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(2, -5)
+sprite_frames = ExtResource("4_vxp3f")
+autoplay = "default"
+
+[node name="BurnComponent" parent="." instance=ExtResource("5_4dpiy")]
+position = Vector2(4, -8)
+_ignition_range = 10.0
+_catch_fire_range = 8.0
+_catch_burn_time = 1.0
+
+[node name="GroundShapeCast" type="ShapeCast2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_lvq3l")
+target_position = Vector2(0, 0)
+collision_mask = 70
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -8)
+shape = SubResource("RectangleShape2D_tlsna")

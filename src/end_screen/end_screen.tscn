@@ -10,53 +10,20 @@
 [ext_resource type="PackedScene" uid="uid://nfwtfgygpjt8" path="res://enemies/enemy_walker.tscn" id="3_p1ayw"]
 [ext_resource type="Texture2D" uid="uid://kmw657lomrwm" path="res://assets/ui/initials_border.png" id="3_q7ipi"]
 [ext_resource type="Texture2D" uid="uid://bbc0m5jv1gkf4" path="res://assets/ui/arrow_up.png" id="4_1odwr"]
+[ext_resource type="Shader" uid="uid://ng8jsrw7vop2" path="res://shaders/fire_gradient.gdshader" id="5_64gd1"]
 [ext_resource type="Texture2D" uid="uid://ccbd37lt20el1" path="res://assets/ui/arrow_down.png" id="5_i5gnp"]
 [ext_resource type="Script" uid="uid://bvjycsd0dsjwb" path="res://end_screen/ok_label.gd" id="7_fjggk"]
 [ext_resource type="PackedScene" uid="uid://bdsvt4f48syfr" path="res://player/player_actor.tscn" id="13_7o74m"]
 
-[sub_resource type="Shader" id="Shader_7o74m"]
-resource_local_to_scene = true
-code = "shader_type canvas_item;
-
-uniform float clear_progress : hint_range(0.0, 1.0) = 0.0; // 0 -> 1 where 1 is fully cleared.
-
-void fragment()
-{
-    vec4 tex_color = texture(TEXTURE, UV);
-
-	// Figure out which pixel we are in the texture (integer coords) and if they are odd/even.
-    ivec2 px = ivec2(floor(UV / TEXTURE_PIXEL_SIZE));
-    int x_odd = px.x & 1;
-    int y_odd = px.y & 1;
-    
-    float sweepA = (UV.x + UV.y) * 0.5;
-	float sweepB = (UV.x + (1.0 - UV.y)) * 0.5;
-	float sweepC = ((1.0 - UV.x) + UV.y) * 0.5;
-	float sweepD = ((1.0 - UV.x) + (1.0 - UV.y)) * 0.5;
-
-	float sweep = sweepA;
-    if (x_odd == 1 && y_odd == 1) {
-        sweep = sweepB;
-    } else if (x_odd == 1 && y_odd == 0) {
-        sweep = sweepC;
-    } else if (x_odd == 0 && y_odd == 1) {
-        sweep = sweepD;
-    }
-    
-    if (sweep <= clear_progress) {
-        // Cleared pixel → make transparent
-        COLOR = vec4(tex_color.rgb, 0.0);
-    } else {
-        // Black with full alpha.
-        COLOR = vec4(0.0, 0.0, 0.0, 1.0);
-    }
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fwhm7"]
-resource_local_to_scene = true
-shader = SubResource("Shader_7o74m")
-shader_parameter/clear_progress = 1.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcgll"]
+shader = ExtResource("5_64gd1")
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/speed = 0.5000001187500001
+shader_parameter/scale = 2.00000009174012
+shader_parameter/fire1 = Color(0.55, 0, 0, 1)
+shader_parameter/fire2 = Color(0.8, 0.2, 0, 1)
+shader_parameter/fire3 = Color(1, 0.55, 0, 1)
+shader_parameter/fire4 = Color(1, 0.8, 0.2, 1)
 
 [node name="EndScreen" type="Control"]
 custom_minimum_size = Vector2(320, 180)
@@ -94,6 +61,7 @@ is_dummy = true
 position = Vector2(-40, 172)
 
 [node name="GameOverLabel" type="Label" parent="."]
+material = SubResource("ShaderMaterial_xcgll")
 layout_mode = 0
 offset_top = 12.0
 offset_right = 320.0
@@ -103,6 +71,7 @@ text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="GameOverLabel"]
+use_parent_material = true
 position = Vector2(84, -4)
 texture = ExtResource("1_72q5w")
 centered = false
@@ -143,6 +112,7 @@ offset_left = 24.0
 offset_top = 56.0
 offset_right = 296.0
 offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "CONGRATULATIONS!"
 horizontal_alignment = 1
 
@@ -152,6 +122,7 @@ offset_left = 24.0
 offset_top = 72.0
 offset_right = 296.0
 offset_bottom = 80.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "YOU'VE MADE IT TO THE LEADERBOARD."
 
 [node name="CongratulationsLabel3" type="Label" parent="NewHighscoreScreen"]
@@ -160,6 +131,7 @@ offset_left = 24.0
 offset_top = 84.0
 offset_right = 296.0
 offset_bottom = 92.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "ENTER YOUR INITIALS:"
 
 [node name="Initial0" type="Label" parent="NewHighscoreScreen"]
@@ -325,6 +297,7 @@ offset_left = 80.0
 offset_top = -52.0
 offset_right = 200.0
 offset_bottom = -44.0
+theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "STAGES CLEARED"
 
 [node name="StagesCleared" type="Label" parent="StatisticsScreen/StatisticsSection"]
@@ -334,6 +307,7 @@ offset_left = 128.0
 offset_top = -52.0
 offset_right = 240.0
 offset_bottom = -44.0
+theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "12"
 horizontal_alignment = 2
 
@@ -343,6 +317,7 @@ offset_left = 80.0
 offset_top = -40.0
 offset_right = 200.0
 offset_bottom = -32.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "PLAY TIME"
 
 [node name="Playtime" type="Label" parent="StatisticsScreen/StatisticsSection"]
@@ -352,6 +327,7 @@ offset_left = 128.0
 offset_top = -40.0
 offset_right = 240.0
 offset_bottom = -32.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "01:45"
 horizontal_alignment = 2
 
@@ -361,6 +337,7 @@ offset_left = 80.0
 offset_top = -28.0
 offset_right = 192.0
 offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "FOOD EATEN"
 
 [node name="FoodEaten" type="Label" parent="StatisticsScreen/StatisticsSection"]
@@ -370,6 +347,7 @@ offset_left = 128.0
 offset_top = -28.0
 offset_right = 240.0
 offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "132"
 horizontal_alignment = 2
 
@@ -396,6 +374,7 @@ offset_left = 8.0
 offset_top = 24.0
 offset_right = 48.0
 offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "1ST"
 horizontal_alignment = 2
 
@@ -405,6 +384,7 @@ offset_left = 20.0
 offset_top = 24.0
 offset_right = 112.0
 offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "9999999"
 horizontal_alignment = 2
 
@@ -414,6 +394,7 @@ offset_left = 120.0
 offset_top = 24.0
 offset_right = 212.0
 offset_bottom = 32.0
+theme_override_colors/font_color = Color(1, 0.5019608, 0.6431373, 1)
 text = "ZPX"
 
 [node name="Highscore2Label" type="Label" parent="StatisticsScreen/HighscoresSection"]
@@ -422,6 +403,7 @@ offset_left = 8.0
 offset_top = 36.0
 offset_right = 48.0
 offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "2ND"
 horizontal_alignment = 2
 
@@ -431,6 +413,7 @@ offset_left = 20.0
 offset_top = 36.0
 offset_right = 112.0
 offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "99999"
 horizontal_alignment = 2
 
@@ -440,6 +423,7 @@ offset_left = 120.0
 offset_top = 36.0
 offset_right = 212.0
 offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.14901961, 0.45490196, 1)
 text = "ZPX"
 
 [node name="Highscore3Label" type="Label" parent="StatisticsScreen/HighscoresSection"]
@@ -448,6 +432,7 @@ offset_left = 8.0
 offset_top = 48.0
 offset_right = 48.0
 offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "3RD"
 horizontal_alignment = 2
 
@@ -457,6 +442,7 @@ offset_left = 20.0
 offset_top = 48.0
 offset_right = 112.0
 offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "9999"
 horizontal_alignment = 2
 
@@ -466,8 +452,8 @@ offset_left = 120.0
 offset_top = 48.0
 offset_right = 212.0
 offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "ZPX"
 
 [node name="TransitionRect" parent="." instance=ExtResource("3_mkgft")]
-material = SubResource("ShaderMaterial_fwhm7")
 layout_mode = 0

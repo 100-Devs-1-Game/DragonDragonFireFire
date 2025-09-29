@@ -30,6 +30,8 @@ var _leave_screen_action : LeaveScreenAction = LeaveScreenAction.START_GAME
 @onready var _menu_screen_settings_menu : MenuScreenSettingsMenu = $MenuScreenContainer/MenuScreenSettingsMenu
 @onready var _menu_screen_credits_screen : MenuScreenCreditsScreen = $MenuScreenContainer/MenuScreenCreditsScreen
 
+@onready var _version_label : Label = $VersionLabel
+
 @onready var _title_graphic_control : Control = $TitleGraphicControl
 
 
@@ -55,6 +57,9 @@ func _ready() -> void:
 	_transition_rect.material.set_shader_parameter("clear_progress", 0.0)
 
 	MusicPlayer.play_track(MusicPlayer.TRACK_TITLE)
+
+	_version_label.modulate.a = 0.5
+	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
 
 
 func _process(delta : float) -> void:
