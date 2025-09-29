@@ -32,18 +32,17 @@ func _update_shader_settings() -> void:
 	_render_rect_no_shader.visible = false
 	match Settings.render_mode:
 		Settings.RenderMode.CRT_SHADER_TYPE1:
-			_render_rect_shader.material.set_shader_parameter("mask_type", 3)
-			_render_rect_shader.material.set_shader_parameter("curve", 0.091)
-			_render_rect_shader.material.set_shader_parameter("sharpness", 0.714)
-
+			_render_rect_shader.material.set_shader_parameter("mask_type", 5)
+			_render_rect_shader.material.set_shader_parameter("curve", 0.073)
+			_render_rect_shader.material.set_shader_parameter("sharpness", 0.803)
 		Settings.RenderMode.CRT_SHADER_TYPE2:
 			_render_rect_shader.material.set_shader_parameter("mask_type", 0)
 			_render_rect_shader.material.set_shader_parameter("curve", 0.045)
 			_render_rect_shader.material.set_shader_parameter("sharpness", 0.814)
 		Settings.RenderMode.CRT_SHADER_TYPE3:
-			_render_rect_shader.material.set_shader_parameter("mask_type", 5)
-			_render_rect_shader.material.set_shader_parameter("curve", 0.073)
-			_render_rect_shader.material.set_shader_parameter("sharpness", 0.803)
+			_render_rect_shader.material.set_shader_parameter("mask_type", 3)
+			_render_rect_shader.material.set_shader_parameter("curve", 0.091)
+			_render_rect_shader.material.set_shader_parameter("sharpness", 0.714)
 		_:
 			push_error("Invalid render mode: " + str(Settings.render_mode))
 

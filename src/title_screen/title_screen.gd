@@ -15,6 +15,7 @@ enum LeaveScreenAction
 }
 
 const _MUSIC_FADEOUT_TIME : float = 2.0
+const _PLAY_MUSIC_DELAY : float = 0.1 # Short delay to ensure music starts after volume settings are applied.
 
 
 var _cur_transition_state : TransitionState = TransitionState.TRANSITION_IN
@@ -56,7 +57,7 @@ func _ready() -> void:
 	assert(_transition_rect.material)
 	_transition_rect.material.set_shader_parameter("clear_progress", 0.0)
 
-	MusicPlayer.play_track(MusicPlayer.TRACK_TITLE)
+	_queue_title_music()
 
 	_version_label.modulate.a = 0.5
 	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
@@ -133,6 +134,11 @@ func _process_transition_out(delta : float) -> void:
 			Signals.scene_change_triggered.emit(SceneDefinitions.Scenes.GAME_SCENE)
 		elif _leave_screen_action == LeaveScreenAction.EXIT_GAME:
 			get_tree().quit()
+
+
+func _queue_title_music() -> void:
+	await get_tree().create_timer(_PLAY_MUSIC_DELAY).timeout
+	MusicPlayer.play_track(MusicPlayer.TRACK_TITLE)
 
 
 func _on_menu_screen_requested(new_screen : MenuScreenDefinitions.MenuScreen) -> void:
