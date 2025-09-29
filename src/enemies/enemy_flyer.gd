@@ -34,6 +34,7 @@ func _ready() -> void:
 	assert(starting_vertical_direction == Types.Direction.UP or starting_vertical_direction == Types.Direction.DOWN)
 	_cur_dir = starting_direction
 	_cur_vertical_dir = starting_vertical_direction
+	_handle_animation() # Update initial animation.
 
 
 func _process(_delta : float) -> void:
@@ -101,11 +102,11 @@ func _check_if_flees_from_burning() -> void:
 
 
 func _handle_animation() -> void:
+	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
+
 	if GameState.is_halted():
 		_sprite.pause()
 		return
-
-	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
 
 	_sprite.speed_scale = 1.0 if not _burn_component.is_burning() else _BURNING_MODIFIER
 	match _cur_state:
