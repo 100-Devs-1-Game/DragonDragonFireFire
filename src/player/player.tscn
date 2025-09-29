@@ -49,7 +49,7 @@ debug_color = Color(0.96020204, 0, 0.52006775, 0.41960785)
 [node name="EnemyDetectionHitbox" type="Area2D" parent="."]
 position = Vector2(0, -7)
 collision_layer = 0
-collision_mask = 16
+collision_mask = 144
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionHitbox"]
 shape = SubResource("CircleShape2D_g1dw6")

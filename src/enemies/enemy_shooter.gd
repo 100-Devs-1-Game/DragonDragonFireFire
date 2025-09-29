@@ -11,14 +11,20 @@ enum State
 	DYING,
 }
 
+const _PROJECTILE_SCENE : PackedScene = preload("res://projectiles/shooter_projectile.tscn")
+
 const _RUN_SPEED : float = 30.0
 const _DROP_FACTOR : float = 2.0
+const _SHOOT_CADENCE : float = 1.5
+const _PROJECTILE_OFFSET : Vector2 = Vector2(8.0, -4.0)
 
 var _cur_state : State = State.STANDING
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
 var _fall_begin_time : float = 0.0
 var _drop_time : float = 0.0
+var _shoot_timer : float = 0.0
+var _time_since_last_shot : float = _SHOOT_CADENCE + 0.01
 
 var _burned_previously : bool = false
 
@@ -78,7 +84,13 @@ func _physics_process(delta : float) -> void:
 				velocity = Vector2(0, 0)
 				move_and_slide()
 
-				# TODO: Shooting
+				_shoot_timer += delta
+				_time_since_last_shot += delta
+				if _shoot_timer >= _SHOOT_CADENCE:
+					_time_since_last_shot = 0.0
+					_shoot_timer = 0.0
+					_handle_shot()
+
 
 		State.RUNNING:
 			assert(_burn_component.is_burning())
@@ -124,6 +136,7 @@ func _physics_process(delta : float) -> void:
 						_cur_state = State.RUNNING
 					else:
 						_cur_state = State.STANDING
+						_shoot_timer = 0.0
 		
 		State.DYING:
 			velocity = Vector2(0, 0)
@@ -131,6 +144,23 @@ func _physics_process(delta : float) -> void:
 			_update_death_visuals()
 			if _death_time_elapsed >= _DEATH_SEQUENCE_TIME:
 				die()
+
+
+func _handle_shot() -> void:
+	var player_pos : PlayerUtils.PlayerPos = PlayerUtils.get_player_global_position()
+	if not player_pos.valid:
+		return
+
+	var projectile : ShooterProjectile = _PROJECTILE_SCENE.instantiate() as ShooterProjectile
+	get_parent().add_child(projectile)
+
+	var proj_offs_right : Vector2 = _PROJECTILE_OFFSET
+	var proj_offs_left : Vector2 = Vector2(-_PROJECTILE_OFFSET.x, _PROJECTILE_OFFSET.y)
+	var proj_offs : Vector2 = proj_offs_right if _cur_dir == Types.Direction.RIGHT else proj_offs_left
+	projectile.global_position = global_position + proj_offs
+
+	var motion_vec : Vector2 = (player_pos.value - global_position).normalized()
+	projectile.set_motion_vector(motion_vec)
 
 
 func _look_at_player() -> void:
@@ -160,7 +190,10 @@ func _handle_animation() -> void:
 
 	match _cur_state:
 		State.STANDING:
-			_sprite.play("standing")
+			if _time_since_last_shot < 0.2:
+				_sprite.play("shooting")
+			else:
+				_sprite.play("standing")
 		State.RUNNING:
 			_sprite.play("running")
 		State.FALL_BEGIN:
