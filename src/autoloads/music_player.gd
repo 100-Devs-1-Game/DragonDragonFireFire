@@ -32,6 +32,7 @@ func stop_track(duration : float = 0.0) -> void:
 func play_track(track : AudioStream) -> void:
 	# Stop potentially playing track immediately.
 	_players[_curr_idx].stop()
+	_players[_curr_idx].volume_db = 0.0 # Reset volume.
 
 	# Start the new track.
 	_players[_curr_idx].stream = track
