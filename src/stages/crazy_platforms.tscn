@@ -61,6 +61,7 @@ starting_direction = 0
 
 [node name="EnemyShooter" parent="Enemies" instance=ExtResource("6_8hsb3")]
 position = Vector2(257, 68)
+starting_direction = 0
 
 [node name="Player" parent="." instance=ExtResource("5_6osud")]
 position = Vector2(93, 164)

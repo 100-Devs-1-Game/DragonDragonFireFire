@@ -40,12 +40,15 @@ position = Vector2(64, 140)
 
 [node name="EnemyShooter4" parent="Enemies" instance=ExtResource("4_xtomf")]
 position = Vector2(256, 140)
+starting_direction = 0
 
 [node name="EnemyShooter5" parent="Enemies" instance=ExtResource("4_xtomf")]
 position = Vector2(280, 108)
+starting_direction = 0
 
 [node name="EnemyShooter6" parent="Enemies" instance=ExtResource("4_xtomf")]
 position = Vector2(304, 76)
+starting_direction = 0
 
 [node name="EnemyWalker" parent="Enemies" instance=ExtResource("4_4740q")]
 position = Vector2(88, 68)

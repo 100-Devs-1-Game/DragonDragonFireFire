@@ -18,6 +18,8 @@ const _DROP_FACTOR : float = 2.0
 const _SHOOT_CADENCE : float = 1.5
 const _PROJECTILE_OFFSET : Vector2 = Vector2(8.0, -4.0)
 
+@export var starting_direction : Types.Direction = Types.Direction.RIGHT
+
 var _cur_state : State = State.STANDING
 var _cur_dir : Types.Direction = Types.Direction.RIGHT
 
@@ -40,6 +42,8 @@ var _burned_previously : bool = false
 func _ready() -> void:
 	super._ready()
 	_burn_visuals.visible = false
+
+	_cur_dir = starting_direction
 
 
 func _process(_delta : float) -> void:
@@ -104,6 +108,10 @@ func _physics_process(delta : float) -> void:
 				
 				velocity.y = 0
 				move_and_slide()
+
+				# Turn around at walls.
+				if is_on_wall():
+					_cur_dir = Types.Direction.LEFT if _cur_dir == Types.Direction.RIGHT else Types.Direction.RIGHT
 		
 		State.FALL_BEGIN:
 			_fall_begin_time += delta

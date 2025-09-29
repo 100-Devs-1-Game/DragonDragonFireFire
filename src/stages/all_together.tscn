@@ -73,6 +73,7 @@ is_dummy = null
 
 [node name="EnemyShooter" parent="Enemies" instance=ExtResource("6_7mwdv")]
 position = Vector2(280, 60)
+starting_direction = 0
 
 [node name="Player" parent="." instance=ExtResource("7_ehw73")]
 position = Vector2(28, 172)
