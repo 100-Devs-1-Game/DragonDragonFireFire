@@ -44,6 +44,7 @@ func _ready() -> void:
 	_burn_visuals.visible = false
 
 	_cur_dir = starting_direction
+	_handle_animation() # Update initial animation.
 
 
 func _process(_delta : float) -> void:
@@ -190,11 +191,11 @@ func _check_if_flees_from_burning() -> void:
 
 
 func _handle_animation() -> void:
+	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
+	
 	if GameState.is_halted():
 		_sprite.pause()
 		return
-	
-	_visuals.scale.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
 
 	match _cur_state:
 		State.STANDING:

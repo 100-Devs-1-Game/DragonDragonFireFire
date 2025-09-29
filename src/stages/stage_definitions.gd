@@ -8,6 +8,7 @@ const HELLO_SHOOTER : PackedScene = preload("res://stages/hello_shooter.tscn")
 const ALL_TOGETHER : PackedScene = preload("res://stages/all_together.tscn")
 const CRAZY_PLATFORMS : PackedScene = preload("res://stages/crazy_platforms.tscn")
 const SHOOTER_MADNESS : PackedScene = preload("res://stages/shooter_madness.tscn")
+const CRAZY_HOLES : PackedScene = preload("res://stages/crazy_holes.tscn")
 
 const STAGES_DICT : Dictionary[int, PackedScene] = {
 	1: HELLO_WALKER,
@@ -17,4 +18,5 @@ const STAGES_DICT : Dictionary[int, PackedScene] = {
 	5: ALL_TOGETHER,
 	6: CRAZY_PLATFORMS,
 	7: SHOOTER_MADNESS,
+	8: CRAZY_HOLES
 }
