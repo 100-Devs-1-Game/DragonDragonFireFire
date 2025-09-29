@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://btb3ktgnrdtit"]
+[gd_scene load_steps=18 format=4 uid="uid://btb3ktgnrdtit"]
 
 [ext_resource type="Texture2D" uid="uid://x81840evf2gg" path="res://assets/ui/game_over_border.png" id="1_72q5w"]
 [ext_resource type="Script" uid="uid://d2quw7csckdsd" path="res://end_screen/end_screen.gd" id="1_hmshp"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ccbd37lt20el1" path="res://assets/ui/arrow_down.png" id="5_i5gnp"]
 [ext_resource type="Script" uid="uid://bvjycsd0dsjwb" path="res://end_screen/ok_label.gd" id="7_fjggk"]
 [ext_resource type="PackedScene" uid="uid://bdsvt4f48syfr" path="res://player/player_actor.tscn" id="13_7o74m"]
+[ext_resource type="Shader" uid="uid://r4tl5h1pumgl" path="res://shaders/transition_shader.gdshader" id="15_xcgll"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xcgll"]
 shader = ExtResource("5_64gd1")
@@ -24,6 +25,11 @@ shader_parameter/fire1 = Color(0.55, 0, 0, 1)
 shader_parameter/fire2 = Color(0.8, 0.2, 0, 1)
 shader_parameter/fire3 = Color(1, 0.55, 0, 1)
 shader_parameter/fire4 = Color(1, 0.8, 0.2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dggce"]
+resource_local_to_scene = true
+shader = ExtResource("15_xcgll")
+shader_parameter/clear_progress = 1.0
 
 [node name="EndScreen" type="Control"]
 custom_minimum_size = Vector2(320, 180)
@@ -456,4 +462,5 @@ theme_override_colors/font_color = Color(0.5803922, 0.12941177, 0.41568628, 1)
 text = "ZPX"
 
 [node name="TransitionRect" parent="." instance=ExtResource("3_mkgft")]
+material = SubResource("ShaderMaterial_dggce")
 layout_mode = 0
