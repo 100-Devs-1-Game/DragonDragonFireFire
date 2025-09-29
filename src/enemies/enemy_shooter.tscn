@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4v5ex073a51i"]
+
+[ext_resource type="Script" uid="uid://ljml7a663sxd" path="res://enemies/enemy_shooter.gd" id="1_qxdd0"]
+[ext_resource type="Material" uid="uid://dyx1yhurrujxn" path="res://shaders/shader_material_incinerate.tres" id="2_lbsqm"]
+[ext_resource type="SpriteFrames" uid="uid://bvscoedqbrwd2" path="res://enemies/enemy_shooter_sprite_frames.tres" id="3_qxdd0"]
+[ext_resource type="SpriteFrames" uid="uid://xocdsmqp0n7g" path="res://burn/burn_sprite_frames_8p.tres" id="4_cbff4"]
+[ext_resource type="PackedScene" uid="uid://c0gcyjv75u0ib" path="res://burn/burn_component.tscn" id="5_6ci1x"]
+[ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="6_6m5pa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjv7w"]
+size = Vector2(12, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxbco"]
+size = Vector2(10, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vya6k"]
+size = Vector2(12.2, 1)
+
+[node name="EnemyShooter" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 16
+collision_mask = 70
+script = ExtResource("1_qxdd0")
+score = 500
+
+[node name="Visuals" type="Node2D" parent="."]
+material = ExtResource("2_lbsqm")
+position = Vector2(0, -7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+use_parent_material = true
+position = Vector2(0, -1)
+sprite_frames = ExtResource("3_qxdd0")
+animation = &"standing"
+
+[node name="BurnVisuals" type="Node2D" parent="Visuals"]
+use_parent_material = true
+position = Vector2(0, 7)
+
+[node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(-2, -5)
+sprite_frames = ExtResource("4_cbff4")
+autoplay = "default"
+
+[node name="BurnSprite2" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
+use_parent_material = true
+position = Vector2(4, -10)
+sprite_frames = ExtResource("4_cbff4")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_kjv7w")
+
+[node name="BurnComponent" parent="." instance=ExtResource("5_6ci1x")]
+position = Vector2(0, -8)
+_ignition_range = 10.0
+_force_immediate = true
+_catch_fire_range = 8.0
+
+[node name="HeadCheckComponent" parent="." instance=ExtResource("6_6m5pa")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_bxbco")
+debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)
+
+[node name="GroundShapeCast" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_vya6k")
+target_position = Vector2(0, 0)
+collision_mask = 70

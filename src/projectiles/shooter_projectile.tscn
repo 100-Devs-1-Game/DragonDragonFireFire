@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dejjw4jyrd7op"]
+
+[ext_resource type="Script" uid="uid://b2q3p1mt22167" path="res://projectiles/shooter_projectile.gd" id="1_kylyq"]
+[ext_resource type="SpriteFrames" uid="uid://nkcr4gfqo5rn" path="res://projectiles/shooter_projectile_sprite_frames.tres" id="2_y6r7u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4il3"]
+radius = 3.0
+
+[node name="ShooterProjectile" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_kylyq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_y6r7u")
+autoplay = "default"
+frame_progress = 0.33027637
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k4il3")

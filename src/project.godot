@@ -25,6 +25,7 @@ Highscores="*res://autoloads/highscores.gd"
 SoundPool="*res://autoloads/sound_pool.gd"
 MusicPlayer="*res://autoloads/music_player.gd"
 Settings="*res://autoloads/settings.gd"
+PlayerUtils="*res://player/player_utils.gd"
 
 [debug]
 
@@ -41,6 +42,7 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 enemies=""
+player=""
 
 [gui]
 
@@ -160,6 +162,7 @@ menu={
 2d_physics/layer_5="Enemies"
 2d_physics/layer_6="Collectibles"
 2d_physics/layer_7="StaticGeometryOneway"
+2d_physics/layer_8="EnemyProjectiles"
 
 [physics]
 

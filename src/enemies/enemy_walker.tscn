@@ -53,19 +53,16 @@ sprite_frames = ExtResource("2_cygq1")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_kjv7w")
 
 [node name="BurnComponent" parent="." instance=ExtResource("1_u0qym")]
-visible = false
 position = Vector2(0, -8)
 _ignition_range = 10.0
 _force_immediate = true
 _catch_fire_range = 8.0
 
 [node name="HeadCheckComponent" parent="." instance=ExtResource("4_bxbco")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
 position = Vector2(0, -13)
@@ -73,20 +70,17 @@ shape = SubResource("RectangleShape2D_bxbco")
 debug_color = Color(0.9607843, 0, 0.52156866, 0.41960785)
 
 [node name="GroundShapeCast" type="ShapeCast2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_vya6k")
 target_position = Vector2(0, 0)
 collision_mask = 70
 
 [node name="EdgeShapeCastLeft" type="ShapeCast2D" parent="."]
-visible = false
 position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_j7cfi")
 target_position = Vector2(0, 0)
 collision_mask = 70
 
 [node name="EdgeShapeCastRight" type="ShapeCast2D" parent="."]
-visible = false
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_j7cfi")
 target_position = Vector2(0, 0)

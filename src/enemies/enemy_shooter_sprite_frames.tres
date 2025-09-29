@@ -1,0 +1,61 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bvscoedqbrwd2"]
+
+[ext_resource type="Texture2D" uid="uid://ds27rglkyq2rr" path="res://assets/enemies/shooter.png" id="1_sedq4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0o35"]
+atlas = ExtResource("1_sedq4")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvxs3"]
+atlas = ExtResource("1_sedq4")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf1fp"]
+atlas = ExtResource("1_sedq4")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dp23"]
+atlas = ExtResource("1_sedq4")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwget"]
+atlas = ExtResource("1_sedq4")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0o35")
+}],
+"loop": false,
+"name": &"falling",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvxs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf1fp")
+}],
+"loop": false,
+"name": &"running",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dp23")
+}],
+"loop": false,
+"name": &"shooting",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwget")
+}],
+"loop": false,
+"name": &"standing",
+"speed": 1.0
+}]
