@@ -22,14 +22,19 @@ const _MIN_TIME_TO_NEXT_SPAWN : float = 4.0
 const _MAX_TIME_TO_NEXT_SPAWN : float = 8.0
 
 var _time_to_next_spawn : float = 0.0
+var _stop_spawning : bool = false
 
 
 func _ready() -> void:
+	Signals.transition_to_next_stage_started.connect(_on_transition_to_next_stage_started)
 	_set_time_to_next_spawn()
 
 
 func _process(delta: float) -> void:
 	if GameState.is_halted():
+		return
+	
+	if _stop_spawning:
 		return
 	
 	_time_to_next_spawn -= delta
@@ -101,3 +106,8 @@ func _create_collectible(collectible: Collectible) -> void:
 		collectible.make_fruit()
 
 	GameState.collectibles_spawned += 1
+
+
+func _on_transition_to_next_stage_started() -> void:
+	# No longer spawn new collectibles once transitioning to next stage, it's frustrating.
+	_stop_spawning = true

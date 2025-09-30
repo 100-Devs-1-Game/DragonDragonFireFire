@@ -13,7 +13,7 @@ enum State
 const _PLAYER_SCENE : PackedScene = preload("res://player/player.tscn")
 
 # Grace time to not have a sudden transition immediately after last enemy is defeated.
-const _TRANSITION_ENTERING_TIME : float = 2.0
+const _TRANSITION_ENTERING_TIME : float = 2.5
 
 var _transition_entering_time_elapsed : float = 0.0
 
@@ -64,6 +64,7 @@ func _process(delta : float) -> void:
 				GameState.paused = not GameState.paused
 
 			if _enemy_controller.get_enemy_count() == 0:
+				Signals.transition_to_next_stage_started.emit()
 				_transition_entering_time_elapsed = 0.0
 				_cur_state = State.TRANSITION_ENTERING
 
