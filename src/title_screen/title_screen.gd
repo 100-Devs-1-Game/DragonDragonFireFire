@@ -60,7 +60,7 @@ func _ready() -> void:
 	_queue_title_music()
 
 	_version_label.modulate.a = 0.5
-	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
+	_version_label.text = _get_game_version()
 
 
 func _process(delta : float) -> void:
@@ -164,3 +164,12 @@ func _deactivate_all_menu_screens() -> void:
 	_menu_screen_main_menu.deactivate()
 	_menu_screen_settings_menu.deactivate()
 	_menu_screen_credits_screen.deactivate()
+
+
+func _get_game_version() -> String:
+	var file_path = "res://version.txt"
+	if FileAccess.file_exists(file_path):
+		var file = FileAccess.open(file_path, FileAccess.READ)
+		return "%s" % file.get_as_text().strip_edges()
+	return "v%s" % ProjectSettings.get_setting("application/config/version")
+	
