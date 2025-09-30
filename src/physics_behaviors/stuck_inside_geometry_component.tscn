@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dosfp58oaoyid"]
+
+[ext_resource type="Script" uid="uid://cmqemm1y5ipq0" path="res://physics_behaviors/stuck_inside_geometry_component.gd" id="1_1qumh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg3qi"]
+size = Vector2(4, 4)
+
+[node name="StuckInsideGeometryComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_1qumh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jg3qi")
+debug_color = Color(0.95686275, 0, 0, 0.5803922)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

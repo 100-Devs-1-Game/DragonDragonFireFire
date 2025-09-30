@@ -1,6 +1,11 @@
 class_name BurnComponent
 extends Node2D
 
+# Sometimes, due to frame timing, a burnable component (in particular enemies) might get incinerated immediately when
+# in vicinity of another burning component like a box. I'm not exactly sure what that happens. To prevent it, we add
+# a miniscule grace time. A component can only get incinerated after this time has passed since it started burning.
+const _INCINERATION_GRACE_TIME : float = 0.03
+
 var _is_burning : bool = false
 var _is_incinerated : bool = false
 var _burn_time : float = 0.0
@@ -84,7 +89,7 @@ func _on_fire_emitted(burn_parameters : BurnParameters) -> void:
 		return
 	
 	# Already burning target hit by fire ball?
-	if _is_burning and burn_parameters.is_player_induced:
+	if _is_burning and burn_parameters.is_player_induced and _burn_time >= _INCINERATION_GRACE_TIME:
 		_is_incinerated = true
 		return
 

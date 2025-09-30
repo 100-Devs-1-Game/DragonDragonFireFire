@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://s471kpgknaxv"]
+[gd_scene load_steps=10 format=3 uid="uid://s471kpgknaxv"]
 
 [ext_resource type="Script" uid="uid://8lx35134fwif" path="res://collectibles/collectible.gd" id="1_mctxo"]
 [ext_resource type="Shader" uid="uid://b20o28llb12ur" path="res://shaders/bling_shader.gdshader" id="2_m0tds"]
+[ext_resource type="PackedScene" uid="uid://dosfp58oaoyid" path="res://physics_behaviors/stuck_inside_geometry_component.tscn" id="3_k5esu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mctxo"]
 size = Vector2(12, 12)
@@ -76,5 +77,8 @@ collision_mask = 70
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_pjpvi")
 debug_color = Color(0.65441453, 0.4481778, 0.6877562, 0.41960785)
+
+[node name="StuckInsideGeometryComponent" parent="." instance=ExtResource("3_k5esu")]
+position = Vector2(0, -6)
 
 [connection signal="body_entered" from="CollectibleArea" to="." method="_on_collectible_area_body_entered"]
