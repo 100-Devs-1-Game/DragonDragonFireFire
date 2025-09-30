@@ -148,6 +148,7 @@ func _physics_process(delta : float) -> void:
 						_shoot_timer = 0.0
 		
 		State.DYING:
+			collision_layer = 0 # Stop being an interactible enemy, in particular don't kill player anymore.
 			velocity = Vector2(0, 0)
 			_death_time_elapsed += delta
 			_update_death_visuals()
