@@ -65,6 +65,7 @@ var _lifetime : float = _COLLECTIBLE_LIFETIME
 @onready var _shape_cast_object_range : ShapeCast2D = $ShapeCastObjectRange
 @onready var _shape_cast_valid_ground_left : ShapeCast2D = $ShapeCastValidGroundLeft
 @onready var _shape_cast_valid_ground_right : ShapeCast2D = $ShapeCastValidGroundRight
+@onready var _stuck_inside_geometry_component : StuckInsideGeometryComponent = $StuckInsideGeometryComponent
 
 
 func _ready() -> void:
@@ -96,6 +97,11 @@ func _physics_process(delta : float) -> void:
 		return
 
 	if not _is_active:
+		return
+
+	if _stuck_inside_geometry_component.has_been_stuck():
+		# Stuck inside geometry, just despawn.
+		queue_free()
 		return
 
 	# Apply gravity.
