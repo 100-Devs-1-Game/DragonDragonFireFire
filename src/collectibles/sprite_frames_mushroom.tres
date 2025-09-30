@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b1rxm20orwd1b"]
+
+[ext_resource type="Texture2D" uid="uid://buvc4rn5iqsbg" path="res://assets/collectibles/mushroom.png" id="1_ehbj5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sohe"]
+atlas = ExtResource("1_ehbj5")
+region = Rect2(0, 0, 12, 12)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sohe")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]

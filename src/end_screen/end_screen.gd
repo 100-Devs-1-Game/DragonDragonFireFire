@@ -59,6 +59,8 @@ func _ready() -> void:
 	GameState.cutscene = true
 	GameState.paused = false
 
+	MusicPlayer.play_track(MusicPlayer.TRACK_END)
+
 
 func _process(delta : float) -> void:
 	match _cur_state:
@@ -151,6 +153,7 @@ func _process_waiting_for_input(_delta : float) -> void:
 	var fire_pressed : bool = Input.is_action_just_pressed("fire")
 	if accept_pressed or jump_pressed or fire_pressed:
 		Highscores.save_highscores_file()
+		MusicPlayer.stop_track(0.4)
 		_cur_state = State.TRANSITION_OUT
 
 

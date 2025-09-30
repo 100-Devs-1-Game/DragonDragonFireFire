@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://nerkv4n8k2ul"]
+
+[ext_resource type="Texture2D" uid="uid://bc0xjb5an3lf0" path="res://assets/collectibles/burger.png" id="1_bktli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynb2k"]
+atlas = ExtResource("1_bktli")
+region = Rect2(0, 0, 12, 12)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynb2k")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]

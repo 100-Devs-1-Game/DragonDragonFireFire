@@ -186,6 +186,7 @@ func _callback_transition_finished() -> void:
 func _on_player_died() -> void:
 	assert(_cur_state != State.PLAYER_DEAD)
 	_cur_state = State.PLAYER_DEAD
+	SoundPool.play_sound(SoundPool.SOUND_PLAYER_HURT)
 
 	GameState.cutscene = true
 	_time_controller.set_running(false)
@@ -209,6 +210,7 @@ func _on_player_died() -> void:
 
 func _on_time_over() -> void:
 	_cur_state = State.PLAYER_DEAD
+	SoundPool.play_sound(SoundPool.SOUND_PLAYER_HURT)
 
 	GameState.cutscene = true
 	_time_controller.set_running(false)
@@ -229,6 +231,7 @@ func _on_time_over() -> void:
 func _do_death_transition() -> void:
 	var death_transition_tween : Tween = get_tree().create_tween()
 	death_transition_tween.tween_interval(0.75)
+	death_transition_tween.tween_callback(SoundPool.play_sound.bind(SoundPool.SOUND_LIFE_LOST))
 	death_transition_tween.tween_callback(_player_cutscene.play_body.bind("spin_hurt"))
 	death_transition_tween.tween_callback(_player_cutscene.play_head.bind("invisible"))
 	death_transition_tween.tween_property(_player_cutscene, "global_position", _current_stage_starting_pos, 1.5)
