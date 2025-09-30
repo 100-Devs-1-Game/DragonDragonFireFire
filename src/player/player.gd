@@ -123,6 +123,7 @@ func _physics_process_move(delta : float) -> void:
 		_jump_buffer_timer = _JUMP_BUFFER_TIME + 0.01 # Consume buffered jump.
 		if down_pressed and _one_way_platform_detector.is_colliding():
 			# Drop down through one-way platform.
+			SoundPool.play_sound(SoundPool.SOUND_PLAYER_DROP_PLATFORM)
 			position.y += 1.0
 		else:
 			velocity.y = _JUMP_VELOCITY
@@ -198,7 +199,6 @@ func _shoot_fire_ball() -> void:
 
 func _handle_death() -> void:
 	Signals.player_died.emit()
-	SoundPool.play_sound(SoundPool.SOUND_PLAYER_HURT)
 	_cur_state = State.DEAD
 
 

@@ -16,7 +16,7 @@ enum FruitType
 	CAKE,
 }
 
-const _COLLECTIBLE_SIZE : Vector2 = Vector2(12, 12)
+const _COLLECTIBLE_PICKUP_BLING_SCENE : PackedScene = preload("res://effects/collectible_pickup_bling.tscn")
 
 const _GRAVITY_MODIFIER : float = 0.6
 const _ACTIVATION_VELOCITY_Y : float = -50.0
@@ -38,19 +38,19 @@ const _CLOCK_SECONDS_BONUS : int = 5
 
 const _SCORE_INDICATOR_SCENE : PackedScene = preload("res://effects/score_indicator.tscn")
 
-const _TEXTURE_MUSHROOM : Texture2D = preload("res://assets/collectibles/mushroom.png")
-const _TEXTURE_MELON : Texture2D = preload("res://assets/collectibles/melon.png")
-const _TEXTURE_BURGER : Texture2D = preload("res://assets/collectibles/burger.png")
-const _TEXTURE_CAKE : Texture2D = preload("res://assets/collectibles/cake.png")
+const _SPRITE_FRAMES_MUSHROOM : SpriteFrames = preload("res://collectibles/sprite_frames_mushroom.tres")
+const _SPRITE_FRAMES_MELON : SpriteFrames = preload("res://collectibles/sprite_frames_melon.tres")
+const _SPRITE_FRAMES_BURGER : SpriteFrames = preload("res://collectibles/sprite_frames_burger.tres")
+const _SPRITE_FRAMES_CAKE : SpriteFrames = preload("res://collectibles/sprite_frames_cake.tres")
 
-const _FRUIT_TEXTURE_DICT : Dictionary[FruitType, Texture2D] = {
-	FruitType.MUSHROOM: _TEXTURE_MUSHROOM,
-	FruitType.MELON: _TEXTURE_MELON,
-	FruitType.BURGER: _TEXTURE_BURGER,
-	FruitType.CAKE: _TEXTURE_CAKE,
+const _FRUIT_SPRITE_FRAMES_DICT : Dictionary[FruitType, SpriteFrames] = {
+	FruitType.MUSHROOM: _SPRITE_FRAMES_MUSHROOM,
+	FruitType.MELON: _SPRITE_FRAMES_MELON,
+	FruitType.BURGER: _SPRITE_FRAMES_BURGER,
+	FruitType.CAKE: _SPRITE_FRAMES_CAKE,
 }
 
-const _CLOCK_TEXTURE : Texture2D = preload("res://assets/collectibles/clock.png")
+const _CLOCK_SPRITE_FRAMES : SpriteFrames = preload("res://collectibles/sprite_frames_clock.tres")
 
 var _is_active : bool = false
 var _collectible_type: Type = Type.FRUIT
@@ -59,7 +59,7 @@ var _fixed_x_position : float = 0.0
 var _bling_shader_progress : float = 0.0
 var _lifetime : float = _COLLECTIBLE_LIFETIME
 
-@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _shape_cast_anything : ShapeCast2D = $ShapeCastAnything
 @onready var _shape_cast_geometry : ShapeCast2D = $ShapeCastGeometry
 @onready var _shape_cast_object_range : ShapeCast2D = $ShapeCastObjectRange
@@ -111,16 +111,14 @@ func make_fruit() -> void:
 	_collectible_type = Type.FRUIT
 	_fruit_type = randi() % FruitType.size() as FruitType
 
-	_sprite.texture = _FRUIT_TEXTURE_DICT[_fruit_type]
-	assert(_sprite.texture.get_size() == _COLLECTIBLE_SIZE)
+	_sprite.sprite_frames = _FRUIT_SPRITE_FRAMES_DICT[_fruit_type]
 
 	_activate()
 
 
 func make_clock() -> void:
 	_collectible_type = Type.CLOCK
-	_sprite.texture = _CLOCK_TEXTURE
-	assert(_sprite.texture.get_size() == _COLLECTIBLE_SIZE)
+	_sprite.sprite_frames = _CLOCK_SPRITE_FRAMES
 
 	_activate()
 
@@ -128,6 +126,7 @@ func make_clock() -> void:
 func _activate() -> void:
 	_is_active = true
 	visible = true
+	_sprite.play("default")
 	_fixed_x_position = global_position.x
 	velocity.y = _ACTIVATION_VELOCITY_Y
 
@@ -184,4 +183,9 @@ func _on_collectible_area_body_entered(_body):
 	if not _is_active:
 		return
 	
+	SoundPool.play_sound(SoundPool.SOUND_COLLECTIBLE_PICKED_UP)
+	var bling : CollectiblePickupBling = _COLLECTIBLE_PICKUP_BLING_SCENE.instantiate() as CollectiblePickupBling
+	get_parent().add_child(bling)
+	bling.global_position = _sprite.global_position
+
 	_perform_pickup_logic()

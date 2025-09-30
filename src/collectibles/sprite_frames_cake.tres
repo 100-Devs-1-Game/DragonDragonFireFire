@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://wder48d6l3r5"]
+
+[ext_resource type="Texture2D" uid="uid://rfy0c35uydf0" path="res://assets/collectibles/cake.png" id="1_dpio5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn7wg"]
+atlas = ExtResource("1_dpio5")
+region = Rect2(0, 0, 12, 12)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wn7wg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]

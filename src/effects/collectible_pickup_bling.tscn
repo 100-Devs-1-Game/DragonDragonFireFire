@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbfdf3btnhak8"]
+
+[ext_resource type="SpriteFrames" uid="uid://q5ssg150vru7" path="res://effects/collectible_pickup_bling_sprite_frames.tres" id="1_enavp"]
+[ext_resource type="Script" uid="uid://dwdi3jq6uh04v" path="res://effects/collectible_pickup_bling.gd" id="2_enavp"]
+
+[node name="CollectiblePickupBling" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_enavp")
+autoplay = "default"
+script = ExtResource("2_enavp")
