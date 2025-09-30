@@ -47,6 +47,7 @@ var _looking_up : bool = false
 @onready var _sprite_head : AnimatedSprite2D = $Visuals/AnimatedSprite2DHead
 @onready var _sprite_body : AnimatedSprite2D = $Visuals/AnimatedSprite2DBody
 @onready var _head_check_component : HeadCheckComponent = $HeadCheckComponent
+@onready var _stuck_inside_geometry_component : StuckInsideGeometryComponent = $StuckInsideGeometryComponent
 @onready var _one_way_platform_detector : ShapeCast2D = %OneWayPlatformDetector
 
 
@@ -97,6 +98,8 @@ func _physics_process(delta : float) -> void:
 	Teleport.handle_teleport(self)
 
 	if _head_check_component.is_hit():
+		_handle_death()
+	if _stuck_inside_geometry_component.has_been_stuck():
 		_handle_death()
 
 
