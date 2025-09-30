@@ -27,6 +27,7 @@ position = Vector2(0, -4)
 texture = ExtResource("2_tlsna")
 
 [node name="BurnVisuals" type="Node2D" parent="Visuals"]
+use_parent_material = true
 
 [node name="BurnSprite" type="AnimatedSprite2D" parent="Visuals/BurnVisuals"]
 use_parent_material = true
