@@ -59,6 +59,7 @@ _force_immediate = true
 _catch_fire_range = 8.0
 
 [node name="HeadCheckComponent" parent="." instance=ExtResource("6_6m5pa")]
+must_be_on_ground = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCheckComponent"]
 position = Vector2(0, -12)

@@ -32,13 +32,13 @@ func _check_if_hit() -> bool:
 			assert(false) # This should not actually happen when layer/mask is set as intended.
 			continue
 		
-		if body.velocity.y < 0.01:
+		if body.velocity.y < 0.005:
 			continue
 
-		if not _parent.is_on_floor() and must_be_on_ground:
+		if must_be_on_ground and (not _parent.is_on_floor()):
 			continue
 		
-		_is_hit = true
+		return true
 	
 	return false
 
