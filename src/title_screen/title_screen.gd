@@ -60,7 +60,7 @@ func _ready() -> void:
 	_queue_title_music()
 
 	_version_label.modulate.a = 0.5
-	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
+	_version_label.text = ProjectSettings.get_setting("application/config/version")
 
 
 func _process(delta : float) -> void:
