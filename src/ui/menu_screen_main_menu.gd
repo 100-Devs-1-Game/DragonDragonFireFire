@@ -3,8 +3,12 @@ extends MenuScreen
 
 
 func _on_play_button_pressed():
-	Signals.play_game_requested.emit()
-	SoundPool.play_sound(SoundPool.SOUND_MENU_SELECT)
+	if GameState.controls_shown:
+		Signals.play_game_requested.emit()
+		SoundPool.play_sound(SoundPool.SOUND_MENU_SELECT)
+	else:
+		Signals.menu_screen_requested.emit(MenuScreenDefinitions.MenuScreen.CONTROLS_SCREEN)
+		SoundPool.play_sound(SoundPool.SOUND_MENU_SWITCH)
 
 
 func _on_settings_button_pressed():

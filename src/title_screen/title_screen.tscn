@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://3j6mbl5516uy"]
+[gd_scene load_steps=12 format=3 uid="uid://3j6mbl5516uy"]
 
 [ext_resource type="Script" uid="uid://lfin03e4chuk" path="res://title_screen/title_screen.gd" id="1_dxpbd"]
 [ext_resource type="Shader" uid="uid://ng8jsrw7vop2" path="res://shaders/fire_gradient.gdshader" id="2_2dq6q"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vqnw6jvlujgw" path="res://effects/transition_rect.tscn" id="4_vbjqi"]
 [ext_resource type="PackedScene" uid="uid://b5snvku6yk86l" path="res://ui/menu_screen_settings_menu.tscn" id="5_1oos5"]
 [ext_resource type="PackedScene" uid="uid://dc804bbbum0dm" path="res://ui/menu_screen_credits_screen.tscn" id="6_fh6ay"]
+[ext_resource type="PackedScene" uid="uid://3rit4noy2lnd" path="res://ui/menu_screen_controls_screen.tscn" id="7_1oos5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dq6q"]
 shader = ExtResource("2_2dq6q")
@@ -103,6 +104,10 @@ visible = false
 layout_mode = 0
 
 [node name="MenuScreenCreditsScreen" parent="MenuScreenContainer" instance=ExtResource("6_fh6ay")]
+visible = false
+layout_mode = 0
+
+[node name="MenuScreenControlsScreen" parent="MenuScreenContainer" instance=ExtResource("7_1oos5")]
 visible = false
 layout_mode = 0
 

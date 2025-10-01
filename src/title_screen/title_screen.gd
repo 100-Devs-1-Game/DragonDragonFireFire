@@ -30,6 +30,7 @@ var _leave_screen_action : LeaveScreenAction = LeaveScreenAction.START_GAME
 @onready var _menu_screen_main_menu : MenuScreenMainMenu = $MenuScreenContainer/MenuScreenMainMenu
 @onready var _menu_screen_settings_menu : MenuScreenSettingsMenu = $MenuScreenContainer/MenuScreenSettingsMenu
 @onready var _menu_screen_credits_screen : MenuScreenCreditsScreen = $MenuScreenContainer/MenuScreenCreditsScreen
+@onready var _menu_screen_controls_screen : MenuScreenControlsScreen = $MenuScreenContainer/MenuScreenControlsScreen
 
 @onready var _version_label : Label = $VersionLabel
 
@@ -45,6 +46,7 @@ func _ready() -> void:
 	_menu_screen_main_menu.visible = false
 	_menu_screen_settings_menu.visible = false
 	_menu_screen_credits_screen.visible = false
+	_menu_screen_controls_screen.visible = false
 
 	if GameState.title_shown:
 		_current_screen = MenuScreenDefinitions.MenuScreen.MAIN_MENU
@@ -59,13 +61,11 @@ func _ready() -> void:
 
 	_queue_title_music()
 
-	_version_label.modulate.a = 0.5
-	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
-
 
 func _process(delta : float) -> void:
 	_update_transition(delta)
 	_update_title_graphic_visibility()
+	_update_version_label_visibility()
 
 
 func _update_transition(delta : float) -> void:
@@ -79,10 +79,20 @@ func _update_transition(delta : float) -> void:
 
 
 func _update_title_graphic_visibility() -> void:
-	if _current_screen == MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN:
+	var is_in_credits_screen : bool = (_current_screen == MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN)
+	var is_in_controls_screen : bool = (_current_screen == MenuScreenDefinitions.MenuScreen.CONTROLS_SCREEN)
+
+	if is_in_credits_screen or is_in_controls_screen:
 		_title_graphic_control.visible = false
 	else:
 		_title_graphic_control.visible = true
+
+
+func _update_version_label_visibility() -> void:
+	_version_label.modulate.a = 0.5
+	_version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")
+
+	_version_label.visible = (_current_screen != MenuScreenDefinitions.MenuScreen.CONTROLS_SCREEN)
 
 
 func _activate_menu_screen(new_screen : MenuScreenDefinitions.MenuScreen) -> void:
@@ -95,6 +105,8 @@ func _activate_menu_screen(new_screen : MenuScreenDefinitions.MenuScreen) -> voi
 			_menu_screen_settings_menu.deactivate()
 		MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN:
 			_menu_screen_credits_screen.deactivate()
+		MenuScreenDefinitions.MenuScreen.CONTROLS_SCREEN:
+			_menu_screen_controls_screen.deactivate()
 		_:
 			pass
 
@@ -107,6 +119,8 @@ func _activate_menu_screen(new_screen : MenuScreenDefinitions.MenuScreen) -> voi
 			_menu_screen_settings_menu.activate()
 		MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN:
 			_menu_screen_credits_screen.activate()
+		MenuScreenDefinitions.MenuScreen.CONTROLS_SCREEN:
+			_menu_screen_controls_screen.activate()
 		_:
 			push_error("Invalid screen specified to activate: %s" % str(new_screen))
 	

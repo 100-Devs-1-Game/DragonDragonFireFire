@@ -4,6 +4,9 @@ extends Node
 # Whether the initial title screen has been shown once.
 var title_shown : bool = false
 
+# Whether the control screen has been shown once.
+var controls_shown : bool = false
+
 var cutscene : bool = false
 var paused : bool = false
 
