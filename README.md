@@ -2,6 +2,8 @@
 
 A simple arcade platformer featuring a fire spitting dragon and destructible levels. Made with Godot.
 
+[Play it on itch.io](https://100devs.itch.io/dragon-dragon-fire-fire)
+
 ## Credits
 - Zephyrix: Lead, Design, Programming
 - Astenra: Pixel Art, Illustrations
