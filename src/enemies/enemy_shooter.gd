@@ -74,8 +74,9 @@ func _physics_process(delta : float) -> void:
 	_ground_shape_cast.force_shapecast_update()
 	var object_beneath : bool = _ground_shape_cast.is_colliding()
 
+	_perform_first_burn_check()
+
 	match _cur_state:
-		_perform_first_burn_check()
 		State.STANDING:
 			_look_at_player()
 			if not object_beneath:
