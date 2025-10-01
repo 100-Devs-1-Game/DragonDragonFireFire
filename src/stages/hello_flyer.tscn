@@ -36,10 +36,10 @@ position = Vector2(233, 120)
 starting_direction = 0
 
 [node name="EnemyFlyer3" parent="Enemies" instance=ExtResource("4_82s02")]
-position = Vector2(61, 48)
+position = Vector2(32, 60)
 
 [node name="EnemyFlyer4" parent="Enemies" instance=ExtResource("4_82s02")]
-position = Vector2(261, 48)
+position = Vector2(288, 60)
 starting_direction = 0
 
 [node name="Player" parent="." instance=ExtResource("5_ecgiy")]

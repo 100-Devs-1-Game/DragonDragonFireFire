@@ -69,14 +69,14 @@ func _physics_process(delta : float) -> void:
 	_ground_shape_cast.force_shapecast_update()
 	var object_beneath : bool = _ground_shape_cast.is_colliding()
 
+	_perform_first_burn_check()
+
 	match _cur_state:
 		State.WALK:
 			if not object_beneath:
 				_cur_state = State.FALL_BEGIN
 				_fall_begin_time = 0.0
 			else:
-				_check_if_flees_from_burning()
-
 				velocity.x = _SPEED if _cur_dir == Types.Direction.RIGHT else -_SPEED
 				if _burn_component.is_burning():
 					velocity.x *= _BURNING_MODIFIER
@@ -136,8 +136,9 @@ func _physics_process(delta : float) -> void:
 				die()
 
 
-func _check_if_flees_from_burning() -> void:
+func _perform_first_burn_check() -> void:
 	if not _burned_previously and _burn_component.is_burning():
+		SoundPool.play_sound(SoundPool.SOUND_ENEMY_SET_ON_FIRE)
 		_burned_previously = true
 		if _burn_component.does_scare_enemies():
 			_cur_dir = _burn_component.get_hor_burn_flee_direction()

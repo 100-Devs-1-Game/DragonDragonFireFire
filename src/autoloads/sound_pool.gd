@@ -6,6 +6,7 @@ const _MAX_TRIES : int = 10
 
 const SOUND_COLLECTIBLE_PICKED_UP : AudioStream = preload("res://assets/sounds/Pickup_SFX_1.wav")
 const SOUND_ENEMY_DEATH : AudioStream = preload("res://assets/sounds/Enemy_Death_SFX_1.wav")
+const SOUND_ENEMY_SET_ON_FIRE : AudioStream = preload("res://assets/sounds/Enemy_Set_On_Fire_SFX.wav")
 const SOUND_FIRE_SHOT : AudioStream = preload("res://assets/sounds/Fire_Shoot_SFX_1.wav")
 const SOUND_GAME_OVER_JINGLE : AudioStream = preload("res://assets/sounds/Game_Over_Jingle.ogg")
 const SOUND_LIFE_LOST : AudioStream = preload("res://assets/sounds/Player_Return_to_Position_v2.wav")
@@ -21,6 +22,7 @@ const GLOBAL_SOUND_VOLUME_DB : float = -6.0
 const VOLUME_CHANGE_DICT : Dictionary[AudioStream, float] = {
 	SOUND_COLLECTIBLE_PICKED_UP: 0.0,
 	SOUND_ENEMY_DEATH: -2.0,
+	SOUND_ENEMY_SET_ON_FIRE: -2.0,
 	SOUND_FIRE_SHOT: -2.0,
 	SOUND_GAME_OVER_JINGLE: 3.0,
 	SOUND_LIFE_LOST: 5.0,
