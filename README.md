@@ -14,7 +14,7 @@ Join us on [Discord](https://discord.gg/UHN4AjMw4d).
 
 ## License
 - `MIT` with the exception of 3rd party code and assets
-- `CC BY-NC-SA 4.0` for our assets stored in `stc/assets/`
+- `CC BY-NC-SA 4.0` for our assets stored in `src/assets/`
 
 # Folder Structure
 - Code, scenes and project files: `src/`
