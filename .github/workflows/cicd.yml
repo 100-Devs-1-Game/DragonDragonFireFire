@@ -18,7 +18,7 @@ jobs:
           lfs: true
 
       - name: Override version string
-        run: printf "[application]\nconfig/version=%s\n" "${{ github.ref_name }}" > ./src/override.cfg
+        run: echo -e "[application]\nconfig/version=${{ github.ref_name }}\n" > src/override.cfg
 
       - name: Build game
         id: build
