@@ -61,7 +61,7 @@ func _physics_process(delta : float) -> void:
 	if GameState.is_halted():
 		return
 
-	_check_if_flees_from_burning()
+	_perform_first_burn_check()
 
 	var cur_motion_vector : Vector2 = Vector2.ZERO
 	cur_motion_vector.x = 1.0 if _cur_dir == Types.Direction.RIGHT else -1.0
@@ -93,9 +93,10 @@ func _physics_process(delta : float) -> void:
 				die()
 
 
-func _check_if_flees_from_burning() -> void:
+func _perform_first_burn_check() -> void:
 	# Just caught fire?
 	if not _burned_previously and _burn_component.is_burning():
+		SoundPool.play_sound(SoundPool.SOUND_ENEMY_SET_ON_FIRE)
 		_burned_previously = true
 		if _burn_component.does_scare_enemies():
 			_cur_dir = _burn_component.get_hor_burn_flee_direction()

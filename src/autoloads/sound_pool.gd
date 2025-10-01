@@ -6,6 +6,7 @@ const _MAX_TRIES : int = 10
 
 const SOUND_COLLECTIBLE_PICKED_UP : AudioStream = preload("res://assets/sounds/Pickup_SFX_1.wav")
 const SOUND_ENEMY_DEATH : AudioStream = preload("res://assets/sounds/Enemy_Death_SFX_1.wav")
+const SOUND_ENEMY_SET_ON_FIRE : AudioStream = preload("res://assets/sounds/Enemy_Set_On_Fire_SFX.wav")
 const SOUND_FIRE_SHOT : AudioStream = preload("res://assets/sounds/Fire_Shoot_SFX_1.wav")
 const SOUND_GAME_OVER_JINGLE : AudioStream = preload("res://assets/sounds/Game_Over_Jingle.ogg")
 const SOUND_LIFE_LOST : AudioStream = preload("res://assets/sounds/Player_Return_to_Position_v2.wav")

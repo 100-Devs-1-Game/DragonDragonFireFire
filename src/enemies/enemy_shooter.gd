@@ -75,6 +75,7 @@ func _physics_process(delta : float) -> void:
 	var object_beneath : bool = _ground_shape_cast.is_colliding()
 
 	match _cur_state:
+		_perform_first_burn_check()
 		State.STANDING:
 			_look_at_player()
 			if not object_beneath:
@@ -83,7 +84,6 @@ func _physics_process(delta : float) -> void:
 			else:
 				if _burn_component.is_burning():
 					_cur_state = State.RUNNING
-					_check_if_flees_from_burning()
 					return
 
 				velocity = Vector2(0, 0)
@@ -184,8 +184,9 @@ func _look_at_player() -> void:
 		_cur_dir = Types.Direction.LEFT
 
 
-func _check_if_flees_from_burning() -> void:
+func _perform_first_burn_check() -> void:
 	if not _burned_previously and _burn_component.is_burning():
+		SoundPool.play_sound(SoundPool.SOUND_ENEMY_SET_ON_FIRE)
 		_burned_previously = true
 		if _burn_component.does_scare_enemies():
 			_cur_dir = _burn_component.get_hor_burn_flee_direction()
