@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dragon Dragon Fire Fire"
-config/version="0.2.2"
+config/version="0.2.3"
 run/main_scene="uid://6thasun1l7ps"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/max_fps=240
