@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://d3i6n8ncflaq3" path="res://physics_behaviors/head_check_component.tscn" id="3_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://dosfp58oaoyid" path="res://physics_behaviors/stuck_inside_geometry_component.tscn" id="5_qjkh3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oul6g"]
-size = Vector2(12, 13)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qjkh3"]
+radius = 6.0
+height = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
 size = Vector2(8, 4)
@@ -38,7 +39,7 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.5)
-shape = SubResource("RectangleShape2D_oul6g")
+shape = SubResource("CapsuleShape2D_qjkh3")
 
 [node name="HeadCheckComponent" parent="." instance=ExtResource("3_g1dw6")]
 

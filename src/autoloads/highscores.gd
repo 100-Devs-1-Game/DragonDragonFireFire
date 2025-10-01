@@ -37,7 +37,7 @@ func reset_highscores() -> void:
 	highscores.append(entry2)
 
 	var entry3 = ScoreEntry.new()
-	entry3.score_value = 7500
+	entry3.score_value = 12500
 	entry3.name = "TYL"
 	highscores.append(entry3)
 
