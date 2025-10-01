@@ -1,0 +1,351 @@
+[gd_scene load_steps=22 format=3 uid="uid://3rit4noy2lnd"]
+
+[ext_resource type="Script" uid="uid://bomrqxljndn2e" path="res://ui/menu_screen_controls_screen.gd" id="1_gbkq5"]
+[ext_resource type="Texture2D" uid="uid://ild42oxk3ytc" path="res://assets/ui/keybinds_border.png" id="2_xb03x"]
+[ext_resource type="Texture2D" uid="uid://badt7edi7hako" path="res://assets/keys/key_w.png" id="3_acl2e"]
+[ext_resource type="Texture2D" uid="uid://binscg80uft5t" path="res://assets/keys/key_a.png" id="4_fmbue"]
+[ext_resource type="Texture2D" uid="uid://jwu5dniuihmm" path="res://assets/keys/key_s.png" id="5_hwtd3"]
+[ext_resource type="Texture2D" uid="uid://bwufdm3vvakav" path="res://assets/keys/key_d.png" id="6_f50m5"]
+[ext_resource type="Texture2D" uid="uid://tq1g1k12vd8d" path="res://assets/keys/key_k.png" id="7_6ap6b"]
+[ext_resource type="Texture2D" uid="uid://cdqm0uuyf4noc" path="res://assets/keys/key_l.png" id="8_20t2n"]
+[ext_resource type="Texture2D" uid="uid://dq26hbk8njm7o" path="res://assets/keys/key_up.png" id="9_uuagi"]
+[ext_resource type="Texture2D" uid="uid://xm60kej1dmaq" path="res://assets/keys/key_left.png" id="10_y6kjc"]
+[ext_resource type="Texture2D" uid="uid://qsmfs3lmxw0c" path="res://assets/keys/key_down.png" id="11_if8m6"]
+[ext_resource type="Texture2D" uid="uid://dvbl576fuxmjj" path="res://assets/keys/key_right.png" id="12_c41k7"]
+[ext_resource type="Texture2D" uid="uid://bl1sxobmn6bqi" path="res://assets/keys/key_shift.png" id="13_ioc7j"]
+[ext_resource type="Texture2D" uid="uid://d3psabnv3fwbp" path="res://assets/keys/key_space.png" id="14_nxpin"]
+[ext_resource type="Texture2D" uid="uid://khagxpnmvk6r" path="res://assets/keys/key_z.png" id="15_j7q56"]
+[ext_resource type="Texture2D" uid="uid://joipro2kf1ie" path="res://assets/keys/key_x.png" id="16_brfda"]
+[ext_resource type="Texture2D" uid="uid://ddogco7x3cnrf" path="res://assets/keys/joy_dpad.png" id="17_3kj24"]
+[ext_resource type="Texture2D" uid="uid://j7f4y5k5jvf4" path="res://assets/keys/joy_a.png" id="18_qtkas"]
+[ext_resource type="Texture2D" uid="uid://cwykf7ii42yi7" path="res://assets/keys/joy_b.png" id="19_gemcd"]
+[ext_resource type="Texture2D" uid="uid://c1rhcs0287ebh" path="res://assets/keys/joy_analog.png" id="20_6136k"]
+[ext_resource type="Texture2D" uid="uid://nxvmgw6p0vg5" path="res://assets/keys/joy_rb.png" id="21_2t5el"]
+
+[node name="MenuScreenControlsScreen" type="Control"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_gbkq5")
+metadata/_edit_vertical_guides_ = [320.0, 160.0]
+metadata/_edit_horizontal_guides_ = [176.0, 64.0, 120.0]
+
+[node name="DescriptionLabels" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="DescriptionLabels"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 10.0
+offset_right = 280.0
+offset_bottom = 29.0
+text = "THERE ARE MANY WAYS TO PLAY \"DRAGON DRAGON FIRE FIRE\"."
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="DescriptionLabels"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 35.0
+offset_right = 280.0
+offset_bottom = 54.0
+text = "USE THE CONTROL SCHEME THAT WORKS BEST FOR YOU (OR MIX)."
+autowrap_mode = 3
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Box1" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 160.0
+offset_bottom = 120.0
+texture = ExtResource("2_xb03x")
+
+[node name="Box2" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 120.0
+texture = ExtResource("2_xb03x")
+
+[node name="Box3" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 120.0
+offset_right = 320.0
+offset_bottom = 176.0
+texture = ExtResource("2_xb03x")
+
+[node name="Box4" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 176.0
+texture = ExtResource("2_xb03x")
+
+[node name="TextureRect" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 126.0
+offset_right = 56.0
+offset_bottom = 142.0
+texture = ExtResource("3_acl2e")
+
+[node name="TextureRect2" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 140.0
+offset_right = 41.0
+offset_bottom = 156.0
+texture = ExtResource("4_fmbue")
+
+[node name="TextureRect3" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 140.0
+offset_right = 56.0
+offset_bottom = 156.0
+texture = ExtResource("5_hwtd3")
+
+[node name="TextureRect4" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 140.0
+offset_right = 71.0
+offset_bottom = 156.0
+texture = ExtResource("6_f50m5")
+
+[node name="TextureRect5" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 132.0
+offset_right = 112.0
+offset_bottom = 148.0
+texture = ExtResource("7_6ap6b")
+
+[node name="TextureRect6" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 132.0
+offset_right = 128.0
+offset_bottom = 148.0
+texture = ExtResource("8_20t2n")
+
+[node name="TextureRect7" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 70.0
+offset_right = 124.0
+offset_bottom = 86.0
+texture = ExtResource("9_uuagi")
+
+[node name="TextureRect8" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 84.0
+offset_right = 109.0
+offset_bottom = 100.0
+texture = ExtResource("10_y6kjc")
+
+[node name="TextureRect9" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 84.0
+offset_right = 124.0
+offset_bottom = 100.0
+texture = ExtResource("11_if8m6")
+
+[node name="TextureRect10" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 84.0
+offset_right = 139.0
+offset_bottom = 100.0
+texture = ExtResource("12_c41k7")
+
+[node name="TextureRect11" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 76.0
+offset_right = 49.0
+offset_bottom = 92.0
+texture = ExtResource("13_ioc7j")
+
+[node name="TextureRect12" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 76.0
+offset_right = 80.0
+offset_bottom = 92.0
+texture = ExtResource("14_nxpin")
+
+[node name="TextureRect13" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 70.0
+offset_right = 280.0
+offset_bottom = 86.0
+texture = ExtResource("9_uuagi")
+
+[node name="TextureRect14" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 84.0
+offset_right = 265.0
+offset_bottom = 100.0
+texture = ExtResource("10_y6kjc")
+
+[node name="TextureRect15" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 84.0
+offset_right = 280.0
+offset_bottom = 100.0
+texture = ExtResource("11_if8m6")
+
+[node name="TextureRect16" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 84.0
+offset_right = 295.0
+offset_bottom = 100.0
+texture = ExtResource("12_c41k7")
+
+[node name="TextureRect17" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 76.0
+offset_right = 208.0
+offset_bottom = 92.0
+texture = ExtResource("15_j7q56")
+
+[node name="TextureRect18" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 76.0
+offset_right = 224.0
+offset_bottom = 92.0
+texture = ExtResource("16_brfda")
+
+[node name="TextureRect19" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 136.0
+offset_right = 220.0
+offset_bottom = 152.0
+texture = ExtResource("17_3kj24")
+
+[node name="TextureRect20" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 134.0
+offset_right = 260.0
+offset_bottom = 150.0
+texture = ExtResource("18_qtkas")
+
+[node name="TextureRect21" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 131.0
+offset_right = 276.0
+offset_bottom = 147.0
+texture = ExtResource("19_gemcd")
+
+[node name="TextureRect22" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 133.0
+offset_right = 204.0
+offset_bottom = 149.0
+texture = ExtResource("20_6136k")
+
+[node name="TextureRect23" type="TextureRect" parent="Buttons"]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 126.0
+offset_right = 294.0
+offset_bottom = 142.0
+texture = ExtResource("21_2t5el")
+
+[node name="Label" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 103.0
+offset_right = 144.0
+offset_bottom = 111.0
+text = "MOVE"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 93.0
+offset_right = 76.0
+offset_bottom = 112.0
+theme_override_constants/line_spacing = 1
+text = "JUMP/FIRE"
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 102.0
+offset_right = 300.0
+offset_bottom = 110.0
+text = "MOVE"
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 159.0
+offset_right = 76.0
+offset_bottom = 167.0
+text = "MOVE"
+autowrap_mode = 3
+
+[node name="Label8" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 155.0
+offset_right = 233.0
+offset_bottom = 163.0
+text = "MOVE"
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 93.0
+offset_right = 236.0
+offset_bottom = 112.0
+theme_override_constants/line_spacing = 1
+text = "JUMP/FIRE"
+autowrap_mode = 3
+
+[node name="Label6" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 149.0
+offset_right = 140.0
+offset_bottom = 168.0
+theme_override_constants/line_spacing = 1
+text = "JUMP/FIRE"
+autowrap_mode = 3
+
+[node name="Label7" type="Label" parent="Buttons"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 150.0
+offset_right = 300.0
+offset_bottom = 169.0
+theme_override_constants/line_spacing = 1
+text = "JUMP/FIRE"
+autowrap_mode = 3
