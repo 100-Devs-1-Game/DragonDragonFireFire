@@ -13,7 +13,7 @@ enum State
 const _PLAYER_SCENE : PackedScene = preload("res://player/player.tscn")
 
 # Grace time to not have a sudden transition immediately after last enemy is defeated.
-const _TRANSITION_ENTERING_TIME : float = 2.5
+const _TRANSITION_ENTERING_TIME : float = 2.75
 
 var _transition_entering_time_elapsed : float = 0.0
 
