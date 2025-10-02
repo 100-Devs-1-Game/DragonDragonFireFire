@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cmqemm1y5ipq0" path="res://physics_behaviors/stuck_inside_geometry_component.gd" id="1_1qumh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg3qi"]
-size = Vector2(4, 4)
+size = Vector2(6, 6)
 
 [node name="StuckInsideGeometryComponent" type="Area2D"]
 collision_layer = 0
