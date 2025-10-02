@@ -26,6 +26,8 @@ const _BLING_SHADER_SPEED : float = 3.0
 const _COLLECTIBLE_LIFETIME : float = 9.0
 const _COLLECTIBLE_LIFETIME_BLINK : float = 1.25
 const _COLLECTIBLE_LIFETIME_BLINK_SPEED : float = 20.0
+const _COLLECTIBLE_ENEMY_LAYER : int = 5
+const _COLLECTIBLE_PHYSICS_LAYER : int = 6
 
 const _FRUIT_SCORES : Dictionary[FruitType, int] = {
 	FruitType.MUSHROOM: 100,
@@ -129,6 +131,13 @@ func make_clock() -> void:
 	_activate()
 
 
+# Shape cast anything will no longer detect collectibles, i.e. this can now spawn close to other collectibles.
+func allow_close_to_other_collectibles() -> void:
+	_shape_cast_anything.set_collision_mask_value(_COLLECTIBLE_PHYSICS_LAYER, false)
+	_shape_cast_object_range.set_collision_mask_value(_COLLECTIBLE_PHYSICS_LAYER, false)
+	_shape_cast_object_range.set_collision_mask_value(_COLLECTIBLE_ENEMY_LAYER, true)
+
+
 func _activate() -> void:
 	_is_active = true
 	visible = true
@@ -189,6 +198,7 @@ func _on_collectible_area_body_entered(_body):
 	if not _is_active:
 		return
 	
+	SoundPool.stop_sound(SoundPool.SOUND_COLLECTIBLE_PICKED_UP) # In case multiple are picked up at once.
 	SoundPool.play_sound(SoundPool.SOUND_COLLECTIBLE_PICKED_UP)
 	var bling : CollectiblePickupBling = _COLLECTIBLE_PICKUP_BLING_SCENE.instantiate() as CollectiblePickupBling
 	get_parent().add_child(bling)

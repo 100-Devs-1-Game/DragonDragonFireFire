@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kqxbgyfi1rjl"]
+
+[ext_resource type="Script" uid="uid://dddcdntwnh3so" path="res://collectibles/bonus_collectible_spawn_trigger.gd" id="1_tc2p0"]
+
+[node name="BonusCollectibleSpawnTrigger" type="Node2D"]
+script = ExtResource("1_tc2p0")

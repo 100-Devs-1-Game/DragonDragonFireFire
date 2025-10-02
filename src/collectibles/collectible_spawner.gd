@@ -21,12 +21,19 @@ const _NUM_MAX_DISTANCE_VERTICAL_PLACEMENT : int = 64
 const _MIN_TIME_TO_NEXT_SPAWN : float = 4.0
 const _MAX_TIME_TO_NEXT_SPAWN : float = 8.0
 
+const _NUM_SPAWNS_BONUS : int = 20
+const _TIME_TO_NEXT_SPAWN_BONUS : float = 0.05
+
 var _time_to_next_spawn : float = 0.0
 var _stop_spawning : bool = false
+
+var _is_in_bonus_mode : bool = false
+var _bonus_spawns_done : int = 0
 
 
 func _ready() -> void:
 	Signals.transition_to_next_stage_started.connect(_on_transition_to_next_stage_started)
+	Signals.bonus_collectible_spawn_triggered.connect(_on_bonus_collectible_spawn_triggered)
 	_set_time_to_next_spawn()
 
 
@@ -41,15 +48,27 @@ func _process(delta: float) -> void:
 	if _time_to_next_spawn <= 0.0:
 		_try_spawn_collectible()
 		_set_time_to_next_spawn()
+		if _is_in_bonus_mode:
+			_bonus_spawns_done += 1
+	
+	if _is_in_bonus_mode and _bonus_spawns_done >= _NUM_SPAWNS_BONUS:
+		_stop_spawning = true
 
 
 func _set_time_to_next_spawn() -> void:
-	_time_to_next_spawn = randf_range(_MIN_TIME_TO_NEXT_SPAWN, _MAX_TIME_TO_NEXT_SPAWN)
+	if _is_in_bonus_mode:
+		_time_to_next_spawn = _TIME_TO_NEXT_SPAWN_BONUS
+	else:
+		_time_to_next_spawn = randf_range(_MIN_TIME_TO_NEXT_SPAWN, _MAX_TIME_TO_NEXT_SPAWN)
 
 
 func _try_spawn_collectible() -> void:
 	var collectible : Collectible = _COLLECTIBLE_SCENE.instantiate() as Collectible
 	add_child(collectible)
+
+	# In bonus mode, the collectibles can be close to others.
+	if _is_in_bonus_mode:
+		collectible.allow_close_to_other_collectibles()
 
 	var position_found : bool = _find_spawn_position(collectible)
 	if position_found:
@@ -99,8 +118,11 @@ func _find_spawn_position(collectible: Collectible) -> bool:
 
 
 func _create_collectible(collectible: Collectible) -> void:
-	# Every third collectible is a clock, otherwise fruit.
-	if GameState.collectibles_spawned % 3 == 1:
+	# Every third collectible is a clock, otherwise fruit. Except for bonus spawn, there 1 out of 3 would be too many
+	# clocks so use fewer.
+	var clock_modifier : int = 3 if not _is_in_bonus_mode else 8
+
+	if GameState.collectibles_spawned % clock_modifier == 1:
 		collectible.make_clock()
 	else:
 		collectible.make_fruit()
@@ -111,3 +133,9 @@ func _create_collectible(collectible: Collectible) -> void:
 func _on_transition_to_next_stage_started() -> void:
 	# No longer spawn new collectibles once transitioning to next stage, it's frustrating.
 	_stop_spawning = true
+
+
+func _on_bonus_collectible_spawn_triggered() -> void:
+	_is_in_bonus_mode = true
+	_bonus_spawns_done = 0
+	_time_to_next_spawn = 0.0 # Immediately spawn.
