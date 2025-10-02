@@ -34,6 +34,9 @@ var _selected_option : SelectedOption = SelectedOption.NONE
 
 
 func _process(_delta : float) -> void:
+	if not is_active:
+		return
+	
 	_update_adjustment()
 
 	_handle_volume_change()

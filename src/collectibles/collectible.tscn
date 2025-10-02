@@ -17,7 +17,7 @@ shader_parameter/is_active = true
 size = Vector2(12, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mctxo"]
-radius = 24.0
+radius = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5esu"]
 size = Vector2(2, 2)
