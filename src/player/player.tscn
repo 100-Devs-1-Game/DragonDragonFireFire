@@ -49,7 +49,7 @@ shape = SubResource("RectangleShape2D_yw30f")
 debug_color = Color(0.96020204, 0, 0.52006775, 0.41960785)
 
 [node name="StuckInsideGeometryComponent" parent="." instance=ExtResource("5_qjkh3")]
-position = Vector2(0, -7)
+position = Vector2(0, -6)
 
 [node name="EnemyDetectionHitbox" type="Area2D" parent="."]
 position = Vector2(0, -7)
