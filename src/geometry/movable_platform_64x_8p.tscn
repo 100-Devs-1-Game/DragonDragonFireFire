@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj4axie3xaeal"]
+[gd_scene load_steps=8 format=3 uid="uid://bj4axie3xaeal"]
 
 [ext_resource type="Script" uid="uid://cmvj8ybsxqofs" path="res://geometry/movable_platform.gd" id="1_sxh17"]
-[ext_resource type="Texture2D" uid="uid://bfjptl75hf1dl" path="res://assets/geometry/platform_movable_8_left.png" id="2_26hpy"]
-[ext_resource type="Texture2D" uid="uid://cjhfur22urh0s" path="res://assets/geometry/platform_movable_8_mid.png" id="3_b5n0b"]
-[ext_resource type="Texture2D" uid="uid://cvxseoh57kvx6" path="res://assets/geometry/platform_movable_8_right.png" id="4_4b7ej"]
+[ext_resource type="Texture2D" uid="uid://bfjptl75hf1dl" path="res://assets/geometry/platform_movable_8_left_blue.png" id="2_26hpy"]
+[ext_resource type="Script" uid="uid://bka0ixhfh7ye8" path="res://geometry/movable_platform_sprite.gd" id="3_26hpy"]
+[ext_resource type="Texture2D" uid="uid://cjhfur22urh0s" path="res://assets/geometry/platform_movable_8_mid_blue.png" id="3_b5n0b"]
+[ext_resource type="Texture2D" uid="uid://cvxseoh57kvx6" path="res://assets/geometry/platform_movable_8_right_blue.png" id="4_4b7ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esmxb"]
 resource_local_to_scene = true
@@ -22,34 +23,50 @@ script = ExtResource("1_sxh17")
 [node name="Sprite0" type="Sprite2D" parent="Visuals"]
 position = Vector2(-24, -4)
 texture = ExtResource("2_26hpy")
+script = ExtResource("3_26hpy")
+part = 1
 
 [node name="Sprite1" type="Sprite2D" parent="Visuals"]
 position = Vector2(-16, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite2" type="Sprite2D" parent="Visuals"]
 position = Vector2(-8, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite3" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite4" type="Sprite2D" parent="Visuals"]
 position = Vector2(8, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite5" type="Sprite2D" parent="Visuals"]
 position = Vector2(16, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite6" type="Sprite2D" parent="Visuals"]
 position = Vector2(24, -4)
 texture = ExtResource("3_b5n0b")
+script = ExtResource("3_26hpy")
+part = 2
 
 [node name="Sprite7" type="Sprite2D" parent="Visuals"]
 position = Vector2(32, -4)
 texture = ExtResource("4_4b7ej")
+script = ExtResource("3_26hpy")
+part = 3
 
 [node name="GroundShapeCast" type="ShapeCast2D" parent="."]
 position = Vector2(4.0000005, 0)

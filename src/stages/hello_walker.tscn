@@ -32,14 +32,14 @@ tile_set = ExtResource("3_puf3i")
 position = Vector2(116, 108)
 
 [node name="EnemyWalker4" parent="Enemies" instance=ExtResource("4_aqdm5")]
-position = Vector2(196, 108)
+position = Vector2(204, 108)
 starting_direction = 0
 
 [node name="EnemyWalker2" parent="Enemies" instance=ExtResource("4_aqdm5")]
 position = Vector2(140, 156)
 
 [node name="EnemyWalker3" parent="Enemies" instance=ExtResource("4_aqdm5")]
-position = Vector2(200, 172)
+position = Vector2(212, 172)
 
 [node name="Player" parent="." instance=ExtResource("5_sj68m")]
 position = Vector2(32, 172)
