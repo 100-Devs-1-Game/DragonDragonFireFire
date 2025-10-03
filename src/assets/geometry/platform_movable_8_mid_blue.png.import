@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfjptl75hf1dl"
-path="res://.godot/imported/platform_movable_8_left.png-d99ffc25d47e2138bb986d9a8c6564c6.ctex"
+uid="uid://cjhfur22urh0s"
+path="res://.godot/imported/platform_movable_8_mid_blue.png-49bdae2d951748a757a5eca83b8e577e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/geometry/platform_movable_8_left.png"
-dest_files=["res://.godot/imported/platform_movable_8_left.png-d99ffc25d47e2138bb986d9a8c6564c6.ctex"]
+source_file="res://assets/geometry/platform_movable_8_mid_blue.png"
+dest_files=["res://.godot/imported/platform_movable_8_mid_blue.png-49bdae2d951748a757a5eca83b8e577e.ctex"]
 
 [params]
 
