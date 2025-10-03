@@ -78,7 +78,9 @@ func _physics_process(delta : float) -> void:
 
 	match _cur_state:
 		State.STANDING:
-			_look_at_player()
+			# Don't look at the player if burning, we expect a state transition and running away soon.
+			if not _burn_component.is_burning():
+				_look_at_player()
 			if not object_beneath:
 				_cur_state = State.FALL_BEGIN
 				_fall_begin_time = 0.0
