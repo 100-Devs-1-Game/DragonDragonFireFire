@@ -7,7 +7,8 @@ enum State
 	DYING,
 }
 
-const _SPEED : float = 50.0
+const _SPEED : float = 45.0
+const _SPECIFIC_BURNING_MODIFIER : float = 0.9 # Motion of flyers less affected by burning.
 
 @export var starting_direction : Types.Direction = Types.Direction.RIGHT
 @export var starting_vertical_direction : Types.Direction = Types.Direction.DOWN
@@ -70,7 +71,7 @@ func _physics_process(delta : float) -> void:
 	cur_motion_vector *= _SPEED
 
 	if _burn_component.is_burning():
-		cur_motion_vector *= _BURNING_MODIFIER
+		cur_motion_vector *= _BURNING_MODIFIER * _SPECIFIC_BURNING_MODIFIER
 
 	match _cur_state:
 		State.FLYING:
@@ -110,7 +111,6 @@ func _handle_animation() -> void:
 		_sprite.pause()
 		return
 
-	_sprite.speed_scale = 1.0 if not _burn_component.is_burning() else _BURNING_MODIFIER
 	match _cur_state:
 		State.FLYING:
 			if _burn_component.is_burning():
