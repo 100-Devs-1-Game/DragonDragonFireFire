@@ -42,6 +42,7 @@ func die() -> void:
 	get_parent().add_child(poof_effect)
 	poof_effect.global_position = _visuals.global_position
 
+	SoundPool.stop_sound(SoundPool.SOUND_ENEMY_DEATH) # Stop previous instance to prevent double sound.
 	SoundPool.play_sound(SoundPool.SOUND_ENEMY_DEATH)
 
 	# Dummies don't grant score.

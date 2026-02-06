@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b8adolhf1jwt3"]
+[gd_resource type="TileSet" format=3 uid="uid://b8adolhf1jwt3"]
 
 [ext_resource type="PackedScene" uid="uid://cfm6whuvj2n57" path="res://geometry/burnable_block_8p.tscn" id="1_u8yef"]
 [ext_resource type="PackedScene" uid="uid://b2qqy2qp1tee4" path="res://geometry/movable_platform_24x_8p.tscn" id="2_6r0tj"]

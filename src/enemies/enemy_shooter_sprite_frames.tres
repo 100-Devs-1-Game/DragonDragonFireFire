@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bvscoedqbrwd2"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bvscoedqbrwd2"]
 
 [ext_resource type="Texture2D" uid="uid://ds27rglkyq2rr" path="res://assets/enemies/shooter.png" id="1_sedq4"]
 

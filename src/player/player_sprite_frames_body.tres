@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://b4dfese7m67yy"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b4dfese7m67yy"]
 
 [ext_resource type="Texture2D" uid="uid://cygfu8auq32qh" path="res://assets/effects/fire_ball_explosion.png" id="1_0pss6"]
 [ext_resource type="Texture2D" uid="uid://7ti5idigms35" path="res://assets/player/player.png" id="2_k1cvp"]

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ddhe3pl35683h"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ddhe3pl35683h"]
 
 [ext_resource type="Texture2D" uid="uid://cxhg31p2hsgca" path="res://assets/collectibles/melon.png" id="1_hig1f"]
 

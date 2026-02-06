@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://dcxbvgske0q7x"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dcxbvgske0q7x"]
 
 [ext_resource type="Texture2D" uid="uid://xdvgixw6clnu" path="res://assets/enemies/walker.png" id="1_cfvog"]
 

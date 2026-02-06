@@ -158,6 +158,7 @@ func _transition_stages() -> void:
 	SoundPool.play_sound(SoundPool.SOUND_STAGE_COMPLETED)
 
 	var transition_tween : Tween = get_tree().create_tween()
+	transition_tween.set_process_mode(Tween.TweenProcessMode.TWEEN_PROCESS_PHYSICS)
 	transition_tween.set_parallel(true)
 	transition_tween.tween_property(_next_stage, "global_position", Vector2(0, 0), 2.0)
 	transition_tween.tween_property(_current_stage, "global_position", Vector2(0, Constants.ARENA_HEIGHT), 2.0)
