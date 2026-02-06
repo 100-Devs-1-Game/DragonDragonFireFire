@@ -127,7 +127,7 @@ func _physics_process_move(delta : float) -> void:
 		if down_pressed and _one_way_platform_detector.is_colliding():
 			# Drop down through one-way platform.
 			SoundPool.play_sound(SoundPool.SOUND_PLAYER_DROP_PLATFORM)
-			position.y += 1.0
+			position.y += 2.0
 		else:
 			velocity.y = _JUMP_VELOCITY
 			_time_since_last_ground_contact = _COYOTE_TIME + 0.01 # Consume coyote time.
