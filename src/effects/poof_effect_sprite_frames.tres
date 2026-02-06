@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://dhm624m3teesf"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dhm624m3teesf"]
 
 [ext_resource type="Texture2D" uid="uid://botnmcjbddvwx" path="res://assets/effects/poof.png" id="1_qr54i"]
 

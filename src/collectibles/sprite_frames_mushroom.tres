@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b1rxm20orwd1b"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b1rxm20orwd1b"]
 
 [ext_resource type="Texture2D" uid="uid://buvc4rn5iqsbg" path="res://assets/collectibles/mushroom.png" id="1_ehbj5"]
 

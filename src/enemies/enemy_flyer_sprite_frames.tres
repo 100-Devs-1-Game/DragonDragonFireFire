@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://ddk5t1k4nvlo8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ddk5t1k4nvlo8"]
 
 [ext_resource type="Texture2D" uid="uid://bwxghxqdwuimo" path="res://assets/enemies/flyer.png" id="1_cy6bg"]
 
