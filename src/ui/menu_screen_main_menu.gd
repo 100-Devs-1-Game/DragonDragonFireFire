@@ -19,5 +19,10 @@ func _on_credits_button_pressed():
 	Signals.menu_screen_requested.emit(MenuScreenDefinitions.MenuScreen.CREDITS_SCREEN)
 
 
+func _on_wishlist_button_pressed():
+	# Open Steam URL:
+	OS.shell_open("https://store.steampowered.com/app/4177670/Dragon_Dragon_Fire_Fire_Deluxe")
+
+
 func _on_exit_button_pressed():
 	Signals.exit_game_requested.emit()
